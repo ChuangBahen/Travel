@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#1a73e8">
+<title>2026 京阪神家族旅遊手冊</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.6;color:#222;background:#f7f8fa;padding-bottom:90px}
+
+/* Colors per day */
+.c-d1{--clr:#1a73e8;--bg:#e8f0fe}
+.c-d2{--clr:#0f9d58;--bg:#e6f4ea}
+.c-d3{--clr:#f57c00;--bg:#fff3e0}
+.c-d4{--clr:#8e24aa;--bg:#f3e5f5}
+.c-d5{--clr:#d93025;--bg:#fce8e6}
+.c-d6{--clr:#5f6368;--bg:#f1f3f4}
+
+/* Sticky nav */
+.sticky-nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e0e0e0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.04)}
+.nav-scroll{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:10px 12px;gap:8px;scrollbar-width:none}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-btn{flex:0 0 auto;min-width:90px;min-height:44px;padding:8px 14px;border-radius:22px;background:#f1f3f4;color:#333;text-decoration:none;font-size:14px;font-weight:500;text-align:center;white-space:nowrap;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.nav-btn.active{background:var(--clr,#1a73e8);color:#fff}
+.nav-btn[data-day="1"]{--clr:#1a73e8}
+.nav-btn[data-day="2"]{--clr:#0f9d58}
+.nav-btn[data-day="3"]{--clr:#f57c00}
+.nav-btn[data-day="4"]{--clr:#8e24aa}
+.nav-btn[data-day="5"]{--clr:#d93025}
+.nav-btn[data-day="6"]{--clr:#5f6368}
+.nav-btn[data-day="info"]{--clr:#555}
+
+/* Header */
+header{padding:24px 16px 16px;text-align:center;background:linear-gradient(135deg,#1a73e8 0%,#8e24aa 50%,#d93025 100%);color:#fff}
+header h1{margin:0 0 8px;font-size:22px}
+header p{margin:4px 0;font-size:14px;opacity:.95}
+
+main{max-width:1000px;margin:0 auto;padding:16px 12px}
+
+/* Day section */
+.day-section{background:#fff;border-radius:14px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden;border-left:6px solid var(--clr)}
+.day-section h2{margin:0;padding:16px 18px;background:var(--bg);color:var(--clr);font-size:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rating{font-size:13px;padding:2px 8px;border-radius:10px;background:#fff;color:#333;font-weight:normal}
+.rating.ok{background:#e6f4ea;color:#0f9d58}
+.rating.warn{background:#fff3e0;color:#f57c00}
+.rating.bad{background:#fce8e6;color:#d93025}
+
+/* Tabs */
+.day-tabs{display:flex;border-bottom:1px solid #e0e0e0;overflow-x:auto}
+.tab{flex:1;min-width:100px;min-height:44px;padding:12px 8px;border:none;background:transparent;color:#666;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;white-space:nowrap}
+.tab.active{color:var(--clr);border-bottom:3px solid var(--clr);background:#fafafa}
+.tab-content{padding:16px 18px;display:none}
+.tab-content.active{display:block}
+
+/* Timeline */
+.timeline{border-left:2px solid var(--clr);padding-left:16px;margin:10px 0}
+.timeline-item{position:relative;padding-bottom:16px}
+.timeline-item::before{content:"";position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--clr);border:2px solid #fff}
+.time-tag{font-weight:600;color:var(--clr);font-size:14px}
+.time-desc{margin-top:4px;font-size:15px}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--bg);color:var(--clr);padding:8px 6px;text-align:left;font-weight:600;font-size:13px}
+td{padding:8px 6px;border-top:1px solid #eee;vertical-align:top}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -6px;padding:0 6px}
+
+/* Details */
+details{margin:10px 0;border:1px solid #e0e0e0;border-radius:8px;background:#fafafa}
+summary{padding:10px 14px;cursor:pointer;font-weight:500;min-height:44px;display:flex;align-items:center}
+details[open] summary{border-bottom:1px solid #e0e0e0}
+details > *:not(summary){padding:12px 14px}
+
+/* Restaurant cards */
+.restaurant-scroll{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:12px;padding:8px 0;scroll-snap-type:x mandatory;margin:0 -6px;padding-left:6px;padding-right:6px}
+.restaurant-card{flex:0 0 86%;max-width:320px;scroll-snap-align:start;border:1px solid #e0e0e0;border-radius:12px;padding:14px;background:#fff}
+.restaurant-card.primary{border-color:var(--clr);border-width:2px;background:var(--bg)}
+.restaurant-card h4{margin:0 0 8px;font-size:16px;color:var(--clr)}
+.restaurant-card .tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:500}
+.tag-v{background:#e6f4ea;color:#0f9d58}
+.tag-k{background:#e8f0fe;color:#1a73e8}
+.tag-w{background:#fff3e0;color:#f57c00}
+.tag-x{background:#fce8e6;color:#d93025}
+.restaurant-card ul{margin:6px 0;padding-left:18px;font-size:14px}
+.restaurant-card li{margin:3px 0}
+
+/* Alert */
+.alert{padding:12px 14px;border-radius:8px;margin:12px 0;border-left:4px solid #f57c00;background:#fff3e0;color:#5f4300}
+.alert.warn{border-left-color:#d93025;background:#fce8e6;color:#7a1d15}
+.alert.ok{border-left-color:#0f9d58;background:#e6f4ea;color:#0c5c36}
+.alert.info{border-left-color:#1a73e8;background:#e8f0fe;color:#174ea6}
+.alert h4{margin:0 0 6px;font-size:15px}
+.alert ul{margin:6px 0;padding-left:20px}
+
+/* Emergency FAB */
+.fab{position:fixed;right:16px;bottom:16px;z-index:200;width:56px;height:56px;border-radius:50%;background:#d93025;color:#fff;border:none;font-size:22px;box-shadow:0 4px 12px rgba(217,48,37,.4);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.em-panel{position:fixed;right:16px;bottom:80px;z-index:200;width:min(320px,calc(100vw - 32px));background:#fff;border-radius:12px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.2);display:none}
+.em-panel.open{display:block}
+.em-panel h3{margin:0 0 10px;color:#d93025;font-size:16px}
+.em-panel a{display:block;padding:10px 12px;margin:6px 0;background:#fce8e6;border-radius:8px;text-decoration:none;color:#222;font-size:14px;min-height:44px}
+
+/* Links */
+a{color:#1a73e8}
+a[href^="tel:"]{background:#e6f4ea;padding:1px 6px;border-radius:4px;text-decoration:none;color:#0f9d58;font-weight:500}
+.map-link{display:inline-flex;align-items:center;gap:4px;color:#1a73e8;text-decoration:none;font-size:13px}
+
+/* Checklist */
+.checklist{list-style:none;padding:0}
+.checklist li{padding:6px 0 6px 28px;position:relative;font-size:14px;line-height:1.5}
+.checklist li::before{content:"☐";position:absolute;left:0;top:4px;font-size:18px;color:var(--clr,#1a73e8)}
+
+/* Cost table highlight */
+.total-row td{background:#fff3e0;font-weight:600;color:#5f4300}
+
+/* Dark mode */
+@media (prefers-color-scheme:dark){
+  body{background:#111;color:#eee}
+  .sticky-nav{background:#1a1a1a;border-color:#333}
+  .nav-btn{background:#2a2a2a;color:#ddd}
+  .day-section{background:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .day-section h2{filter:brightness(1.2)}
+  th{color:#fff}
+  td{border-color:#333}
+  details{background:#222;border-color:#333}
+  .restaurant-card{background:#222;border-color:#333}
+  .tab{color:#aaa}
+  .tab.active{background:#0a0a0a}
+  a{color:#8ab4f8}
+}
+
+/* RWD */
+@media(min-width:768px){
+  header h1{font-size:28px}
+  header p{font-size:16px}
+  .nav-btn{min-width:110px;padding:8px 18px}
+  .day-section h2{font-size:22px}
+  .restaurant-card{flex:0 0 48%}
+}
+@media(min-width:1024px){
+  .restaurant-card{flex:0 0 32%}
+}
+
+/* Print */
+@media print{
+  body{background:#fff;padding-bottom:0;font-size:11pt}
+  .sticky-nav,.fab,.em-panel,.day-tabs{display:none!important}
+  .tab-content{display:block!important;padding:8px 0!important}
+  .day-section{page-break-before:always;box-shadow:none;border:1px solid #999;margin-bottom:10pt}
+  .day-section:first-of-type{page-break-before:avoid}
+  header{background:#fff!important;color:#000!important}
+  header h1{color:#000}
+  details{page-break-inside:avoid}
+  details > *:not(summary){display:block!important}
+  summary::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="sticky-nav">
+  <div class="nav-scroll">
+    <a href="#day1" class="nav-btn" data-day="1">Day1 抵達</a>
+    <a href="#day2" class="nav-btn" data-day="2">Day2 神戶</a>
+    <a href="#day3" class="nav-btn" data-day="3">Day3 葵祭</a>
+    <a href="#day4" class="nav-btn" data-day="4">Day4 嵐山</a>
+    <a href="#day5" class="nav-btn" data-day="5">Day5 奈良</a>
+    <a href="#day6" class="nav-btn" data-day="6">Day6 回程</a>
+    <a href="#info" class="nav-btn" data-day="info">📋 資訊</a>
+  </div>
+</nav>
+
+<header>
+  <h1>🗾 2026 京阪神家族旅遊手冊</h1>
+  <p>5/13 (三) – 5/18 (一) ｜ 9 人（大 6 + 小學 1 + 幼稚園 1 + 幼幼班 1）</p>
+  <p>🏨 大阪難波 5 晚不換飯店　🌸 含京都葵祭 5/15</p>
+</header>
+
+<main>
+
+<!-- Day 1 -->
+<section id="day1" class="day-section c-d1">
+<h2>Day 1 ─ 5/13 (三) 台灣 → 大阪 <span class="rating ok">🟢 可行</span></h2>
+<div class="day-tabs">
+  <button class="tab active" data-target="d1-o">📋 總覽</button>
+  <button class="tab" data-target="d1-t">🚃 交通</button>
+  <button class="tab" data-target="d1-m">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d1-o">
+<div class="timeline">
+  <div class="timeline-item"><div class="time-tag">13:00</div><div class="time-desc">桃園 TPE 起飛（長榮 BR131）</div></div>
+  <div class="timeline-item"><div class="time-tag">17:00</div><div class="time-desc">抵達關西機場 KIX T1，入境審查+提領行李 30 分</div></div>
+  <div class="timeline-item"><div class="time-tag">17:30</div><div class="time-desc">2F 南海票務中心：購 ICOCA + Rapi:t 特急券</div></div>
+  <div class="timeline-item"><div class="time-tag">18:00</div><div class="time-desc">搭 Rapi:t 特急（38 分直達）</div></div>
+  <div class="timeline-item"><div class="time-tag">18:38</div><div class="time-desc">抵達南海難波站，步行/計程車至飯店</div></div>
+  <div class="timeline-item"><div class="time-tag">19:00</div><div class="time-desc">飯店 Check-in</div></div>
+  <div class="timeline-item"><div class="time-tag">19:30</div><div class="time-desc">道頓堀晚餐（步行 6 分）</div></div>
+</div>
+<div class="alert info"><h4>✈️ 航班比較</h4>
+<ul>
+<li><b>北部 → 桃園 TPE 午班</b>（長榮 NT$8,000–15,000 或虎航 NT$4,000–8,000）</li>
+<li><b>中部 → 台中 TXG 早班</b>（長榮 NT$9,000–16,000 或虎航 NT$3,500–7,000）</li>
+</ul></div>
+</div>
+
+<div class="tab-content" id="d1-t">
+<h3>KIX → 難波（三方案比較）</h3>
+<div class="scroll-x"><table>
+<tr><th>方案</th><th>時間</th><th>9 人費用</th><th>推車</th><th>推薦</th></tr>
+<tr><td><b>A. 南海 Rapi:t 特急</b></td><td>38 分</td><td>¥10,440</td><td>⭕ 指定席</td><td>🥇 首選</td></tr>
+<tr><td>B. 南海空港急行</td><td>50 分</td><td>¥6,800</td><td>⚠️ 無座</td><td>省錢</td></tr>
+<tr><td>C. JR 関空快速</td><td>70 分</td><td>¥9,460</td><td>⚠️ 換車</td><td>不建議</td></tr>
+</table></div>
+<details><summary>🎫 ICOCA + Rapi:t 購票地點</summary>
+<p>KIX T1 2F 南海票務中心（入境大廳右側）。Rapi:t 外國人 e-ticket Klook 預購約 ¥1,330。</p>
+<p><b>9 人建議</b>：訂同一節車廂（1 號車廂端），行李可放車廂端行李架。</p>
+</details>
+<details><summary>🚶 難波站 → 飯店（推車友善）</summary>
+<p>南海難波站中央口（有電梯）→ 黑門市場方向 700m / 10 分；→ 道頓堀 400m / 6 分。大阪メトロ難波 B19 出口有升降梯。</p>
+</details>
+</div>
+
+<div class="tab-content" id="d1-m">
+<h3>晚餐 18:30–19:30（道頓堀/心斎橋）</h3>
+<div class="restaurant-scroll">
+
+<div class="restaurant-card primary">
+<h4>🥇 大阪王將 道頓堀店</h4>
+<div class="tags"><span class="tag tag-v">素食可客製</span><span class="tag tag-k">兒童椅</span></div>
+<ul>
+<li>⭐ 3.7 ｜ 步行 5–7 分</li>
+<li>✅ 9 人同區分桌可容納</li>
+<li>💰 ¥800–1,200 /人</li>
+<li>素食：野菜炒め（告知不用葷油）</li>
+<li>無需預約</li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🌱 Paprika 食堂 Vegan</h4>
+<div class="tags"><span class="tag tag-v">100% 純素</span><span class="tag tag-w">空間小</span></div>
+<ul>
+<li>⭐ 4.4 ｜ 步行 8–12 分</li>
+<li>💰 ¥1,500–2,500</li>
+<li>素食長輩最佳選擇</li>
+<li><b>3–7 天前預約</b></li>
+</ul>
+</div>
+
+<div class="restaurant-card">
+<h4>551 蓬萊 本店</h4>
+<div class="tags"><span class="tag tag-w">素食有限</span><span class="tag tag-k">兒童椅</span></div>
+<ul>
+<li>⭐ 4.0 ｜ 步行 3–5 分</li>
+<li>大阪必吃豚まん</li>
+<li>💰 ¥1,000–1,500</li>
+</ul>
+</div>
+
+<div class="restaurant-card">
+<h4>金龍拉麵 道頓堀</h4>
+<div class="tags"><span class="tag tag-x">無素食</span></div>
+<ul>
+<li>⭐ 3.8 ｜ 24H</li>
+<li>豚骨湯、長桌共食</li>
+<li>素食長輩跳過</li>
+</ul>
+</div>
+
+</div>
+<div class="alert ok"><h4>💡 分流推薦策略</h4>
+素食長輩組（2–3 人）去 Paprika（預約），其他人去大阪王將或 551 蓬萊。</div>
+</div>
+</section>
+
+<!-- Day 2 -->
+<section id="day2" class="day-section c-d2">
+<h2>Day 2 ─ 5/14 (四) 神戶日 <span class="rating warn">🟡 緊湊</span></h2>
+<div class="day-tabs">
+  <button class="tab active" data-target="d2-o">📋 總覽</button>
+  <button class="tab" data-target="d2-t">🚃 交通</button>
+  <button class="tab" data-target="d2-m">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d2-o">
+<div class="timeline">
+  <div class="timeline-item"><div class="time-tag">08:30</div><div class="time-desc">難波出發（阪神なんば線直通特急）</div></div>
+  <div class="timeline-item"><div class="time-tag">09:10</div><div class="time-desc">抵達神戶三宮</div></div>
+  <div class="timeline-item"><div class="time-tag">09:20</div><div class="time-desc">🚕 計程車上北野（避陡坡 2 台 ¥1,600–2,400）</div></div>
+  <div class="timeline-item"><div class="time-tag">09:30</div><div class="time-desc">北野異人館（外觀為主 30–60 分）</div></div>
+  <div class="timeline-item"><div class="time-tag">10:30</div><div class="time-desc">步行下坡至 Meriken Park（神戶港塔）</div></div>
+  <div class="timeline-item"><div class="time-tag">11:30</div><div class="time-desc">🍞 神戶麵包超人博物館（兒童重點，¥2,200/1 歲+）</div></div>
+  <div class="timeline-item"><div class="time-tag">13:00</div><div class="time-desc">umie モザイク 午餐</div></div>
+  <div class="timeline-item"><div class="time-tag">15:30</div><div class="time-desc">返程三宮 → 難波</div></div>
+</div>
+<div class="alert warn"><h4>⚠️ 神戶日關鍵決策</h4>
+<b>北野異人館陡坡 80–100m（坡度 10–15%）</b>：推車+長輩上山極吃力。策略：<b>計程車上山、步行下坡</b>。北野以外觀欣賞為主（30-60 分），不進多館。</div>
+</div>
+
+<div class="tab-content" id="d2-t">
+<h3>難波 → 三宮</h3>
+<div class="scroll-x"><table>
+<tr><th>方案</th><th>時間</th><th>票價</th><th>推車</th></tr>
+<tr><td><b>阪神なんば線直通特急</b></td><td>40 分</td><td>¥410</td><td>⭕ 直通、電梯</td></tr>
+<tr><td>JR 大阪→三ノ宮 新快速</td><td>21 分+轉車</td><td>¥420</td><td>⚠️ 需轉車</td></tr>
+</table></div>
+<details><summary>🚕 三宮 → 北野（計程車推薦）</summary>
+<p>高度差 80-100m，步行上坡 20–25 分極吃力。計程車 2 台 ¥1,600–2,400，最省力。</p>
+</details>
+<details><summary>🚶 北野 → 神戶港 → 麵包超人（步行下坡）</summary>
+<p>北野下坡沿北野坂 30 分，推車輕鬆。Meriken Park → 麵包超人博物館沿岸步道 10 分。</p>
+</details>
+<div class="alert info"><h4>💰 全日費用（9 人）</h4>
+交通 ¥9,000–10,000 ｜ 景點（港塔+麵包超人）¥27,200</div>
+</div>
+
+<div class="tab-content" id="d2-m">
+<h3>三餐</h3>
+<div class="restaurant-scroll">
+
+<div class="restaurant-card primary">
+<h4>☕ コメダ珈琲 難波店（早餐）</h4>
+<div class="tags"><span class="tag tag-v">素食吐司</span><span class="tag tag-k">推車友善</span></div>
+<ul>
+<li>07:00 開、小倉吐司組合</li>
+<li>半包廂卡座 9 人友善</li>
+<li>💰 ¥700–1,000</li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🌱 Vegetable Garden Shinji（午餐）</h4>
+<div class="tags"><span class="tag tag-v">蔬食</span></div>
+<ul>
+<li>💰 ¥1,500–2,500</li>
+<li>素食長輩最佳</li>
+<li>需電話確認 9 人座位</li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🦐 FISHERMAN'S MARKET（晚餐）</h4>
+<div class="tags"><span class="tag tag-k">家庭友善</span><span class="tag tag-v">自助素食</span></div>
+<ul>
+<li>umie モザイク、神戶港景觀</li>
+<li>💰 ¥2,500–3,500（大人）</li>
+<li>✅ 可線上預約</li>
+</ul>
+</div>
+
+<div class="restaurant-card">
+<h4>🥩 神戶牛 吉祥吉（午餐備案）</h4>
+<div class="tags"><span class="tag tag-x">無素食</span></div>
+<ul>
+<li>💰 ¥5,000–8,000</li>
+<li>需 1–2 週前預約包廂</li>
+<li>素食長輩需另備方案</li>
+</ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Day 3 -->
+<section id="day3" class="day-section c-d3">
+<h2>Day 3 ─ 5/15 (五) 京都葵祭 <span class="rating ok">🟢 可行（調整後）</span></h2>
+<div class="day-tabs">
+  <button class="tab active" data-target="d3-o">📋 總覽</button>
+  <button class="tab" data-target="d3-t">🚃 交通</button>
+  <button class="tab" data-target="d3-m">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d3-o">
+<div class="alert warn"><h4>🎌 葵祭 雨天延期規則</h4>
+雨天延至 5/16（惡劣天氣持續最多再延 2 日）。當日 08:00 京都市觀光協會官網公告。若延至 5/16 會與嵐山日衝突，需彈性調整。</div>
+<div class="timeline">
+  <div class="timeline-item"><div class="time-tag">07:30</div><div class="time-desc">難波出發</div></div>
+  <div class="timeline-item"><div class="time-tag">09:30</div><div class="time-desc">抵達京都御所（烏丸通占位）</div></div>
+  <div class="timeline-item"><div class="time-tag">10:30</div><div class="time-desc">🎌 葵祭行列出発（90 分觀賞）</div></div>
+  <div class="timeline-item"><div class="time-tag">12:00</div><div class="time-desc">前往下鴨神社（糺の森）</div></div>
+  <div class="timeline-item"><div class="time-tag">13:00</div><div class="time-desc">下鴨茶寮 午餐（需 1 個月前預約）</div></div>
+  <div class="timeline-item"><div class="time-tag">15:00</div><div class="time-desc">出町柳商圈休息</div></div>
+  <div class="timeline-item"><div class="time-tag">17:00</div><div class="time-desc">返回京都駅</div></div>
+  <div class="timeline-item"><div class="time-tag">18:30</div><div class="time-desc">hale 京都 晚餐（祇園 100% 純素）</div></div>
+</div>
+<div class="alert"><h4>🚫 已移除：清水寺</h4>
+原因：産寧坂/二年坂石板路推車無法通行 + 葵祭日人潮推擠危險。</div>
+</div>
+
+<div class="tab-content" id="d3-t">
+<h3>🎌 葵祭遊行時程</h3>
+<div class="scroll-x"><table>
+<tr><th>時間</th><th>地點</th></tr>
+<tr><td>10:30</td><td>京都御所 出発</td></tr>
+<tr><td>11:40</td><td>下鴨神社 社頭の儀</td></tr>
+<tr><td>14:20</td><td>下鴨神社 出発</td></tr>
+<tr><td>15:30</td><td>上賀茂神社 社頭の儀</td></tr>
+</table></div>
+<div class="alert info"><h4>🎫 付費觀覽席 ¥2,100/人</h4>
+御所/下鴨/上賀茂 三地點。<b>2026/2 月開賣時立即購票！</b>建議購買御所席（出發場面最壯觀）。</div>
+<details><summary>🆓 免費觀賞推薦點</summary>
+<p><b>烏丸通/今出川通交叉口綠地帶</b>：9 人+推車最佳位置，樹蔭+路面平整。<b>09:30 前到</b>占位。</p>
+</details>
+<h3>交通段</h3>
+<div class="scroll-x"><table>
+<tr><th>段</th><th>方式</th><th>票價</th><th>時間</th></tr>
+<tr><td>難波 → 京都駅</td><td>JR 新快速+御堂筋線</td><td>¥810</td><td>45 分</td></tr>
+<tr><td>京都駅 → 丸太町</td><td>地下鐵烏丸線</td><td>¥230</td><td>6 分</td></tr>
+<tr><td>京都駅 → 難波</td><td>JR 新快速+御堂筋線</td><td>¥810</td><td>40 分</td></tr>
+</table></div>
+<p><b>一日票</b>：京都地下鐵一日券 ¥800 當日最划算</p>
+</div>
+
+<div class="tab-content" id="d3-m">
+<h3>三餐</h3>
+<div class="restaurant-scroll">
+
+<div class="restaurant-card primary">
+<h4>🍚 すき家 難波店（早餐）</h4>
+<div class="tags"><span class="tag tag-k">24H</span></div>
+<ul><li>兒童椅</li><li>💰 ¥500–700</li><li>素食長輩建議飯店自助</li></ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🥢 下鴨茶寮（午餐）</h4>
+<div class="tags"><span class="tag tag-v">精進料理</span><span class="tag tag-w">需預約</span></div>
+<ul>
+<li>⭐ 4.2 百年懷石</li>
+<li>💰 ¥5,000–12,000</li>
+<li>9 人包廂 <b>1 個月前預約</b></li>
+<li>📞 <a href="tel:+81757015185">075-701-5185</a></li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🌱 hale 京都（晚餐）</h4>
+<div class="tags"><span class="tag tag-v">100% 全素</span></div>
+<ul>
+<li>⭐ 4.4 祇園</li>
+<li>💰 ¥4,000–8,000</li>
+<li>素食長輩最完美選擇</li>
+<li>強烈建議預約</li>
+</ul>
+</div>
+
+<div class="restaurant-card">
+<h4>🏢 京都駅伊勢丹 11F 美食街（備案）</h4>
+<div class="tags"><span class="tag tag-k">推車友善</span></div>
+<ul><li>回程順路</li><li>多樣選擇</li><li>無需預約</li></ul>
+</div>
+
+</div>
+<div class="alert warn">⚠️ <b>阿古屋茶屋 18:00 閉店</b>，若要去需改至 16:30–17:00</div>
+</div>
+</section>
+
+<!-- Day 4 -->
+<section id="day4" class="day-section c-d4">
+<h2>Day 4 ─ 5/16 (六) 嵐山 + 金閣寺 <span class="rating warn">🟡 緊湊</span></h2>
+<div class="day-tabs">
+  <button class="tab active" data-target="d4-o">📋 總覽</button>
+  <button class="tab" data-target="d4-t">🚃 交通</button>
+  <button class="tab" data-target="d4-m">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d4-o">
+<div class="timeline">
+  <div class="timeline-item"><div class="time-tag">07:30</div><div class="time-desc">難波出發（堺筋線→阪急京都本線→阪急嵐山線）</div></div>
+  <div class="timeline-item"><div class="time-tag">09:00</div><div class="time-desc">阪急嵐山駅（竹林 08:30 前最好）</div></div>
+  <div class="timeline-item"><div class="time-tag">09:30</div><div class="time-desc">🌉 渡月橋 → 竹林小徑 → 天龍寺庭園 ¥500</div></div>
+  <div class="timeline-item"><div class="time-tag">12:00</div><div class="time-desc">🍲 嵐山よしむら 湯豆腐會席（預約）</div></div>
+  <div class="timeline-item"><div class="time-tag">14:00</div><div class="time-desc">🚋 嵐電 + 市巴士 → 金閣寺 ¥500（14:30–15:30 拍照最美）</div></div>
+  <div class="timeline-item"><div class="time-tag">16:30</div><div class="time-desc">返程京都駅 → 難波</div></div>
+  <div class="timeline-item"><div class="time-tag">19:00</div><div class="time-desc">道頓堀 晚餐（千房大阪燒）</div></div>
+</div>
+<div class="alert warn"><h4>⚠️ 嵐山週六人山人海</h4>
+<b>09:00 前抵達、竹林 08:30 前走</b>，10:00 後人山人海。若嵯峨野小火車預約成功+天龍寺時間充裕，可放棄金閣寺改在嵐山嵐電漫遊。</div>
+</div>
+
+<div class="tab-content" id="d4-t">
+<h3>交通段</h3>
+<div class="scroll-x"><table>
+<tr><th>段</th><th>時間</th><th>9 人費用</th><th>推車</th></tr>
+<tr><td>難波 → 嵐山（換 2 次）</td><td>85 分</td><td>¥4,560</td><td>⭕</td></tr>
+<tr><td>嵐山 → 金閣寺</td><td>45–60 分</td><td>¥3,380</td><td>⚠️ 嵐電窄</td></tr>
+<tr><td>金閣寺 → 難波</td><td>75–90 分</td><td>¥7,140</td><td>⭕</td></tr>
+<tr class="total-row"><td>交通合計</td><td>–</td><td>¥15,080</td><td>–</td></tr>
+</table></div>
+<details><summary>🎋 嵐山景點推車友善度</summary>
+<ul>
+<li><b>渡月橋</b>：⭕ 推車完全無問題</li>
+<li><b>竹林小徑</b>：⚠️ 前半砂利 OK、後半石畳費力，建議幼幼班換揹巾</li>
+<li><b>天龍寺庭園</b>：⚠️ 砂利為主，入口參道可推車</li>
+<li><b>金閣寺</b>：⭕ 境內鋪裝路面</li>
+</ul>
+</details>
+<details><summary>🚂 嵯峨野小火車（選配）</summary>
+<p>9 人 ¥6,160。週末必須 1 個月前預約。推車需折疊。</p>
+</details>
+</div>
+
+<div class="tab-content" id="d4-m">
+<div class="restaurant-scroll">
+
+<div class="restaurant-card primary">
+<h4>🍜 つるまる饂飩（早餐）</h4>
+<div class="tags"><span class="tag tag-v">素食昆布湯</span></div>
+<ul>
+<li>07:00 開</li>
+<li>💰 ¥400–700</li>
+<li>告知不用柴魚高湯</li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🍲 嵐山よしむら（午餐）</h4>
+<div class="tags"><span class="tag tag-v">精進料理</span><span class="tag tag-w">必預約</span></div>
+<ul>
+<li>渡月橋旁絕佳景觀</li>
+<li>💰 ¥2,000–3,500</li>
+<li>📞 <a href="tel:+81758610038">075-861-0038</a></li>
+<li><b>2 週前預約</b>，告知 1 位全素+推車</li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🔥 千房 道頓堀大玩笑店（晚餐）</h4>
+<div class="tags"><span class="tag tag-w">含蛋</span><span class="tag tag-k">家庭友善</span></div>
+<ul>
+<li>大阪燒</li>
+<li>💰 ¥1,500–2,500</li>
+<li>📞 <a href="tel:+81662111119">06-6211-1119</a></li>
+</ul>
+</div>
+
+<div class="restaurant-card">
+<h4>🌿 MUSUBI-CAFE（備案）</h4>
+<ul><li>蔬食和風</li><li>若よしむら訂不到</li></ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Day 5 -->
+<section id="day5" class="day-section c-d5">
+<h2>Day 5 ─ 5/17 (日) 奈良 + 心斎橋 <span class="rating ok">🟢 可行</span></h2>
+<div class="day-tabs">
+  <button class="tab active" data-target="d5-o">📋 總覽</button>
+  <button class="tab" data-target="d5-t">🚃 交通</button>
+  <button class="tab" data-target="d5-m">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d5-o">
+<div class="timeline">
+  <div class="timeline-item"><div class="time-tag">09:00</div><div class="time-desc">難波出發（近鉄快速急行）</div></div>
+  <div class="timeline-item"><div class="time-tag">10:00</div><div class="time-desc">🦌 近鉄奈良駅 → 奈良公園（鹿仙貝 ¥200/束）</div></div>
+  <div class="timeline-item"><div class="time-tag">11:00</div><div class="time-desc">東大寺南大門 → 大佛殿 ¥600/大人</div></div>
+  <div class="timeline-item"><div class="time-tag">12:30</div><div class="time-desc">🌱 粟 ならまち店 精進料理（預約）</div></div>
+  <div class="timeline-item"><div class="time-tag">14:00</div><div class="time-desc">春日大社</div></div>
+  <div class="timeline-item"><div class="time-tag">14:30</div><div class="time-desc">返回近鉄奈良駅（清洗推車輪子）</div></div>
+  <div class="timeline-item"><div class="time-tag">15:00</div><div class="time-desc">🛍️ 心斎橋筋商店街 / 道頓堀購物</div></div>
+  <div class="timeline-item"><div class="time-tag">19:00</div><div class="time-desc">北極星 心斎橋 蛋包飯晚餐</div></div>
+</div>
+<div class="alert warn"><h4>🦌 鹿群安全（超重要！）</h4>
+<ul>
+<li><b>幼幼班必抱起再餵鹿</b>，勿推推車進鹿群</li>
+<li>鹿仙貝由大人拿，孩子站大人背後或抱起</li>
+<li>食物吃完攤開雙手示意「沒有了」</li>
+<li>🚫 若草山不帶推車上山（草地 15–20 度翻覆危險）</li>
+</ul></div>
+</div>
+
+<div class="tab-content" id="d5-t">
+<h3>難波 ↔ 奈良</h3>
+<div class="scroll-x"><table>
+<tr><th>方向</th><th>路線</th><th>時間</th><th>票價（成人）</th><th>9 人單程</th></tr>
+<tr><td>去程</td><td><b>近鉄快速急行</b>（無換車）</td><td>40 分</td><td>¥680</td><td>¥4,760</td></tr>
+<tr><td>回程</td><td>同上</td><td>40 分</td><td>¥680</td><td>¥4,760</td></tr>
+</table></div>
+<div class="alert info">JR 路線不推薦（需天王寺換乘 60–70 分）。直接 ICOCA 儲值最省事（近鉄 1 Day Pass 不划算）。</div>
+<details><summary>🧼 推車清理</summary>
+<p>出發前準備濕紙巾 2–3 包+小塑膠袋。回程在近鉄奈良駅洗手台清潔鹿糞異味。</p>
+</details>
+</div>
+
+<div class="tab-content" id="d5-m">
+<div class="restaurant-scroll">
+
+<div class="restaurant-card primary">
+<h4>🍱 なか卯 難波店（早餐）</h4>
+<div class="tags"><span class="tag tag-k">24H</span></div>
+<ul>
+<li>和風早餐定食</li>
+<li>💰 ¥500–700</li>
+<li>素食長輩：白飯+納豆+豆腐</li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🌱 粟 ならまち店（午餐）</h4>
+<div class="tags"><span class="tag tag-v">100% 精進料理</span><span class="tag tag-w">必預約</span></div>
+<ul>
+<li>⭐ 4.4 大和野菜</li>
+<li>💰 ¥3,000–5,000</li>
+<li>📞 <a href="tel:+81742245699">0742-24-5699</a></li>
+<li><b>2–3 週前預約</b>，素食保障最佳</li>
+</ul>
+</div>
+
+<div class="restaurant-card primary">
+<h4>🍳 北極星 心斎橋本店（晚餐）</h4>
+<div class="tags"><span class="tag tag-w">含蛋</span><span class="tag tag-k">家庭友善</span></div>
+<ul>
+<li>蛋包飯元祖老店</li>
+<li>💰 ¥1,500–2,500</li>
+<li>📞 <a href="tel:+81662117829">06-6211-7829</a></li>
+</ul>
+</div>
+
+<div class="restaurant-card">
+<h4>🦀 かに道楽（晚餐分流）</h4>
+<ul><li>螃蟹會席</li><li>💰 ¥5,000–10,000</li><li>📞 <a href="tel:+81662118975">06-6211-8975</a></li></ul>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Day 6 -->
+<section id="day6" class="day-section c-d6">
+<h2>Day 6 ─ 5/18 (一) 回程 <span class="rating ok">🟢 可行</span></h2>
+<div class="day-tabs">
+  <button class="tab active" data-target="d6-o">📋 總覽</button>
+  <button class="tab" data-target="d6-t">🚃 交通</button>
+  <button class="tab" data-target="d6-m">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d6-o">
+<div class="alert info"><h4>📅 最晚離開飯店時間表</h4>
+<div class="scroll-x"><table>
+<tr><th>班機</th><th>抵 KIX</th><th>離難波</th><th>退房</th></tr>
+<tr><td>14:00</td><td>11:28</td><td>10:50</td><td>10:00</td></tr>
+<tr><td>16:00</td><td>13:08</td><td>12:30</td><td>12:00</td></tr>
+</table></div></div>
+<div class="timeline">
+  <div class="timeline-item"><div class="time-tag">08:00</div><div class="time-desc">飯店 Buffet 早餐（素食長輩最保險）</div></div>
+  <div class="timeline-item"><div class="time-tag">09:00</div><div class="time-desc">黑門市場/道頓堀採買伴手禮</div></div>
+  <div class="timeline-item"><div class="time-tag">10:00</div><div class="time-desc">退房、整理行李</div></div>
+  <div class="timeline-item"><div class="time-tag">10:50</div><div class="time-desc">搭 Rapi:t 特急</div></div>
+  <div class="timeline-item"><div class="time-tag">11:28</div><div class="time-desc">抵達 KIX T1</div></div>
+  <div class="timeline-item"><div class="time-tag">12:00</div><div class="time-desc">機場分組午餐 + 免稅店</div></div>
+  <div class="timeline-item"><div class="time-tag">14:00</div><div class="time-desc">✈️ KIX → 台灣</div></div>
+</div>
+</div>
+
+<div class="tab-content" id="d6-t">
+<h3>難波 → KIX</h3>
+<div class="scroll-x"><table>
+<tr><th>方案</th><th>時間</th><th>9 人費用</th><th>推薦</th></tr>
+<tr><td><b>A. Rapi:t 特急</b></td><td>38 分</td><td>¥10,440</td><td>🥇 首選</td></tr>
+<tr><td>B. 空港急行</td><td>45 分</td><td>¥6,800</td><td>省錢</td></tr>
+<tr><td>C. JR 関空快速</td><td>70 分</td><td>¥8,640</td><td>不建議</td></tr>
+</table></div>
+<div class="alert"><h4>💼 機場重要提醒</h4>
+<ul>
+<li><b>ICOCA 退卡</b>：KIX T1 2F JR みどりの窓口（手續費 ¥220），9 人預留 20 分</li>
+<li><b>推車寄艙</b>：Check-in 櫃台辦理，嬰兒推車<b>免費</b>，事前拍照存證</li>
+<li><b>Aerohouse</b>：T1 3F 免費兒童遊戲區（過安檢前）</li>
+<li><b>黑貓宅急便</b>：大件伴手禮可前一晚寄直送機場</li>
+</ul></div>
+</div>
+
+<div class="tab-content" id="d6-m">
+<h3>早餐 08:00</h3>
+<div class="restaurant-scroll">
+<div class="restaurant-card primary">
+<h4>🍳 飯店 Buffet</h4>
+<div class="tags"><span class="tag tag-v">素食自選</span><span class="tag tag-k">推車</span></div>
+<ul><li>🥇 06:30 起供餐</li><li>不需外出</li></ul>
+</div>
+<div class="restaurant-card">
+<h4>☕ 星乃珈琲 難波店</h4>
+<ul><li>07:30 開</li><li>舒芙蕾鬆餅</li></ul>
+</div>
+</div>
+<h3>🍜 KIX 機場午餐（分組策略）</h3>
+<div class="scroll-x"><table>
+<tr><th>組</th><th>成員</th><th>餐廳</th></tr>
+<tr><td>A</td><td>素食長輩</td><td>T's TanTan（100% 全素拉麵）或素烏龍麵</td></tr>
+<tr><td>B</td><td>兒童+大人</td><td>吉野家 / MOS Burger</td></tr>
+<tr><td>C</td><td>成人主體</td><td>勝博殿 炸豬排定食</td></tr>
+</table></div>
+<details><summary>🎁 伴手禮採購清單</summary>
+<div class="scroll-x"><table>
+<tr><th>品項</th><th>素食</th><th>價格</th></tr>
+<tr><td>Royce' 生巧（冷藏）</td><td>含奶</td><td>¥900–1,500</td></tr>
+<tr><td>YOKU MOKU 蛋捲</td><td>蛋奶素</td><td>¥1,500–2,500</td></tr>
+<tr><td>白い恋人</td><td>蛋奶素</td><td>¥1,200</td></tr>
+<tr><td>神戶布丁</td><td>蛋奶素</td><td>¥500–800</td></tr>
+<tr><td>八ツ橋（傳統）</td><td>全素可</td><td>¥600–1,200</td></tr>
+<tr><td>辻利抹茶</td><td>全素</td><td>¥800–1,500</td></tr>
+</table></div>
+</details>
+</div>
+</section>
+
+<!-- Info / Summary -->
+<section id="info" class="day-section" style="--clr:#555;--bg:#f1f3f4">
+<h2>📋 總體資訊</h2>
+<div class="day-tabs">
+  <button class="tab active" data-target="i-b">💰 預算</button>
+  <button class="tab" data-target="i-h">🏨 住宿</button>
+  <button class="tab" data-target="i-p">✅ 準備</button>
+  <button class="tab" data-target="i-w">🌤️ 天氣</button>
+</div>
+
+<div class="tab-content active" id="i-b">
+<h3>9 人總預算</h3>
+<div class="scroll-x"><table>
+<tr><th>項目</th><th>最低（廉航）</th><th>建議（一般航空）</th></tr>
+<tr><td>機票</td><td>NT$42,500</td><td>NT$96,000</td></tr>
+<tr><td>住宿（5 晚 3 房）</td><td>NT$27,500</td><td>NT$44,000</td></tr>
+<tr><td>交通（ICOCA）</td><td>NT$13,400</td><td>NT$13,400</td></tr>
+<tr><td>景點門票</td><td>NT$13,700</td><td>NT$13,700</td></tr>
+<tr><td>餐費（6 日 ×9 人）</td><td>NT$57,000</td><td>NT$57,000</td></tr>
+<tr><td>伴手禮+雜支</td><td>NT$10,340</td><td>NT$10,340</td></tr>
+<tr class="total-row"><td><b>9 人總計</b></td><td><b>NT$164,440</b></td><td><b>NT$234,440</b></td></tr>
+<tr class="total-row"><td><b>每人平均</b></td><td><b>NT$18,271</b></td><td><b>NT$26,049</b></td></tr>
+</table></div>
+</div>
+
+<div class="tab-content" id="i-h">
+<h3>大阪難波飯店推薦</h3>
+<div class="scroll-x"><table>
+<tr><th>飯店</th><th>特色</th><th>2-3 房/晚</th></tr>
+<tr><td><b>Citadines Namba</b> 🥇</td><td>服務式公寓、廚房可素食早餐</td><td>¥35,000–55,000</td></tr>
+<tr><td>OMO7 大阪 by 星野</td><td>星野集團、和式家族房</td><td>¥40,000–60,000</td></tr>
+<tr><td>Holiday Inn Osaka Namba</td><td>IHG、連通房、英文服務</td><td>¥35,000–55,000</td></tr>
+<tr><td>Cross Hotel Osaka</td><td>心斎橋設計感</td><td>¥30,000–50,000</td></tr>
+<tr><td>大阪難波華盛頓</td><td>性價比</td><td>¥25,000–40,000</td></tr>
+</table></div>
+</div>
+
+<div class="tab-content" id="i-p">
+<h3>🗓️ 必辦（2026/2 月前）</h3>
+<ul class="checklist">
+<li><b>葵祭觀覽席</b>（2026/2 月開賣立即搶）</li>
+<li>機票（2025/11–12 購最划算）</li>
+<li>9 人住宿（3 房 × 5 晚）</li>
+</ul>
+<h3>📞 餐廳預約（出發前 2–4 週）</h3>
+<ul class="checklist">
+<li><b>粟 ならまち店</b>（Day5 素食午餐）官網</li>
+<li><b>嵐山よしむら</b>（Day4 午餐）<a href="tel:+81758610038">075-861-0038</a></li>
+<li><b>下鴨茶寮</b>（Day3 午餐）<a href="tel:+81757015185">075-701-5185</a> 1 個月前</li>
+<li><b>hale 京都</b>（Day3 祇園晚餐）</li>
+<li><b>千房 道頓堀</b>（Day4 晚餐）<a href="tel:+81662111119">06-6211-1119</a></li>
+<li><b>北極星 心斎橋</b>（Day5 晚餐）<a href="tel:+81662117829">06-6211-7829</a></li>
+<li><b>Paprika 食堂 Vegan</b>（Day1 備案）</li>
+<li><b>麵包超人博物館</b>（Day2）官網預購</li>
+<li><b>嵯峨野小火車</b>（Day4 選配）1 個月前</li>
+</ul>
+<h3>🍱 素食日文小卡（隨身攜帶）</h3>
+<div style="background:#fff3e0;padding:12px;border-radius:8px;font-size:13px;white-space:pre-wrap;border-left:4px solid #f57c00">私は完全な菜食主義者です。
+肉・魚・卵・乳製品・かつおだし・煮干しだし
+を一切使用しない料理をお願いします。
+昆布だしと野菜のみで調理してください。</div>
+<h3>💊 藥品清單</h3>
+<ul class="checklist">
+<li>退燒藥（兒童：アセトアミノフェン；大人：Ibuprofen）</li>
+<li>腸胃藥、過敏藥、暈車藥</li>
+<li>防蚊液（奈良、嵐山）</li>
+<li>OK 繃、消毒噴劑</li>
+<li>素食長輩個人處方藥</li>
+</ul>
+</div>
+
+<div class="tab-content" id="i-w">
+<h3>🌤️ 5 月中旬天氣</h3>
+<div class="scroll-x"><table>
+<tr><th>城市</th><th>高溫</th><th>低溫</th><th>雨日/月</th></tr>
+<tr><td>大阪</td><td>24-26°C</td><td>15-17°C</td><td>8-10</td></tr>
+<tr><td>京都</td><td>25-27°C</td><td>14-16°C</td><td>9-11</td></tr>
+<tr><td>神戶</td><td>23-25°C</td><td>15-17°C</td><td>7-9</td></tr>
+<tr><td>奈良</td><td>24-26°C</td><td>13-15°C</td><td>8-10</td></tr>
+</table></div>
+<div class="alert ok"><b>穿著</b>：短袖+薄外套（早晚溫差 10°C）、折疊傘必備、SPF30+ 防曬</div>
+<h3>📱 推薦 APP</h3>
+<ul>
+<li><b>Google Maps</b> — 導航</li>
+<li><b>乗換案内</b> — 日本電車最精準</li>
+<li><b>Japan Travel by Navitime</b> — 外國旅客優化</li>
+<li><b>Yahoo! 乗換案内</b> — 即時延誤</li>
+</ul>
+</div>
+</section>
+
+</main>
+
+<!-- Emergency FAB -->
+<button class="fab" onclick="toggleEmergency()" title="緊急聯絡">🆘</button>
+<div class="em-panel" id="em">
+<h3>🆘 緊急聯絡</h3>
+<a href="tel:+81664438481">📞 台北駐大阪辦事處<br>+81-6-6443-8481</a>
+<a href="tel:119">🚑 日本救護 119</a>
+<a href="tel:110">🚔 日本警察 110</a>
+<a href="tel:+81663140110">🗺️ 大阪觀光諮詢<br>06-6314-0110</a>
+<a href="tel:+81725561220">🏥 大阪府立子ども病院<br>0725-56-1220</a>
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const parent=btn.closest('.day-section');
+    parent.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    parent.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    parent.querySelector('#'+btn.dataset.target).classList.add('active');
+  });
+});
+
+// Nav active state on scroll
+const sections=document.querySelectorAll('.day-section');
+const navBtns=document.querySelectorAll('.nav-btn');
+function updateNav(){
+  let current='';
+  sections.forEach(sec=>{
+    const rect=sec.getBoundingClientRect();
+    if(rect.top<=120)current=sec.id;
+  });
+  navBtns.forEach(b=>{
+    b.classList.toggle('active',b.getAttribute('href')==='#'+current);
+  });
+}
+window.addEventListener('scroll',updateNav,{passive:true});
+updateNav();
+
+// Emergency toggle
+function toggleEmergency(){
+  document.getElementById('em').classList.toggle('open');
+}
+document.addEventListener('click',e=>{
+  const em=document.getElementById('em'),fab=document.querySelector('.fab');
+  if(em.classList.contains('open')&&!em.contains(e.target)&&e.target!==fab){
+    em.classList.remove('open');
+  }
+});
+</script>
+
+</body>
+</html>

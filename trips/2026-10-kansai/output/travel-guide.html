@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="theme-color" content="#d2691e">
+<title>2026 京阪神家族旅遊手冊（方案 C · 大阪+京都）</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",-apple-system,sans-serif;font-size:16px;line-height:1.6;color:#222;background:#faf7f2;padding-bottom:90px}
+.c-d1{--clr:#c2410c;--bg:#fff0e5}
+.c-d2{--clr:#0369a1;--bg:#e0f2fe}
+.c-d3{--clr:#9a3412;--bg:#fed7aa}
+.c-d4{--clr:#b45309;--bg:#fde68a}
+.c-d5{--clr:#92400e;--bg:#fef3c7}
+.c-d6{--clr:#78716c;--bg:#f5f5f4}
+.sticky-nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e7e5e4;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.04)}
+.nav-scroll{display:flex;overflow-x:auto;padding:10px 12px;gap:8px;scrollbar-width:none}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-btn{flex:0 0 auto;min-width:90px;min-height:44px;padding:8px 14px;border-radius:22px;background:#f5f5f4;color:#333;text-decoration:none;font-size:14px;font-weight:500;text-align:center;white-space:nowrap;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.nav-btn[data-day="1"]{--clr:#c2410c}
+.nav-btn[data-day="2"]{--clr:#0369a1}
+.nav-btn[data-day="3"]{--clr:#9a3412}
+.nav-btn[data-day="4"]{--clr:#b45309}
+.nav-btn[data-day="5"]{--clr:#92400e}
+.nav-btn[data-day="6"]{--clr:#78716c}
+.nav-btn:hover{background:var(--clr);color:#fff}
+header{padding:24px 16px 16px;text-align:center;background:linear-gradient(135deg,#c2410c 0%,#9a3412 50%,#0369a1 100%);color:#fff}
+header h1{margin:0 0 8px;font-size:22px}
+header p{margin:4px 0;font-size:14px;opacity:.95}
+main{max-width:1000px;margin:0 auto;padding:16px 12px}
+.day-section{background:#fff;border-radius:14px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden;border-left:6px solid var(--clr)}
+.day-section h2{margin:0;padding:16px 18px;background:var(--bg);color:var(--clr);font-size:18px}
+.day-section .content{padding:16px 18px}
+.rating{font-size:13px;padding:2px 8px;border-radius:10px;background:#fff;color:#333;font-weight:normal;margin-left:8px}
+.rating.ok{background:#dcfce7;color:#15803d}
+.rating.warn{background:#fef3c7;color:#a16207}
+.timeline{border-left:2px solid var(--clr);padding-left:16px;margin:10px 0}
+.timeline-item{position:relative;padding-bottom:14px}
+.timeline-item::before{content:"";position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--clr);border:2px solid #fff}
+.time-tag{font-weight:600;color:var(--clr);font-size:14px}
+.time-desc{margin-top:4px;font-size:15px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px;background:#fff}
+th{background:var(--bg);color:var(--clr);padding:8px 6px;text-align:left;font-weight:600;font-size:13px}
+td{padding:8px 6px;border-top:1px solid #eee;vertical-align:top}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -6px;padding:0 6px}
+details{margin:10px 0;border:1px solid #e7e5e4;border-radius:8px;background:#fafafa}
+summary{padding:10px 14px;cursor:pointer;font-weight:500;min-height:44px;display:flex;align-items:center}
+details[open] summary{border-bottom:1px solid #e7e5e4}
+details > *:not(summary){padding:12px 14px}
+.alert{padding:12px 14px;border-radius:8px;margin:12px 0;border-left:4px solid #a16207;background:#fef3c7;color:#78350f}
+.alert.warn{border-left-color:#b91c1c;background:#fee2e2;color:#7f1d1d}
+.alert.ok{border-left-color:#15803d;background:#dcfce7;color:#14532d}
+.alert.info{border-left-color:#0369a1;background:#e0f2fe;color:#0c4a6e}
+.alert h4{margin:0 0 6px;font-size:15px}
+.alert ul{margin:6px 0;padding-left:20px}
+.badge{display:inline-block;padding:3px 10px;border-radius:14px;font-size:12px;font-weight:600;margin:2px}
+.badge-star{background:#fef3c7;color:#92400e}
+.badge-new{background:#dcfce7;color:#15803d}
+.badge-notaxi{background:#fee2e2;color:#b91c1c}
+a[href^="tel:"]{background:#dcfce7;padding:1px 6px;border-radius:4px;text-decoration:none;color:#15803d;font-weight:500}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:6px 0 6px 28px;position:relative;font-size:14px;line-height:1.5}
+.checklist li::before{content:"☐";position:absolute;left:0;top:4px;font-size:18px;color:var(--clr,#c2410c)}
+.total-row td{background:#fef3c7;font-weight:600;color:#78350f}
+.hotel-card{border:2px solid var(--clr,#c2410c);border-radius:12px;padding:14px;margin:10px 0;background:var(--bg,#fff0e5)}
+.hotel-card h3{margin:0 0 8px;color:var(--clr,#c2410c)}
+@media print{
+  .sticky-nav,.fab,.em-panel{display:none !important}
+  body{background:#fff;padding-bottom:0}
+  .day-section{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+  header{background:none;color:#000}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🍁 2026 京阪神家族旅遊手冊</h1>
+<p><strong>方案 C · 星宇 UKB · 大阪 2 晚 + 京都 3 晚</strong></p>
+<p>2026/10/20(二) – 10/25(日) · 6 天 5 夜 · 9 人</p>
+<p><span class="badge badge-star">星宇 JX306/307</span> <span class="badge badge-notaxi">🚫 無計程車</span> <span class="badge badge-new">🆕 時代祭</span></p>
+</header>
+
+<nav class="sticky-nav">
+<div class="nav-scroll">
+<a class="nav-btn" href="#overview" data-day="info">📊 總覽</a>
+<a class="nav-btn" href="#hotels" data-day="info">🏨 住宿</a>
+<a class="nav-btn" href="#flight" data-day="info">✈️ 航班</a>
+<a class="nav-btn" href="#day1" data-day="1">Day 1 神戶</a>
+<a class="nav-btn" href="#day2" data-day="2">Day 2 海遊館</a>
+<a class="nav-btn" href="#day3" data-day="3">Day 3 時代祭</a>
+<a class="nav-btn" href="#day4" data-day="4">Day 4 嵐山</a>
+<a class="nav-btn" href="#day5" data-day="5">Day 5 奈良</a>
+<a class="nav-btn" href="#day6" data-day="6">Day 6 回程</a>
+<a class="nav-btn" href="#backup" data-day="info">🎯 備案景點</a>
+<a class="nav-btn" href="#budget" data-day="info">💰 預算</a>
+<a class="nav-btn" href="#emergency" data-day="info">🆘 緊急</a>
+</div>
+</nav>
+
+<main>
+
+<section id="overview" class="day-section c-d1">
+<h2>📊 方案 C 動線評估</h2>
+<div class="content">
+<div class="alert ok">
+<h4>✅ 新方案核心優勢</h4>
+<ul>
+<li><strong>只搬 1 次家</strong>（10/22 透過宅急便從大阪寄到京都）</li>
+<li>Day4 嵐山從京都出發，JR 嵯峨野線 <strong>15 分直達</strong>（比難波省 55 分+¥1,170）</li>
+<li>Day5 奈良從京都出發，近鉄急行 45 分直達奈良中心</li>
+<li>Day3 時代祭當天進京都，省去來回通勤</li>
+</ul>
+</div>
+<div class="scroll-x">
+<table>
+<tr><th>Day</th><th>日期</th><th>主題</th><th>住宿</th><th>動線</th></tr>
+<tr><td>1</td><td>10/20(二)</td><td>UKB 抵達+神戶</td><td>🏨 大阪</td><td><span class="rating warn">🟡</span></td></tr>
+<tr><td>2</td><td>10/21(三)</td><td>海遊館+天保山</td><td>🏨 大阪</td><td><span class="rating ok">🟢</span></td></tr>
+<tr><td>3</td><td>10/22(四)</td><td>大阪→京都+時代祭</td><td>🏨 京都</td><td><span class="rating warn">🟡</span></td></tr>
+<tr><td>4</td><td>10/23(五)</td><td>嵐山</td><td>🏨 京都</td><td><span class="rating ok">🟢</span></td></tr>
+<tr><td>5</td><td>10/24(六)</td><td>奈良+心斎橋</td><td>🏨 京都</td><td><span class="rating ok">🟢</span></td></tr>
+<tr><td>6</td><td>10/25(日)</td><td>京都→UKB→台中</td><td>—</td><td><span class="rating ok">🟢</span></td></tr>
+</table>
+</div>
+<div class="alert warn">
+<h4>🚫 排除景點（用戶指定）</h4>
+伏見稻荷大社、<strong>大阪城</strong>、清水寺、金閣寺
+</div>
+</div>
+</section>
+
+<section id="hotels" class="day-section c-d2">
+<h2>🏨 住宿推薦</h2>
+<div class="content">
+
+<div class="hotel-card c-d1" style="--clr:#c2410c;--bg:#fff0e5">
+<h3>🥇 大阪 Day1-2：MIMARU 大阪 難波 STATION</h3>
+<p>⭐ 4.7 (559 則) · 日本橋駅 4 分 · 黑門市場 <strong>2 分</strong></p>
+<ul>
+<li>✅ 完整廚房（素食長輩自炊最方便）</li>
+<li>✅ 近鉄難波駅 7 分 → Day3 直通京都最省事</li>
+<li>✅ 130 款桌遊、親子遊戲間、嬰兒浴盆可借</li>
+<li>💰 <strong>3 房 2 晚：¥130,000-180,000（NT$ 26,000-36,000）</strong></li>
+<li>方案：3 間 Studio 各住 3 人 或 1 大套房 + 2 Studio</li>
+</ul>
+<details>
+<summary>其他大阪候選</summary>
+<table>
+<tr><th>飯店</th><th>評分</th><th>2晚3房 NT$</th><th>特色</th></tr>
+<tr><td>Citadines Namba</td><td>⭐4.7 (1,249)</td><td>30,000-48,000</td><td>服務式公寓・同街區</td></tr>
+<tr><td>Daiwa Roynet Yotsubashi</td><td>⭐4.x</td><td>21,000-30,000</td><td>CP 最高・翻新・3×Triple</td></tr>
+<tr><td>❌ OMO7 大阪</td><td>⭐4.2</td><td>52,000-80,000</td><td>西成區環境不適合幼兒</td></tr>
+</table>
+</details>
+</div>
+
+<div class="hotel-card c-d3" style="--clr:#9a3412;--bg:#fed7aa">
+<h3>🥇 京都 Day3-5：MIMARU KYOTO STATION</h3>
+<p>⭐ <strong>4.8 (438 則)</strong> · 京都駅步行 8 分</p>
+<ul>
+<li>✅ <strong>一間 Family Apartment 可住 5-8 人</strong>（9 人 3 房最舒適）</li>
+<li>✅ 完整廚房 + 樓下 7-11</li>
+<li>✅ JR 嵯峨野線（嵐山）/ 近鉄（奈良）/ JR 新快速（回 UKB）全涵蓋</li>
+<li>💰 <strong>3 房 3 晚：¥300,000-500,000（NT$ 60,000-100,000）</strong></li>
+<li>方案：1 間 Family Apartment（5-8 人）+ 2 間 Studio/Double</li>
+</ul>
+<details>
+<summary>其他京都候選</summary>
+<table>
+<tr><th>飯店</th><th>評分</th><th>3晚3房 NT$</th><th>特色</th></tr>
+<tr><td>HOTEL VISCHIO by GRANVIA</td><td>⭐4.5 (1,360)</td><td>39,000-59,000</td><td>大浴場+三溫暖・八条口 8 分</td></tr>
+<tr><td>Daiwa Roynet Kyoto-Hachijoguchi</td><td>⭐4.x</td><td>27,000-45,000</td><td>CP 最高・八条口 4 分</td></tr>
+<tr><td>Hotel Granvia Kyoto</td><td>⭐4.3 (4,705)</td><td>50,000-90,000</td><td>京都駅直結 0 分・但需 3-4 房</td></tr>
+<tr><td>The Thousand Kyoto</td><td>⭐4.5 (1,395)</td><td>119,000-178,000</td><td>精品 5 星・預算寬裕</td></tr>
+</table>
+</details>
+</div>
+
+<div class="alert warn">
+<h4>⚠️ 京都訂房急迫性</h4>
+10/22 時代祭 + 10 月底楓葉初期 = 京都最緊張時段。<strong>建議 2026/04-05 立即訂房</strong>（先用 Booking.com「免費取消」方案鎖房）。
+</div>
+</div>
+</section>
+
+<section id="flight" class="day-section c-d4">
+<h2>✈️ 星宇 JX306/307 票價</h2>
+<div class="content">
+<p><strong>去：JX306 台中 08:45 → 神戶 12:30</strong>｜<strong>回：JX307 神戶 13:30 → 台中 16:00</strong></p>
+<table>
+<tr><th>情境</th><th>單人含稅</th><th>9 人合計 NT$</th></tr>
+<tr><td>🥇 早鳥 8 折</td><td>17,000-21,000</td><td><strong>約 144,400</strong></td></tr>
+<tr><td>合理一般票</td><td>22,000-28,000</td><td>約 190,000</td></tr>
+<tr><td>彈性 Flex</td><td>28,000-35,000</td><td>約 243,200</td></tr>
+</table>
+
+<div class="alert warn">
+<h4>⚠️ 訂票關鍵提醒</h4>
+<ul>
+<li>2026/04 ATTA 台中旅展 8 折 <strong>已於 04/22 截止</strong></li>
+<li>下一波預期：5-6 月台中旅展延續 / 夏季促銷</li>
+<li><strong>建議 2026/05-06 前完成訂票</strong></li>
+<li>嬰兒票（0-2 歲佔 10%）需電話訂：<a href="tel:0227911199">02-2791-1199</a></li>
+<li>素食餐：訂票後於起飛 24 小時前申請 <strong>VGML（全素）</strong></li>
+<li>玉山星宇聯名卡有 NT$ 1,500 折扣碼可疊加</li>
+</ul>
+</div>
+
+<p><strong>💱 匯率（2026/04/23 台銀）</strong>：JPY 現金賣 0.2014（¥10,000 ≒ NT$ 2,014）</p>
+</div>
+</section>
+
+<section id="day1" class="day-section c-d1">
+<h2>Day 1 — 10/20（二）UKB 抵達 → 神戶 → 大阪 <span class="rating warn">🟡</span></h2>
+<div class="content">
+<div class="alert info">
+<strong>🚚 UKB 宅急便寄行李至大阪</strong>：¥9,000-14,000（6-7 件），隔日 10/21 午前到。當日手提必需品：盥洗、換洗、藥品、幼兒奶粉。
+</div>
+<div class="timeline">
+<div class="timeline-item"><span class="time-tag">12:30</span><div class="time-desc">JX306 UKB 抵達</div></div>
+<div class="timeline-item"><span class="time-tag">13:15</span><div class="time-desc">入境+宅急便寄行李</div></div>
+<div class="timeline-item"><span class="time-tag">14:00</span><div class="time-desc">Port Liner UKB→三宮（18 分 ¥340）</div></div>
+<div class="timeline-item"><span class="time-tag">14:30</span><div class="time-desc">🍽️ 午餐（三宮 Santica 地下街）</div></div>
+<div class="timeline-item"><span class="time-tag">15:30</span><div class="time-desc">地下鐵三宮→新神戶（3 分 ¥210）</div></div>
+<div class="timeline-item"><span class="time-tag">15:35</span><div class="time-desc">新神戶 <strong>下坡 12 分</strong> → 北野異人館（推車友善）</div></div>
+<div class="timeline-item"><span class="time-tag">16:00</span><div class="time-desc">萌黄の館+風見鶏の館</div></div>
+<div class="timeline-item"><span class="time-tag">17:15</span><div class="time-desc">北野→Meriken Park 下坡步行 20 分</div></div>
+<div class="timeline-item"><span class="time-tag">18:00</span><div class="time-desc">🍽️ 神戶港 umie モザイク 晚餐（海景）</div></div>
+<div class="timeline-item"><span class="time-tag">20:00</span><div class="time-desc">阪神直通特急→大阪難波（40 分 ¥410）</div></div>
+<div class="timeline-item"><span class="time-tag">21:00</span><div class="time-desc">🏨 MIMARU 大阪 Check-in</div></div>
+</div>
+<div class="alert warn">
+<strong>⚠️ 麵包超人博物館</strong>：必 kobe-anpanman.jp 線上預約，否則現場拒絕。建議 16:00 場次。
+</div>
+</div>
+</section>
+
+<section id="day2" class="day-section c-d2">
+<h2>Day 2 — 10/21（三）海遊館 + 天保山 + 黑門市場 <span class="rating ok">🟢</span></h2>
+<div class="content">
+<div class="alert info">
+<strong>🎫 OSAKA 海遊きっぷ</strong>：地鐵一日券+海遊館入場券 ¥2,550（比單票省）。9 人總省 ¥4,670。<br>
+<strong>⚠️ 海遊館必 Webket e-ticket</strong>（現場排 3 小時）。
+</div>
+<div class="timeline">
+<div class="timeline-item"><span class="time-tag">08:00</span><div class="time-desc">🍽️ 飯店早餐</div></div>
+<div class="timeline-item"><span class="time-tag">09:30</span><div class="time-desc">難波→大阪港（地鐵御堂筋→中央線 20 分 ¥290）</div></div>
+<div class="timeline-item"><span class="time-tag">10:00-13:00</span><div class="time-desc">🌊 海遊館 ⭐4.5（鯨鯊、水母、企鵝）推車友善</div></div>
+<div class="timeline-item"><span class="time-tag">13:00-14:30</span><div class="time-desc">🍽️ 天保山 2F なにわ食いしんぼ横丁 午餐</div></div>
+<div class="timeline-item"><span class="time-tag">14:30-15:30</span><div class="time-desc">🎡 天保山大摩天輪 ⭐4.5</div></div>
+<div class="timeline-item"><span class="time-tag">15:30-16:30</span><div class="time-desc">天保山公園 或 LEGOLAND Discovery（同棟加點）</div></div>
+<div class="timeline-item"><span class="time-tag">17:30-18:30</span><div class="time-desc">🛒 黑門市場邊食邊逛（18:00 開始收攤）</div></div>
+<div class="timeline-item"><span class="time-tag">20:30</span><div class="time-desc">🚚 <strong>關鍵：便利商店寄行李到京都飯店</strong>（翌日午前着）</div></div>
+</div>
+<div class="alert warn">
+<h4>🚚 Day3 前夕關鍵·宅急便大阪→京都</h4>
+跨府當日配送不可行，<strong>必須 10/21 晚 20:00-21:00 前</strong>由難波 FamilyMart/Lawson 寄出，指定翌日午前 08:00-12:00 到京都飯店。費用 6 件約 <strong>¥12,020</strong>。
+</div>
+</div>
+</section>
+
+<section id="day3" class="day-section c-d3">
+<h2>Day 3 — 10/22（四）大阪→京都 + 時代祭 <span class="rating warn">🟡</span></h2>
+<div class="content">
+<div class="alert info">
+<strong>🎌 時代祭</strong>：京都三大祭，2,000 人歷史裝束遊行。12:00 御所出発 → 14:30 平安神宮。<br>
+<strong>🥇 9 人+推車最佳觀賞位置：平安神宮前神宮道</strong>（免費、終點速度最慢、路寬 6m）
+</div>
+<table>
+<tr><th>路線</th><th>時間</th><th>9 人</th><th>推車</th></tr>
+<tr><td>🥇 JR 新快速</td><td>45-55 分</td><td><strong>¥5,270</strong></td><td>⭕ 最佳</td></tr>
+<tr><td>近鉄急行</td><td>75 分</td><td>¥4,490</td><td>⭕</td></tr>
+<tr><td>阪急特急</td><td>55 分</td><td>¥4,165</td><td>⚠️</td></tr>
+</table>
+<div class="timeline">
+<div class="timeline-item"><span class="time-tag">07:30</span><div class="time-desc">大阪飯店退房（輕裝，行李已宅配）</div></div>
+<div class="timeline-item"><span class="time-tag">08:00</span><div class="time-desc">JR 新快速（大阪→京都，28 分）</div></div>
+<div class="timeline-item"><span class="time-tag">09:00</span><div class="time-desc">地鐵烏丸線 今出川駅</div></div>
+<div class="timeline-item"><span class="time-tag">09:30</span><div class="time-desc">京都御所佔位（御苑散步）</div></div>
+<div class="timeline-item"><span class="time-tag">11:00</span><div class="time-desc">🍱 御苑大草坪野餐（便利商店便當）</div></div>
+<div class="timeline-item"><span class="time-tag">12:00</span><div class="time-desc">御池通 觀賞遊行出發隊伍</div></div>
+<div class="timeline-item"><span class="time-tag">13:00</span><div class="time-desc">地鐵東山駅→平安神宮</div></div>
+<div class="timeline-item"><span class="time-tag">14:00-14:30</span><div class="time-desc">🥇 神宮道觀賞遊行終點</div></div>
+<div class="timeline-item"><span class="time-tag">15:30</span><div class="time-desc">平安神宮境內參拜</div></div>
+<div class="timeline-item"><span class="time-tag">17:00</span><div class="time-desc">🏨 京都飯店 Check-in（行李午前已到）</div></div>
+<div class="timeline-item"><span class="time-tag">18:00</span><div class="time-desc">🍽️ 京都駅伊勢丹 11F 美食街</div></div>
+</div>
+<div class="alert warn">
+<h4>☔ 雨天備案</h4>
+時代祭雨延至 10/23 → Day3 改為 <strong>京都鉄道博物館+京都水族館</strong>（梅小路公園內兩館連逛，推車最友善）。Day4 嵐山縮短為渡月橋 2 小時快速版。
+</div>
+</div>
+</section>
+
+<section id="day4" class="day-section c-d4">
+<h2>Day 4 — 10/23（五）嵐山（京都出發·大升級）<span class="rating ok">🟢</span></h2>
+<div class="content">
+<div class="alert ok">
+<h4>🆕 方案 C 最大優勢</h4>
+JR 嵯峨野線從京都駅 <strong>15 分直達</strong>嵐山！比原難波出發省 55 分 + ¥1,170（9 人）。07:05 首班可享無人竹林。
+</div>
+<table>
+<tr><th>路線</th><th>換乘</th><th>時間</th><th>往返 9 人</th></tr>
+<tr><td>🥇 <strong>JR 嵯峨野線</strong></td><td>0 次</td><td><strong>15 分</strong></td><td><strong>¥3,120</strong></td></tr>
+<tr><td>阪急嵐山線</td><td>2 次</td><td>35-40 分</td><td>¥6,900</td></tr>
+<tr><td>地下鐵+嵐電</td><td>2 次</td><td>30-35 分</td><td>¥5,860</td></tr>
+</table>
+<div class="timeline">
+<div class="timeline-item"><span class="time-tag">07:00</span><div class="time-desc">京都飯店出發 → JR 京都駅</div></div>
+<div class="timeline-item"><span class="time-tag">07:20</span><div class="time-desc">JR 嵯峨嵐山駅抵達</div></div>
+<div class="timeline-item"><span class="time-tag">07:30-08:30</span><div class="time-desc">🎋 竹林小徑（09:00 前最空）</div></div>
+<div class="timeline-item"><span class="time-tag">08:30-09:30</span><div class="time-desc">🏛️ 天龍寺庭園 ¥500×8 = ¥4,000</div></div>
+<div class="timeline-item"><span class="time-tag">09:30-10:30</span><div class="time-desc">🌉 渡月橋</div></div>
+<div class="timeline-item"><span class="time-tag">12:00-14:00</span><div class="time-desc">🍽️ 🥇 <strong>西山艸堂 湯豆腐</strong>（素食長輩完美選擇）</div></div>
+<div class="timeline-item"><span class="time-tag">14:00-15:30</span><div class="time-desc">嵯峨野散步、野宮神社、昇龍苑</div></div>
+<div class="timeline-item"><span class="time-tag">17:00</span><div class="time-desc">回京都</div></div>
+<div class="timeline-item"><span class="time-tag">19:00</span><div class="time-desc">🍽️ 京都駅伊勢丹 11F / 拉麵小路</div></div>
+</div>
+</div>
+</section>
+
+<section id="day5" class="day-section c-d5">
+<h2>Day 5 — 10/24（六）奈良 + 心斎橋 <span class="rating ok">🟢</span></h2>
+<div class="content">
+<table>
+<tr><th>路線</th><th>時間</th><th>往返 9 人</th><th>奈良中心距離</th></tr>
+<tr><td>🥇 <strong>近鉄急行</strong></td><td>45 分</td><td><strong>¥9,880</strong></td><td>步行 5 分</td></tr>
+<tr><td>JR みやこ路快速</td><td>45 分</td><td>¥9,620</td><td>步行 20-25 分</td></tr>
+</table>
+<p>推薦近鉄：費用只多 ¥260，少走 15-20 分對推車意義重大</p>
+<div class="timeline">
+<div class="timeline-item"><span class="time-tag">07:30</span><div class="time-desc">🍽️ 京都飯店早餐</div></div>
+<div class="timeline-item"><span class="time-tag">08:45</span><div class="time-desc">近鉄急行（45 分）</div></div>
+<div class="timeline-item"><span class="time-tag">09:30</span><div class="time-desc">近鉄奈良駅抵達</div></div>
+<div class="timeline-item"><span class="time-tag">09:35</span><div class="time-desc">興福寺（5 分）</div></div>
+<div class="timeline-item"><span class="time-tag">10:00</span><div class="time-desc">🦌 奈良公園鹿群（仙貝 ¥200/束）</div></div>
+<div class="timeline-item"><span class="time-tag">11:00-12:00</span><div class="time-desc">東大寺大佛殿 ¥600×8 = ¥4,800</div></div>
+<div class="timeline-item"><span class="time-tag">12:30</span><div class="time-desc">🍽️ 🥇 <strong>粟 ならまち</strong>（精進料理 ⭐4.5，11:15 前取號）</div></div>
+<div class="timeline-item"><span class="time-tag">14:00</span><div class="time-desc">春日大社</div></div>
+<div class="timeline-item"><span class="time-tag">16:00</span><div class="time-desc">返京都→搭 JR 新快速→大阪→心斎橋</div></div>
+<div class="timeline-item"><span class="time-tag">18:30</span><div class="time-desc">📸 格力高看板點燈拍照</div></div>
+<div class="timeline-item"><span class="time-tag">19:00</span><div class="time-desc">🍽️ 北極星 心斎橋本店（蛋包飯元祖）</div></div>
+<div class="timeline-item"><span class="time-tag">21:00</span><div class="time-desc">返京都飯店</div></div>
+</div>
+<div class="alert warn">
+<h4>🚚 Day5 晚關鍵·寄行李到 UKB</h4>
+<strong>20:00-21:00 前</strong>由京都飯店附近 FamilyMart/Lawson 寄出，指定翌日（10/25 日）午前 08:00-12:00 到 UKB 1F ヤマト窓口。費用 6 件約 <strong>¥11,620-12,020</strong>。
+</div>
+<div class="alert info">
+<h4>🦌 鹿群安全</h4>
+<ul>
+<li>大人拿仙貝、孩子站大人背後</li>
+<li><strong>幼幼班抱起後再靠近鹿群</strong></li>
+<li>推車不放食物、一人專看</li>
+<li>🚫 若草山不帶推車上山（斜坡翻覆危險）</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="day6" class="day-section c-d6">
+<h2>Day 6 — 10/25（日）京都 → UKB → 台中 <span class="rating ok">🟢</span></h2>
+<div class="content">
+<table>
+<tr><th>路線</th><th>時間</th><th>9 人</th></tr>
+<tr><td>🥇 JR 新快速→Port Liner</td><td>80 分</td><td><strong>¥9,690</strong></td></tr>
+<tr><td>新幹線→地下鐵→Port Liner</td><td>65 分</td><td>¥21,980（多 ¥12,290 不划算）</td></tr>
+</table>
+<div class="timeline">
+<div class="timeline-item"><span class="time-tag">07:00</span><div class="time-desc">🍽️ 早餐（飯店 Buffet / 便利商店）</div></div>
+<div class="timeline-item"><span class="time-tag">07:30</span><div class="time-desc">退房（行李已前一晚宅配到 UKB）</div></div>
+<div class="timeline-item"><span class="time-tag">08:00</span><div class="time-desc">離京都飯店 → JR 京都駅</div></div>
+<div class="timeline-item"><span class="time-tag">08:30</span><div class="time-desc">🚃 JR 新快速（京都→三ノ宮 52 分）</div></div>
+<div class="timeline-item"><span class="time-tag">09:22</span><div class="time-desc">三ノ宮抵達</div></div>
+<div class="timeline-item"><span class="time-tag">09:30</span><div class="time-desc">步行 Port Liner 三宮駅（7 分）</div></div>
+<div class="timeline-item"><span class="time-tag">09:37-09:55</span><div class="time-desc">🚃 Port Liner → UKB（18 分）</div></div>
+<div class="timeline-item"><span class="time-tag">10:00-10:20</span><div class="time-desc">UKB 1F ヤマト 取行李</div></div>
+<div class="timeline-item"><span class="time-tag">10:30-11:30</span><div class="time-desc">✈️ 星宇 Check-in</div></div>
+<div class="timeline-item"><span class="time-tag">13:30</span><div class="time-desc"><strong>✈️ JX307 起飛</strong></div></div>
+<div class="timeline-item"><span class="time-tag">16:00</span><div class="time-desc">🏠 抵達台中 RMQ</div></div>
+</div>
+<div class="alert info">
+<strong>🎁 伴手禮</strong>：三宮（大丸/Santica/フランツ 魔法の壺プリン）、京都（伊勢丹地下 八つ橋/辻利抹茶）。UKB 規模小，建議三宮採買完再進 UKB。
+</div>
+</div>
+</section>
+
+<section id="backup" class="day-section c-d4">
+<h2>🎯 未去景點備案（30+ 個）</h2>
+<div class="content">
+
+<details open>
+<summary><strong>A. 雨天備案（時代祭 10/22 雨延→京都室內）</strong></summary>
+<table>
+<tr><th>景點</th><th>評分</th><th>推車</th><th>推薦</th></tr>
+<tr><td>🥇 <strong>京都鉄道博物館</strong></td><td>⭐4.4</td><td>⭐⭐⭐</td><td>蒸汽車頭廣場、真實列車可爬</td></tr>
+<tr><td>🥇 <strong>京都水族館</strong></td><td>⭐4.1</td><td>⭐⭐⭐</td><td>與鐵博同園區、半天連逛</td></tr>
+<tr><td>京セラ美術館</td><td>⭐4.4</td><td>⭐⭐⭐</td><td>平安神宮同區域</td></tr>
+<tr><td>京都國際漫畫博物館</td><td>⭐4.1</td><td>⭐⭐</td><td>30 萬冊現場閱讀</td></tr>
+<tr><td>錦市場</td><td>⭐4.1</td><td>⭐</td><td>早 9-10 點人潮最少</td></tr>
+<tr><td>二条城</td><td>⭐4.3</td><td>⭐⭐</td><td>10 月楓葉開始</td></tr>
+</table>
+</details>
+
+<details>
+<summary><strong>B. 大阪 Day2 加點</strong></summary>
+<table>
+<tr><th>景點</th><th>評分</th><th>推車</th><th>推薦</th></tr>
+<tr><td>🥇 道頓堀遊覧船</td><td>⭐4.2</td><td>⭐⭐⭐</td><td>20 分 ¥900，黃昏最美</td></tr>
+<tr><td>🥇 難波八阪神社</td><td>⭐4.4</td><td>⭐⭐⭐</td><td>獅子頭打卡、免費、20 分</td></tr>
+<tr><td>LEGOLAND Discovery 大阪</td><td>⭐4.0</td><td>⭐⭐⭐</td><td>與海遊館同棟、Day2 加點</td></tr>
+<tr><td>大阪今昔館</td><td>⭐4.3</td><td>⭐⭐</td><td>江戶大阪重現</td></tr>
+<tr><td>中之島玫瑰園</td><td>⭐4.0</td><td>⭐⭐⭐</td><td>10 月秋玫瑰二度花期</td></tr>
+<tr><td>通天閣</td><td>⭐4.0</td><td>⭐⭐</td><td>大阪老地標</td></tr>
+<tr><td>心齋橋 PARCO</td><td>⭐4.0</td><td>⭐⭐⭐</td><td>雨天購物、頂樓景觀</td></tr>
+</table>
+</details>
+
+<details>
+<summary><strong>C. 京都 Day3-5 備選</strong></summary>
+<table>
+<tr><th>景點</th><th>評分</th><th>推車</th><th>推薦</th></tr>
+<tr><td>🥇 <strong>下鴨神社</strong>（糺の森）</td><td>⭐4.3</td><td>⭐⭐⭐</td><td>2.5km 原始森林步道、免費</td></tr>
+<tr><td>🥇 <strong>三十三間堂</strong></td><td>⭐4.6</td><td>⭐⭐</td><td>1,001 尊千手觀音、1 小時</td></tr>
+<tr><td>哲學之道</td><td>⭐4.3</td><td>⭐⭐</td><td>10 月楓葉初期</td></tr>
+<tr><td>京都市動物園</td><td>⭐4.1</td><td>⭐⭐⭐</td><td>岡崎公園內（時代祭同區）</td></tr>
+<tr><td>東福寺</td><td>⭐4.3</td><td>⭐</td><td>楓葉 11 月才盛期</td></tr>
+<tr><td>銀閣寺</td><td>⭐4.3</td><td>⭐</td><td>上坡推車困難</td></tr>
+<tr><td>宇治（平等院）</td><td>⭐4.5</td><td>⭐⭐</td><td>Day5 JR 動線可加</td></tr>
+</table>
+</details>
+
+<details>
+<summary><strong>D. 神戶 Day1 備選加點</strong></summary>
+<table>
+<tr><th>景點</th><th>評分</th><th>推車</th><th>推薦</th></tr>
+<tr><td>🥇 ハーバーランド</td><td>⭐4.2</td><td>⭐⭐⭐</td><td>黃昏神戶港絕美</td></tr>
+<tr><td>南京町（中華街）</td><td>⭐4.0</td><td>⭐⭐</td><td>離麵包超人 700m</td></tr>
+<tr><td>布引香草園</td><td>⭐4.1</td><td>⭐⭐</td><td>纜車上山、10 月玫瑰</td></tr>
+<tr><td>❌ 有馬溫泉</td><td>—</td><td>⭐</td><td>距離遠、石板路不利</td></tr>
+</table>
+</details>
+
+<details>
+<summary><strong>E. 奈良 Day5 備選</strong></summary>
+<table>
+<tr><th>景點</th><th>評分</th><th>推車</th><th>推薦</th></tr>
+<tr><td>🥇 依水園</td><td>⭐4.3</td><td>⭐⭐</td><td>東大寺旁、日式庭園</td></tr>
+<tr><td>奈良町格子之家</td><td>⭐3.9</td><td>⭐⭐</td><td>免費、江戶町家</td></tr>
+<tr><td>❌ 若草山</td><td>—</td><td>⭐</td><td>草坡陡、推車不可</td></tr>
+<tr><td>❌ 法隆寺</td><td>⭐4.5</td><td>—</td><td>距離太遠</td></tr>
+</table>
+</details>
+
+<details>
+<summary><strong>F. 親子主題館（雨天保底）</strong></summary>
+<table>
+<tr><th>景點</th><th>評分</th><th>推車</th><th>推薦</th></tr>
+<tr><td>🥇 NIFREL（EXPOCITY）</td><td>⭐4.2</td><td>⭐⭐⭐</td><td>水族+動物+藝術</td></tr>
+<tr><td>KidZania 甲子園</td><td>⭐4.2</td><td>⭐⭐</td><td>幼稚園+小學生職業體驗</td></tr>
+<tr><td>❌ USJ</td><td>⭐4.4</td><td>⭐⭐</td><td>9 人費用極高、人潮</td></tr>
+</table>
+</details>
+
+<details>
+<summary><strong>G. 當季限定（10/20-25）</strong></summary>
+<ul>
+<li>🎌 <strong>京都時代祭 10/22</strong> ✅ 本行程主題</li>
+<li>⚠️ <strong>正倉院展</strong>（奈良國立博物館）若 2026 提前開幕，Day5 可能碰上（需官網確認）</li>
+<li>✅ 道頓堀萬聖節 10/24-31，Day5 晚心斎橋可順道</li>
+<li>❌ 嵐山もみじ祭（11 月第二週）</li>
+<li>❌ 鹿の角きり（10 月第一週末，已結束）</li>
+<li>❌ 神戶 Luminarie（12 月）</li>
+</ul>
+</details>
+
+</div>
+</section>
+
+<section id="budget" class="day-section c-d5">
+<h2>💰 總預算（9 人·方案 C）</h2>
+<div class="content">
+<table>
+<tr><th>項目</th><th>最低（早鳥 8 折）</th><th>建議（一般票）</th></tr>
+<tr><td>星宇 JX306/307 機票</td><td>NT$ 144,400</td><td>NT$ 190,000</td></tr>
+<tr><td>大阪 2 晚（MIMARU 難波）</td><td>NT$ 26,000</td><td>NT$ 36,000</td></tr>
+<tr><td>京都 3 晚（MIMARU KYOTO）</td><td>NT$ 60,000</td><td>NT$ 80,000</td></tr>
+<tr><td>全程交通（ICOCA+各電鐵）</td><td>NT$ 15,000</td><td>NT$ 17,000</td></tr>
+<tr><td>宅急便（3 段）</td><td>NT$ 7,000</td><td>NT$ 8,500</td></tr>
+<tr><td>景點門票</td><td>NT$ 7,500</td><td>NT$ 8,800</td></tr>
+<tr><td>餐費（6 日連鎖為主）</td><td>NT$ 25,000</td><td>NT$ 32,000</td></tr>
+<tr><td>伴手禮+雜支</td><td>NT$ 10,000</td><td>NT$ 20,000</td></tr>
+<tr class="total-row"><td><strong>9 人合計</strong></td><td><strong>NT$ 294,900</strong></td><td><strong>NT$ 392,300</strong></td></tr>
+<tr class="total-row"><td><strong>每人</strong></td><td><strong>約 NT$ 32,800</strong></td><td><strong>約 NT$ 43,600</strong></td></tr>
+</table>
+</div>
+</section>
+
+<section id="emergency" class="day-section c-d1">
+<h2>🆘 緊急聯絡</h2>
+<div class="content">
+<ul>
+<li>日本警察：<a href="tel:110">110</a></li>
+<li>日本救護車：<a href="tel:119">119</a></li>
+<li>大阪救急安心中心：<a href="tel:+817119">#7119</a></li>
+<li>台北駐大阪辦事處：<a href="tel:+81664438481">+81-6-6443-8481</a></li>
+<li>外交部緊急救助：<a href="tel:+886800085095">+886-800-085-095</a></li>
+<li>星宇航空客服：<a href="tel:0227911199">02-2791-1199</a></li>
+</ul>
+<details open>
+<summary><strong>難波附近醫院（大阪 Day1-2）</strong></summary>
+<ul>
+<li>大野記念病院（878m，24hr 急救）</li>
+<li>富永病院（634m，⭐3.5）</li>
+<li>南薬剤師会中央薬局（124m，⭐4.8）</li>
+</ul>
+</details>
+<details>
+<summary><strong>京都駅附近（Day3-5）</strong></summary>
+<ul>
+<li>武田病院（京都駅步行 7 分，24hr 急救）</li>
+<li>京都市立病院</li>
+</ul>
+</details>
+<details>
+<summary><strong>神戶三宮（Day1/Day6 備用）</strong></summary>
+<ul>
+<li>イースト駅前クリニック 神戸三宮院（224m，⭐4.6）</li>
+<li>大國藥妝（404m，中文友善）</li>
+</ul>
+</details>
+</div>
+</section>
+
+<section id="checklist" class="day-section c-d3">
+<h2>📋 行前準備清單</h2>
+<div class="content">
+<h3>🗓️ 訂票/預約（2026/04-05 立即執行）</h3>
+<ul class="checklist">
+<li>星宇 JX306/307（9 人來回 RMQ-UKB）<strong>早鳥 5-6 月前搶</strong></li>
+<li>嬰兒票電話訂：02-2791-1199</li>
+<li>素食餐申請 VGML（起飛 24 小時前）</li>
+<li>MIMARU 大阪 難波 STATION（Day1-2，2 晚）</li>
+<li>MIMARU KYOTO STATION（Day3-5，3 晚）⚠️ 最緊迫</li>
+<li>海遊館 e-ticket（Webket 指定時段）</li>
+<li>麵包超人博物館（kobe-anpanman.jp，10/20 的 16:00 場次）</li>
+</ul>
+<h3>📦 出發前 1 週</h3>
+<ul class="checklist">
+<li>去程 UKB→大阪 宅急便預約</li>
+<li>Day2 晚大阪→京都 宅急便預約</li>
+<li>Day5 晚京都→UKB 宅急便預約</li>
+<li>確認 10/22 天氣預報（雨天備案：京都鉄道博物館+水族館）</li>
+<li>列印素食日文卡</li>
+<li>安裝 App：Jorudan / Yahoo! 乗換案内 / 近鉄 / MIMARU</li>
+</ul>
+<h3>👶 幼兒/嬰兒用品</h3>
+<ul class="checklist">
+<li>紙尿褲、濕巾、備用衣物 3 套</li>
+<li>推車雨罩、輕便揹巾</li>
+<li>膝蓋毯（早晚 10-15°C）</li>
+<li>奶粉/副食品</li>
+<li>Day1 手提必需品（大件行李隔日才到大阪）</li>
+</ul>
+</div>
+</section>
+
+</main>
+
+<script>
+// 簡易導航高亮
+const navBtns = document.querySelectorAll('.nav-btn');
+navBtns.forEach(btn => {
+  btn.addEventListener('click', e => {
+    navBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

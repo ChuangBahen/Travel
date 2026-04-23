@@ -1,0 +1,30 @@
+# Claude Code 本地設定
+.claude/
+.claude.json
+
+# MCP 設定（含 API Key，嚴禁推送）
+.mcp.json
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Agent 暫存
+*.tmp
+*.bak
+*~
+
+# 個人備忘（如有）
+NOTES.local.md
+TODO.local.md

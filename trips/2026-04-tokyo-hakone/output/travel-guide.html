@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#1a73e8">
+  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiMjAyNiDmnbHkuqznrrbmoLnlrrbml4/ml4XpgYrmiYvlhooisKJzaG9ydF9uYW1lIjoi5p2x5Lqs56eu5qC5Iiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZmZmZmYiLCJ0aGVtZV9jb2xvciI6IiMxYTczZTgiLCJpY29ucyI6W119">
+  <title>2026 東京箱根家族旅遊手冊</title>
+  <style>
+    /* === CSS Variables === */
+    :root {
+      --day1: #1a73e8; --day1-bg: rgba(26,115,232,0.10); --day1-light: #e8f0fe;
+      --day2: #0d9453; --day2-bg: rgba(13,148,83,0.10); --day2-light: #e6f4ea;
+      --day3: #e8710a; --day3-bg: rgba(232,113,10,0.10); --day3-light: #fef3e6;
+      --day4: #7b1fa2; --day4-bg: rgba(123,31,162,0.10); --day4-light: #f3e8f9;
+      --day5: #d93025; --day5-bg: rgba(217,48,37,0.10); --day5-light: #fce8e6;
+      --day6: #5f6368; --day6-bg: rgba(95,99,104,0.10); --day6-light: #f1f3f4;
+      --bg: #ffffff; --bg-card: #ffffff; --text: #202124; --text-secondary: #5f6368;
+      --border: #dadce0; --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+      --radius: 12px; --nav-height: 56px;
+    }
+
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+      font-size: 16px; line-height: 1.6; color: var(--text); background: var(--bg);
+      padding-top: calc(var(--nav-height) + 8px); padding-bottom: 80px;
+    }
+
+    /* === Sticky Nav === */
+    .sticky-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .nav-scroll {
+      display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; padding: 8px 12px; gap: 8px;
+    }
+    .nav-scroll::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      flex-shrink: 0; padding: 8px 16px; border-radius: 20px; font-size: 14px;
+      font-weight: 600; text-decoration: none; color: var(--text-secondary);
+      background: var(--bg-card); border: 2px solid var(--border);
+      min-height: 44px; display: flex; align-items: center; white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .nav-btn.active { color: #fff; border-color: transparent; }
+    .nav-btn.day1-color.active { background: var(--day1); }
+    .nav-btn.day2-color.active { background: var(--day2); }
+    .nav-btn.day3-color.active { background: var(--day3); }
+    .nav-btn.day4-color.active { background: var(--day4); }
+    .nav-btn.day5-color.active { background: var(--day5); }
+    .nav-btn.day6-color.active { background: var(--day6); }
+
+    /* === Header === */
+    header {
+      text-align: center; padding: 24px 16px 16px;
+      background: linear-gradient(135deg, var(--day1-light), var(--day3-light));
+      border-bottom: 3px solid var(--day1);
+    }
+    header h1 { font-size: 1.5rem; margin-bottom: 4px; }
+    header p { color: var(--text-secondary); font-size: 0.95rem; }
+    .trip-info { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+    .trip-info span { background: var(--bg-card); padding: 4px 12px; border-radius: 16px; font-size: 0.85rem; border: 1px solid var(--border); }
+
+    /* === Day Sections === */
+    .day-section { padding: 20px 16px; margin: 0; }
+    .day-section h2 {
+      font-size: 1.3rem; padding: 12px 16px; border-radius: var(--radius);
+      color: #fff; margin-bottom: 16px;
+    }
+    .day1-theme { background: var(--day1-bg); }
+    .day1-theme h2 { background: var(--day1); }
+    .day2-theme { background: var(--day2-bg); }
+    .day2-theme h2 { background: var(--day2); }
+    .day3-theme { background: var(--day3-bg); }
+    .day3-theme h2 { background: var(--day3); }
+    .day4-theme { background: var(--day4-bg); }
+    .day4-theme h2 { background: var(--day4); }
+    .day5-theme { background: var(--day5-bg); }
+    .day5-theme h2 { background: var(--day5); }
+    .day6-theme { background: var(--day6-bg); }
+    .day6-theme h2 { background: var(--day6); }
+
+    /* === Tabs === */
+    .day-tabs { display: flex; gap: 4px; margin-bottom: 16px; overflow-x: auto; }
+    .tab {
+      flex-shrink: 0; padding: 10px 16px; border: none; border-radius: 8px 8px 0 0;
+      background: var(--border); color: var(--text-secondary); font-size: 0.9rem;
+      font-weight: 600; cursor: pointer; min-height: 44px; min-width: 44px;
+      transition: all 0.2s;
+    }
+    .tab.active { background: var(--bg-card); color: var(--text); box-shadow: var(--shadow); }
+    .tab-content { background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) var(--radius); padding: 16px; box-shadow: var(--shadow); }
+    .hidden { display: none !important; }
+
+    /* === Timeline === */
+    .timeline { position: relative; padding-left: 80px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 64px; top: 8px; bottom: 8px;
+      width: 3px; background: var(--border); border-radius: 2px;
+    }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -22px; top: 8px;
+      width: 12px; height: 12px; border-radius: 50%; background: var(--day1);
+      border: 2px solid #fff; box-shadow: 0 0 0 2px var(--day1);
+    }
+    .day1-theme .timeline-item::before { background: var(--day1); box-shadow: 0 0 0 2px var(--day1); }
+    .day2-theme .timeline-item::before { background: var(--day2); box-shadow: 0 0 0 2px var(--day2); }
+    .day3-theme .timeline-item::before { background: var(--day3); box-shadow: 0 0 0 2px var(--day3); }
+    .day4-theme .timeline-item::before { background: var(--day4); box-shadow: 0 0 0 2px var(--day4); }
+    .day5-theme .timeline-item::before { background: var(--day5); box-shadow: 0 0 0 2px var(--day5); }
+    .day6-theme .timeline-item::before { background: var(--day6); box-shadow: 0 0 0 2px var(--day6); }
+    .time {
+      position: absolute; left: -80px; top: 2px; width: 56px; text-align: right;
+      font-weight: 700; font-size: 0.9rem; color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    .timeline-item .content {
+      background: var(--bg); padding: 8px 12px; border-radius: 8px;
+      border: 1px solid var(--border); font-size: 0.95rem;
+    }
+
+    /* === Details/Summary === */
+    details {
+      margin-bottom: 12px; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    summary {
+      padding: 12px 16px; cursor: pointer; font-weight: 600;
+      background: var(--bg); min-height: 44px; display: flex; align-items: center;
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: '▶'; margin-right: 8px; font-size: 0.7rem; transition: transform 0.2s; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details .detail-content { padding: 12px 16px; border-top: 1px solid var(--border); }
+
+    /* === Restaurant Carousel === */
+    .meal-section { margin-bottom: 20px; }
+    .meal-section h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+    .restaurant-carousel {
+      display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; padding-bottom: 8px;
+      scrollbar-width: thin;
+    }
+    .restaurant-card {
+      flex-shrink: 0; min-width: 280px; max-width: 320px; width: 85vw;
+      padding: 16px; border-radius: var(--radius); background: var(--bg-card);
+      border: 2px solid var(--border); scroll-snap-align: start;
+      box-shadow: var(--shadow);
+    }
+    .restaurant-card.primary { border-color: var(--day2); border-width: 3px; }
+    .restaurant-card.primary::before {
+      content: '推薦'; display: inline-block; background: var(--day2); color: #fff;
+      padding: 2px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .restaurant-card.backup { opacity: 0.85; }
+    .restaurant-card h4 { font-size: 1rem; margin-bottom: 6px; }
+    .restaurant-card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 4px; }
+    .carousel-hint { text-align: center; color: var(--text-secondary); font-size: 0.8rem; margin-top: 4px; }
+
+    /* === Badges === */
+    .badge-vegan { background: #0d9453; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; display: inline-block; margin: 2px; }
+    .badge-warning { background: #d93025; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; display: inline-block; margin: 2px; }
+    .badge-stroller { background: #1a73e8; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; display: inline-block; margin: 2px; }
+    .badge-cost { background: #f9ab00; color: #202124; padding: 2px 8px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; display: inline-block; margin: 2px; }
+
+    /* === Links === */
+    .map-link, .tel-link {
+      display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px;
+      border-radius: 8px; text-decoration: none; font-size: 0.9rem;
+      min-height: 44px; margin: 4px 0; transition: background 0.2s;
+    }
+    .map-link { background: #e8f0fe; color: #1a73e8; }
+    .map-link:hover { background: #d2e3fc; }
+    .tel-link { background: #e6f4ea; color: #0d9453; }
+    .tel-link:hover { background: #ceead6; }
+
+    /* === Tables === */
+    .info-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9rem; }
+    .info-table th, .info-table td { padding: 8px 12px; border: 1px solid var(--border); text-align: left; }
+    .info-table th { background: var(--day6-bg); font-weight: 600; }
+    .info-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+    .info-table { overflow-x: auto; display: block; }
+
+    /* === Emergency === */
+    .emergency-fab {
+      position: fixed; bottom: 20px; right: 20px; z-index: 200;
+      width: 56px; height: 56px; border-radius: 50%; border: none;
+      background: #d93025; color: #fff; font-size: 1.5rem; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(217,48,37,0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 4px 12px rgba(217,48,37,0.4); }
+      50% { box-shadow: 0 4px 20px rgba(217,48,37,0.6); }
+    }
+    .emergency-panel {
+      position: fixed; bottom: 84px; right: 16px; z-index: 200;
+      background: var(--bg-card); border: 2px solid #d93025; border-radius: var(--radius);
+      padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); min-width: 260px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .emergency-panel.hidden { transform: translateY(20px); opacity: 0; pointer-events: none; }
+    .emergency-panel h3 { color: #d93025; margin-bottom: 12px; font-size: 1.1rem; }
+    .emergency-panel a {
+      display: block; padding: 10px 12px; margin: 4px 0; border-radius: 8px;
+      text-decoration: none; color: var(--text); min-height: 44px;
+      display: flex; align-items: center; transition: background 0.2s;
+    }
+    .emergency-panel a:hover { background: var(--day5-bg); }
+
+    /* === Summary Section === */
+    .summary-section { padding: 20px 16px; }
+    .summary-section h2 { font-size: 1.3rem; margin-bottom: 16px; padding: 12px 16px; border-radius: var(--radius); background: var(--day1); color: #fff; }
+    .summary-card { background: var(--bg-card); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .summary-card h3 { font-size: 1.1rem; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+    .checklist { list-style: none; }
+    .checklist li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+    .checklist li::before { content: '☐ '; }
+    .vegan-card {
+      background: #fffde7; border: 2px solid #f9ab00; border-radius: var(--radius);
+      padding: 20px; margin: 16px 0; font-size: 1.15rem; line-height: 2;
+    }
+    .vegan-card h3 { color: #e8710a; margin-bottom: 8px; }
+
+    /* === Dark Mode === */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a2e; --bg-card: #16213e; --text: #e0e0e0; --text-secondary: #a0a0a0;
+        --border: #333; --shadow: 0 1px 3px rgba(0,0,0,0.3);
+        --day1-bg: rgba(26,115,232,0.15); --day2-bg: rgba(13,148,83,0.15);
+        --day3-bg: rgba(232,113,10,0.15); --day4-bg: rgba(123,31,162,0.15);
+        --day5-bg: rgba(217,48,37,0.15); --day6-bg: rgba(95,99,104,0.15);
+      }
+      header { background: linear-gradient(135deg, #16213e, #1a1a2e); }
+      .tab { background: #1a1a2e; }
+      .tab.active { background: var(--bg-card); color: #fff; }
+      .map-link { background: rgba(26,115,232,0.2); color: #8ab4f8; }
+      .tel-link { background: rgba(13,148,83,0.2); color: #81c995; }
+      .timeline-item .content { background: var(--bg-card); }
+      .info-table th { background: rgba(95,99,104,0.2); }
+      .vegan-card { background: rgba(249,171,0,0.1); }
+      .emergency-panel { background: #16213e; }
+    }
+
+    /* === Tablet === */
+    @media (min-width: 768px) {
+      .day-section { padding: 24px 32px; }
+      .restaurant-card { min-width: 300px; width: auto; }
+      header h1 { font-size: 1.8rem; }
+      .timeline { padding-left: 100px; }
+      .time { left: -100px; width: 76px; }
+    }
+
+    /* === Desktop === */
+    @media (min-width: 1024px) {
+      body { max-width: 900px; margin: 0 auto; }
+      .day-section { padding: 32px 40px; }
+      header h1 { font-size: 2rem; }
+      .restaurant-carousel { flex-wrap: wrap; }
+      .restaurant-card { width: calc(33% - 8px); min-width: 260px; }
+    }
+
+    /* === Print === */
+    @media print {
+      body { padding-top: 0; padding-bottom: 0; max-width: 100%; color: #000; background: #fff; }
+      .sticky-nav, .emergency-fab, .emergency-panel, .day-tabs, .carousel-hint { display: none !important; }
+      .tab-content { display: block !important; }
+      .hidden { display: block !important; }
+      details { border: 1px solid #999; }
+      details[open] summary { border-bottom: 1px solid #999; }
+      details > .detail-content { display: block; }
+      .day-section { page-break-before: always; background: #fff !important; }
+      .day-section:first-of-type { page-break-before: auto; }
+      .restaurant-carousel { flex-wrap: wrap; overflow: visible; }
+      .restaurant-card { min-width: 45%; page-break-inside: avoid; border: 1px solid #999; }
+      .timeline-item .content { border: 1px solid #999; }
+      a { color: #000; text-decoration: underline; }
+      .badge-vegan, .badge-warning, .badge-stroller, .badge-cost { border: 1px solid #999; }
+    }
+  </style>
+</head>
+<body>
+  <!-- === 頂部導覽 === -->
+  <nav class="sticky-nav">
+    <div class="nav-scroll">
+      <a href="#day1" class="nav-btn day1-color">Day1 上野</a>
+      <a href="#day2" class="nav-btn day2-color">Day2 動物園</a>
+      <a href="#day3" class="nav-btn day3-color">Day3 箱根</a>
+      <a href="#day4" class="nav-btn day4-color">Day4 黃金路線</a>
+      <a href="#day5" class="nav-btn day5-color">Day5 川越</a>
+      <a href="#day6" class="nav-btn day6-color">Day6 回程</a>
+      <a href="#summary" class="nav-btn" style="background:var(--day1-bg)">總覽</a>
+    </div>
+  </nav>
+
+  <!-- === Header === -->
+  <header>
+    <h1>🗼 2026 東京箱根家族旅遊手冊</h1>
+    <p>4/10（五）~ 4/15（三）｜6天5夜</p>
+    <div class="trip-info">
+      <span>👴 長輩×2（1位全素）</span>
+      <span>👨‍👩‍👧 成人×4</span>
+      <span>👦 兒童6歲</span>
+      <span>👶 幼兒2.5歲（推車）</span>
+    </div>
+  </header>
+
+  <main>
+
+  <!-- ==================== DAY 1 ==================== -->
+  <section id="day1" class="day-section day1-theme">
+    <h2>Day 1 — 4/10（五）台灣→上野</h2>
+    <div class="day-tabs">
+      <button class="tab active" data-day="1" data-tab="overview-1">📋 總覽</button>
+      <button class="tab" data-day="1" data-tab="transport-1">🚃 交通</button>
+      <button class="tab" data-day="1" data-tab="meals-1">🍽️ 餐廳</button>
+    </div>
+
+    <div class="tab-content" id="overview-1">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">10:40</span><div class="content">桃園機場起飛 ✈️</div></div>
+        <div class="timeline-item"><span class="time">15:05</span><div class="content">抵達成田機場第1航廈</div></div>
+        <div class="timeline-item"><span class="time">15:30</span><div class="content">入境、領行李、買Skyliner票</div></div>
+        <div class="timeline-item"><span class="time">16:30</span><div class="content">Skyliner前往京成上野站 🚄</div></div>
+        <div class="timeline-item"><span class="time">17:15</span><div class="content">抵達京成上野站</div></div>
+        <div class="timeline-item"><span class="time">17:30</span><div class="content">飯店Check-in、休息<br><a href="https://maps.google.com/?q=東京都台東区根岸2-16-5" class="map-link">📍 嵐ホテル — 台東区根岸2-16-5</a></div></div>
+        <div class="timeline-item"><span class="time">18:30</span><div class="content">晚餐 🍽️</div></div>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="transport-1">
+      <details>
+        <summary>🚄 成田機場 → 京成上野（Skyliner）</summary>
+        <div class="detail-content">
+          <p>移動時間：約 41 分鐘</p>
+          <table class="info-table"><tr><th>票種</th><th>成人</th><th>兒童</th><th>幼兒</th></tr>
+          <tr><td>單程</td><td>¥2,570</td><td>¥1,290</td><td>免費</td></tr>
+          <tr><td>來回（推薦）</td><td>¥4,500</td><td>¥2,250</td><td>免費</td></tr></table>
+          <p><span class="badge-cost">💰 8人單程 ¥16,710 / 來回 ¥29,250</span></p>
+          <p>購票：成田T1 B1F「京成Skyliner交通服務中心」，或官網/Klook預購</p>
+          <p><span class="badge-stroller">🚼 推車友善 — 電梯完善，無障礙閘口</span></p>
+          <p>建議提前購票指定座位，確保8人相鄰</p>
+        </div>
+      </details>
+      <details>
+        <summary>🚕 京成上野站 → 飯店</summary>
+        <div class="detail-content">
+          <p>步行：約15-20分鐘（1.2km）<span class="badge-warning">⚠️ 推車不便</span></p>
+          <p><strong>推薦計程車</strong>：約5-8分鐘 <span class="badge-cost">💰 ¥800-1,100/台，建議叫2台</span></p>
+          <p><span class="badge-warning">⚠️ 長途飛行後帶行李推車，強烈建議搭計程車</span></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="tab-content hidden" id="meals-1">
+      <div class="meal-section">
+        <h3>🌙 晚餐 18:30</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>T's TanTan（Ecute上野3F）</h4>
+            <span class="badge-vegan">✅ 100%純素</span>
+            <span class="badge-stroller">🚼 推車OK</span>
+            <p>純素拉麵 ｜ <span class="badge-cost">💰 ¥900-1,500</span></p>
+            <p>無需預約 ｜ JR上野駅Ecute 3F</p>
+            <a href="https://maps.google.com/?q=JR上野駅Ecute+3F+T's+TanTan" class="map-link">📍 導航</a>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>韻松亭</h4>
+            <span class="badge-warning">⚠️ 素食需提前告知</span>
+            <p>和食會席 ｜ <span class="badge-cost">💰 ¥5,000-10,000</span></p>
+            <p>需預約 ｜ <span class="badge-warning">⚠️ 和室，推車不便</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>guruatsu</h4>
+            <span class="badge-vegan">✅ 全素</span>
+            <p>全素創意料理 ｜ <span class="badge-cost">💰 ¥1,500-2,500</span></p>
+            <p>建議預約</p>
+          </div>
+        </div>
+        <p class="carousel-hint">← 滑動查看更多 →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DAY 2 ==================== -->
+  <section id="day2" class="day-section day2-theme">
+    <h2>Day 2 — 4/11（六）上野動物園+購物</h2>
+    <div class="day-tabs">
+      <button class="tab active" data-day="2" data-tab="overview-2">📋 總覽</button>
+      <button class="tab" data-day="2" data-tab="transport-2">🚃 交通</button>
+      <button class="tab" data-day="2" data-tab="meals-2">🍽️ 餐廳</button>
+    </div>
+
+    <div class="tab-content" id="overview-2">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">08:00</span><div class="content">早餐：Kayaba Coffee ☕</div></div>
+        <div class="timeline-item"><span class="time">09:30</span><div class="content">上野動物園（看熊貓 🐼）</div></div>
+        <div class="timeline-item"><span class="time">12:30</span><div class="content">午餐：園內Saruyama Kitchen</div></div>
+        <div class="timeline-item"><span class="time">13:30</span><div class="content">松坂屋百貨購物 🛍️</div></div>
+        <div class="timeline-item"><span class="time">14:30</span><div class="content">PARCO_ya</div></div>
+        <div class="timeline-item"><span class="time">15:30</span><div class="content">Yamashiroya玩具店 🧸</div></div>
+        <div class="timeline-item"><span class="time">16:30</span><div class="content">阿美橫町</div></div>
+        <div class="timeline-item"><span class="time">18:00</span><div class="content">晚餐</div></div>
+        <div class="timeline-item"><span class="time">19:30</span><div class="content">返回飯店</div></div>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="transport-2">
+      <details>
+        <summary>🚶 全天步行路線（上野地區）</summary>
+        <div class="detail-content">
+          <p>全天步行為主，上野地區半徑約1.5km，全天步行距離約5-7km</p>
+          <p><strong>購物最省力順序：</strong><br>松坂屋(3分)→PARCO_ya(8分)→Yamashiroya(5分)→阿美橫町(8分)</p>
+        </div>
+      </details>
+      <details>
+        <summary>🐼 上野動物園資訊</summary>
+        <div class="detail-content">
+          <table class="info-table"><tr><th>類別</th><th>門票</th></tr>
+          <tr><td>成人</td><td>¥600</td></tr>
+          <tr><td>65歲以上</td><td>¥300</td></tr>
+          <tr><td>小學以下</td><td>免費</td></tr></table>
+          <p><span class="badge-cost">💰 8人合計約 ¥3,000-3,600</span></p>
+          <p><span class="badge-stroller">🚼 園內可租借推車 ¥200/台</span></p>
+        </div>
+      </details>
+      <details>
+        <summary>☕ 長輩休息咖啡廳</summary>
+        <div class="detail-content">
+          <ul>
+            <li>Cafe & Meal MUJI（PARCO_ya 1F）— 蔬食選項豐富</li>
+            <li>西洋菓子舗ウエスト（松坂屋1F）</li>
+            <li>Starbucks 上野恩賜公園店</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="tab-content hidden" id="meals-2">
+      <div class="meal-section">
+        <h3>🌅 早餐 08:00</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>カヤバ珈琲（Kayaba Coffee）</h4>
+            <p>古民家咖啡 ｜ <span class="badge-cost">💰 ¥600-1,200</span></p>
+            <p><span class="badge-warning">⚠️ 素食有限、推車困難</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>Doutor</h4>
+            <p><span class="badge-stroller">🚼 推車OK</span> ｜ <span class="badge-cost">💰 ¥400-800</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>THINK麵包</h4>
+            <span class="badge-vegan">✅ 素食較豐富</span>
+            <p>外帶最方便 ｜ <span class="badge-cost">💰 ¥300-600</span></p>
+          </div>
+        </div>
+        <p class="carousel-hint">← 滑動查看更多 →</p>
+      </div>
+
+      <div class="meal-section">
+        <h3>☀️ 午餐 12:30</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>Saruyama Kitchen（動物園內）</h4>
+            <p>園內餐廳，方便</p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>Saizeriya 連鎖家庭餐廳</h4>
+            <p>兒童友善度最高</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>🌙 晚餐 18:00</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>伊豆榮（鰻魚）</h4>
+            <p><span class="badge-cost">💰 ¥3,000-6,000</span></p>
+            <p><span class="badge-warning">⚠️ 素食：無</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>上野藪そば</h4>
+            <p><span class="badge-cost">💰 ¥1,200-2,000</span></p>
+            <p><span class="badge-warning">⚠️ 素食需確認高湯</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>T's TanTan</h4>
+            <span class="badge-vegan">✅ 100% Vegan</span>
+            <p><span class="badge-cost">💰 ¥900-1,500</span></p>
+          </div>
+        </div>
+        <p class="carousel-hint">← 滑動查看更多 →</p>
+        <p style="margin-top:8px"><strong>建議：</strong>素食長輩→T's TanTan；全家同桌→上野藪そば（確認素食高湯）</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DAY 3 ==================== -->
+  <section id="day3" class="day-section day3-theme">
+    <h2>Day 3 — 4/12（日）上野→箱根（大移動日）</h2>
+    <div class="day-tabs">
+      <button class="tab active" data-day="3" data-tab="overview-3">📋 總覽</button>
+      <button class="tab" data-day="3" data-tab="transport-3">🚃 交通</button>
+      <button class="tab" data-day="3" data-tab="meals-3">🍽️ 餐廳</button>
+    </div>
+
+    <div class="tab-content" id="overview-3">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">08:00</span><div class="content">早餐</div></div>
+        <div class="timeline-item"><span class="time">09:00</span><div class="content">退房，計程車至JR上野站</div></div>
+        <div class="timeline-item"><span class="time">09:20</span><div class="content">山手線→新宿（24分）🚃</div></div>
+        <div class="timeline-item"><span class="time">09:45</span><div class="content">新宿購票（小田急旅遊服務中心）</div></div>
+        <div class="timeline-item"><span class="time">10:30</span><div class="content">浪漫特快→箱根湯本（85分）🚄</div></div>
+        <div class="timeline-item"><span class="time">11:55</span><div class="content">抵達箱根湯本</div></div>
+        <div class="timeline-item"><span class="time">12:00</span><div class="content">午餐 🍽️</div></div>
+        <div class="timeline-item"><span class="time">13:30</span><div class="content">登山電車→彫刻の森（35分）🚞</div></div>
+        <div class="timeline-item"><span class="time">14:15</span><div class="content">步行至民宿Check-in<br><a href="https://maps.google.com/?q=Ninotaira+1118-2+Hakone+Kanagawa" class="map-link">📍 箱根二之平民宿</a></div></div>
+        <div class="timeline-item"><span class="time">15:00</span><div class="content">雕刻之森美術館 🎨</div></div>
+        <div class="timeline-item"><span class="time">18:30</span><div class="content">晚餐</div></div>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="transport-3">
+      <details open>
+        <summary>📦 行李宅配（強烈建議！）</summary>
+        <div class="detail-content">
+          <p><span class="badge-warning">⚠️ 強烈建議前一晚（4/11）宅配行李至箱根民宿</span></p>
+          <p>服務：ヤマト運輸宅急便</p>
+          <p><span class="badge-cost">💰 約¥1,500-2,000/件，4件約¥6,000</span></p>
+          <p>截止：前一晚18:00前交飯店前台</p>
+        </div>
+      </details>
+      <details>
+        <summary>🚄 全程路線</summary>
+        <div class="detail-content">
+          <table class="info-table">
+          <tr><th>路段</th><th>方式</th><th>時間</th><th>費用</th><th>推車</th></tr>
+          <tr><td>飯店→上野站</td><td>計程車×2</td><td>5分</td><td>¥1,600</td><td><span class="badge-stroller">⭕</span></td></tr>
+          <tr><td>上野→新宿</td><td>山手線</td><td>24分</td><td>¥1,370(全家)</td><td><span class="badge-stroller">⭕</span></td></tr>
+          <tr><td>新宿→箱根湯本</td><td>浪漫特快</td><td>85分</td><td>周遊券+特急券</td><td><span class="badge-stroller">⭕</span></td></tr>
+          <tr><td>箱根湯本→彫刻の森</td><td>登山電車</td><td>35分</td><td>周遊券含</td><td><span class="badge-warning">⚠️</span></td></tr>
+          <tr><td>彫刻の森→民宿</td><td>步行</td><td>10-15分</td><td>免費</td><td><span class="badge-warning">⚠️</span></td></tr>
+          </table>
+        </div>
+      </details>
+      <details>
+        <summary>🎫 票價明細</summary>
+        <div class="detail-content">
+          <p>箱根周遊券3日：成人 ¥7,500×6 + 兒童 ¥1,850 = <strong>¥46,850</strong></p>
+          <p>浪漫特快特急券：成人 ¥1,110×6 + 兒童 ¥560 = <strong>¥7,220</strong></p>
+          <p><span class="badge-cost">💰 合計 ¥54,070（幼兒免費）</span></p>
+        </div>
+      </details>
+      <details>
+        <summary>⛰️ 箱根各站海拔</summary>
+        <div class="detail-content">
+          <table class="info-table"><tr><th>站名</th><th>海拔</th></tr>
+          <tr><td>箱根湯本</td><td>108m</td></tr>
+          <tr><td>彫刻の森</td><td>548m</td></tr>
+          <tr><td>強羅</td><td>541m</td></tr>
+          <tr><td>早雲山</td><td>757m</td></tr>
+          <tr><td>大涌谷</td><td>1,044m</td></tr></table>
+        </div>
+      </details>
+    </div>
+
+    <div class="tab-content hidden" id="meals-3">
+      <div class="meal-section">
+        <h3>🌅 早餐 08:00（上野根岸）</h3>
+        <p><span class="badge-warning">⚠️ 吸煙政策注意！部分老咖啡廳允許吸煙，不建議帶幼兒</span></p>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>禁煙連鎖咖啡館（Doutor等）</h4>
+            <p>最安全選擇</p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>喫茶Life（ライフ）</h4>
+            <p>下午吸煙，早上較安全</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>☀️ 午餐 12:00（箱根湯本）</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>直吉（溫泉豆腐）</h4>
+            <span class="badge-vegan">✅ 素食</span>
+            <p><span class="badge-warning">⚠️ 8人需提前預約</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>はつ花本店（蕎麥麵）</h4>
+            <p>備案</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>🌙 晚餐 18:30（箱根二之平）</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>EMBLEM FLOW DINING</h4>
+            <span class="badge-vegan">✅ 葷素皆有</span>
+            <p>空間寬敞</p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>HAKONE PICNIC Taiwanese Cafe</h4>
+            <span class="badge-vegan">✅ 台灣老闆，素食溝通無障礙</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DAY 4 ==================== -->
+  <section id="day4" class="day-section day4-theme">
+    <h2>Day 4 — 4/13（一）箱根黃金路線</h2>
+    <div class="day-tabs">
+      <button class="tab active" data-day="4" data-tab="overview-4">📋 總覽</button>
+      <button class="tab" data-day="4" data-tab="transport-4">🚃 交通</button>
+      <button class="tab" data-day="4" data-tab="meals-4">🍽️ 餐廳</button>
+    </div>
+
+    <div class="tab-content" id="overview-4">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">08:00</span><div class="content">早餐：Cafe Douce ☕</div></div>
+        <div class="timeline-item"><span class="time">08:30</span><div class="content">出發</div></div>
+        <div class="timeline-item"><span class="time">09:00</span><div class="content">強羅→早雲山→大涌谷 🚡</div></div>
+        <div class="timeline-item"><span class="time">09:45</span><div class="content">大涌谷散策、黑溫泉蛋 🥚<br><span class="badge-warning">⚠️ 幼兒停留不超過30分鐘</span></div></div>
+        <div class="timeline-item"><span class="time">10:30</span><div class="content">大涌谷→桃源台</div></div>
+        <div class="timeline-item"><span class="time">11:00</span><div class="content">蘆之湖海賊船→元箱根港 ⛴️</div></div>
+        <div class="timeline-item"><span class="time">12:00</span><div class="content">午餐：Bakery&Table 🥐</div></div>
+        <div class="timeline-item"><span class="time">13:30</span><div class="content">箱根神社、水中鳥居 ⛩️</div></div>
+        <div class="timeline-item"><span class="time">14:15</span><div class="content">巴士返回民宿</div></div>
+        <div class="timeline-item"><span class="time">16:30</span><div class="content">溫泉休息 ♨️</div></div>
+        <div class="timeline-item"><span class="time">19:00</span><div class="content">晚餐：WOODY</div></div>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="transport-4">
+      <details open>
+        <summary>🔄 環形路線（全程周遊券免費）</summary>
+        <div class="detail-content">
+          <p style="line-height:2">
+            民宿<small>(步行5分)</small>→ 彫刻の森<small>(電車3分)</small>→ 強羅<small>(纜車10分)</small>→ 早雲山<small>(空中纜車16分)</small>→ <strong>大涌谷</strong><small>(停留45分)</small>→<small>(空中纜車20分)</small> 桃源台<small>(海賊船40分)</small>→ 元箱根港 →<small>(步行8分)</small> <strong>箱根神社</strong><small>(停留40分)</small>→<small>(巴士35分)</small> 彫刻の森 →<small>(步行5分)</small> 民宿
+          </p>
+        </div>
+      </details>
+      <details>
+        <summary>🚼 推車操作指南</summary>
+        <div class="detail-content">
+          <table class="info-table"><tr><th>段落</th><th>推車狀態</th></tr>
+          <tr><td>登山電車</td><td><span class="badge-stroller">展開放車廂</span></td></tr>
+          <tr><td>鋼索鐵道</td><td><span class="badge-warning">必須收折</span></td></tr>
+          <tr><td>空中纜車</td><td><span class="badge-stroller">展開放角落</span></td></tr>
+          <tr><td>大涌谷</td><td><span class="badge-stroller">展開使用</span></td></tr>
+          <tr><td>海賊船</td><td><span class="badge-stroller">展開放指定區</span></td></tr>
+          <tr><td>箱根神社</td><td><span class="badge-warning">部分需收折（石階多）</span></td></tr>
+          <tr><td>巴士</td><td><span class="badge-warning">必須收折</span></td></tr></table>
+        </div>
+      </details>
+      <details>
+        <summary>⚠️ 大涌谷注意事項</summary>
+        <div class="detail-content">
+          <p><span class="badge-warning">⚠️ 幼兒屬高風險族群，建議停留不超過30分鐘</span></p>
+          <p><span class="badge-warning">⚠️ 呼吸道疾病長輩建議在外圍遠觀</span></p>
+          <p>黑玉子：<span class="badge-cost">💰 1袋5顆 ¥500</span></p>
+        </div>
+      </details>
+      <details>
+        <summary>🔧 纜車停駛替代方案</summary>
+        <div class="detail-content">
+          <p><strong>方案A：</strong>全程改巴士（強羅→元箱根港）</p>
+          <p><strong>方案B：</strong>改遊仙石原（推車友善，道路平坦）</p>
+          <p>查詢：<a href="tel:0460-84-8439" class="tel-link">📞 箱根ロープウェイ 0460-84-8439</a></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="tab-content hidden" id="meals-4">
+      <div class="meal-section">
+        <h3>🌅 早餐 08:00</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>Cafe Douce</h4>
+            <p>步行30分 / 計程車5分</p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>便利商店早餐</h4>
+            <p>備案</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>☀️ 午餐 12:00（元箱根港）</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>Bakery&Table</h4>
+            <p>湖景麵包店</p>
+            <p><span class="badge-warning">⚠️ 素食長輩：在1F購買蔬菜麵包</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>権現茶屋</h4>
+            <p>甘酒、御餅</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>🌙 晚餐 19:00</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>WOODY</h4>
+            <p>西式家庭餐廳</p>
+            <p><span class="badge-warning">⚠️ 8人需提前預約</span></p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>民宿委託準備素食晚餐</h4>
+            <span class="badge-vegan">✅ 最安全</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DAY 5 ==================== -->
+  <section id="day5" class="day-section day5-theme">
+    <h2>Day 5 — 4/14（二）箱根→川越→晴空塔</h2>
+    <div class="day-tabs">
+      <button class="tab active" data-day="5" data-tab="overview-5">📋 總覽</button>
+      <button class="tab" data-day="5" data-tab="transport-5">🚃 交通</button>
+      <button class="tab" data-day="5" data-tab="meals-5">🍽️ 餐廳</button>
+    </div>
+
+    <div class="tab-content" id="overview-5">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">08:30</span><div class="content">住宿早餐</div></div>
+        <div class="timeline-item"><span class="time">09:30</span><div class="content">退房，登山電車→箱根湯本 🚞</div></div>
+        <div class="timeline-item"><span class="time">10:00</span><div class="content">浪漫特快→新宿（85分）🚄</div></div>
+        <div class="timeline-item"><span class="time">11:30</span><div class="content">新宿寄放行李 🧳</div></div>
+        <div class="timeline-item"><span class="time">12:00</span><div class="content">新宿→川越（JR埼京線50分）</div></div>
+        <div class="timeline-item"><span class="time">13:00</span><div class="content">冰川神社（釣鯛魚籤 🎣）</div></div>
+        <div class="timeline-item"><span class="time">14:00</span><div class="content">午餐：春夏秋冬</div></div>
+        <div class="timeline-item"><span class="time">15:00</span><div class="content">藏造老街、時之鐘 🕐</div></div>
+        <div class="timeline-item"><span class="time">16:00</span><div class="content">菓子屋橫丁 🍬</div></div>
+        <div class="timeline-item"><span class="time">17:00</span><div class="content">川越→新宿→押上</div></div>
+        <div class="timeline-item"><span class="time">19:00</span><div class="content">晚餐：敘敘苑 晴空塔30F 🌃</div></div>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="transport-5">
+      <details open>
+        <summary>📦 行李方案</summary>
+        <div class="detail-content">
+          <p><strong>最推薦：前一天宅配至押上住宿</strong> <span class="badge-cost">💰 ¥14,400，全天輕鬆</span></p>
+          <p>方案B：新宿站Coin Locker（LL×4+L×4） <span class="badge-cost">💰 ¥6,000</span></p>
+          <p>方案C：ecbo cloak App預約 <span class="badge-cost">💰 ¥4,800-6,400</span></p>
+        </div>
+      </details>
+      <details>
+        <summary>💰 全程交通費用</summary>
+        <div class="detail-content">
+          <table class="info-table"><tr><th>路段</th><th>8人合計</th></tr>
+          <tr><td>民宿→箱根湯本</td><td>¥4,160</td></tr>
+          <tr><td>箱根湯本→新宿</td><td>¥16,910</td></tr>
+          <tr><td>新宿→川越</td><td>¥4,940</td></tr>
+          <tr><td>川越巴士一日券</td><td>¥3,250</td></tr>
+          <tr><td>川越→新宿→押上</td><td>¥6,700</td></tr>
+          <tr><td><strong>交通合計</strong></td><td><strong><span class="badge-cost">💰 ¥38,500</span></strong></td></tr></table>
+        </div>
+      </details>
+      <details>
+        <summary>🏯 川越景點</summary>
+        <div class="detail-content">
+          <p><strong>冰川神社</strong>：釣鯛魚籤 <span class="badge-cost">💰 ¥500/次</span>，6歲兒童超喜歡 <span class="badge-stroller">🚼 推車可通行</span></p>
+          <p><strong>藏造老街</strong>：江戶風格建築，時之鐘為地標</p>
+          <p><strong>菓子屋橫丁</strong>：復古糖果巷，小孩最愛</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="tab-content hidden" id="meals-5">
+      <div class="meal-section">
+        <h3>🌅 早餐 08:30</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>住宿附早餐</h4>
+            <p><span class="badge-warning">⚠️ 強烈建議！山區07:30幾乎無餐廳開門</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>☀️ 午餐 14:00（川越）</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>春夏秋冬（金笛醬油和食）</h4>
+            <span class="badge-vegan">✅ 素食OK</span>
+            <p>全員可用餐</p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>小川菊（鰻魚飯）</h4>
+            <p>評價高但素食長輩無法用餐且排隊長</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>🌙 晚餐 19:00（晴空塔）</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>敘敘苑 晴空塔30F</h4>
+            <p><span class="badge-warning">⚠️ 至少2週前電話預約</span></p>
+            <a href="tel:03-5809-7229" class="tel-link">📞 03-5809-7229</a>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>宙寅屋（1F美食街）</h4>
+            <p>無需預約</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== DAY 6 ==================== -->
+  <section id="day6" class="day-section day6-theme">
+    <h2>Day 6 — 4/15（三）退房→機場</h2>
+    <div class="day-tabs">
+      <button class="tab active" data-day="6" data-tab="overview-6">📋 總覽</button>
+      <button class="tab" data-day="6" data-tab="transport-6">🚃 交通</button>
+      <button class="tab" data-day="6" data-tab="meals-6">🍽️ 餐廳</button>
+    </div>
+
+    <div class="tab-content" id="overview-6">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">07:30</span><div class="content">早餐</div></div>
+        <div class="timeline-item"><span class="time">10:00</span><div class="content">退房</div></div>
+        <div class="timeline-item"><span class="time">10:15</span><div class="content">押上站出發</div></div>
+        <div class="timeline-item"><span class="time">10:40</span><div class="content">京成上野站搭Skyliner 🚄</div></div>
+        <div class="timeline-item"><span class="time">11:21</span><div class="content">抵達成田機場T1</div></div>
+        <div class="timeline-item"><span class="time">11:30</span><div class="content">辦理登機、買伴手禮 🛍️</div></div>
+        <div class="timeline-item"><span class="time">13:30</span><div class="content">機場午餐</div></div>
+        <div class="timeline-item"><span class="time">14:10</span><div class="content">起飛返台 ✈️</div></div>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="transport-6">
+      <details>
+        <summary>🚄 押上→成田機場</summary>
+        <div class="detail-content">
+          <table class="info-table"><tr><th>路段</th><th>方式</th><th>費用（全家）</th></tr>
+          <tr><td>押上→京成上野</td><td>都營淺草線</td><td><span class="badge-cost">💰 ¥1,430</span></td></tr>
+          <tr><td>京成上野→成田T1</td><td>Skyliner</td><td><span class="badge-cost">💰 ¥16,710</span></td></tr></table>
+        </div>
+      </details>
+    </div>
+
+    <div class="tab-content hidden" id="meals-6">
+      <div class="meal-section">
+        <h3>🌅 早餐 08:00</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary">
+            <h4>ENRICH</h4>
+            <p>步行3-5分</p>
+          </div>
+          <div class="restaurant-card backup">
+            <h4>Mr.Bakeman Bake&coffee</h4>
+            <p>備案</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-section">
+        <h3>🛍️ 機場伴手禮推薦</h3>
+        <div class="restaurant-carousel">
+          <div class="restaurant-card primary" style="min-width:240px">
+            <h4>推薦清單</h4>
+            <ul style="padding-left:16px;margin:0">
+              <li>東京ばな奈</li>
+              <li>白い恋人</li>
+              <li>ROYCE巧克力</li>
+              <li>2F免稅區藥妝/化妝品</li>
+              <li>LEGO STORE（T1限定）🧱</li>
+            </ul>
+          </div>
+          <div class="restaurant-card backup" style="min-width:240px">
+            <h4>素食長輩機場午餐</h4>
+            <span class="badge-vegan">✅ 素食建議</span>
+            <p>便利商店梅飯糰、昆布飯糰最保險</p>
+            <p>日本料理餐廳可點蔬菜天婦羅</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 總結 ==================== -->
+  <section id="summary" class="summary-section">
+    <h2>📊 全程總結</h2>
+
+    <div class="summary-card">
+      <h3>🌤️ 天氣與穿著</h3>
+      <table class="info-table"><tr><th>地區</th><th>白天</th><th>早晚</th></tr>
+      <tr><td>東京</td><td>15-20°C</td><td>10-13°C</td></tr>
+      <tr><td>箱根</td><td>12-16°C</td><td>7-10°C（山區溫差大）</td></tr></table>
+      <p style="margin-top:8px">穿著：洋蔥式，必備防風防雨薄外套<br>幼兒：備防風薄外套、替換衣物<br>長輩：早晚建議圍巾，關節保暖</p>
+    </div>
+
+    <div class="summary-card">
+      <h3>💰 六天總費用估算</h3>
+      <table class="info-table">
+      <tr><th>類別</th><th>日圓</th><th>台幣</th></tr>
+      <tr><td>交通費</td><td>¥111,390</td><td>NT$24,506</td></tr>
+      <tr><td>門票費</td><td>¥32,350</td><td>NT$7,117</td></tr>
+      <tr><td>餐費（6天）</td><td>¥199,200</td><td>NT$43,824</td></tr>
+      <tr><td>購物/雜支</td><td>¥65,000</td><td>NT$14,300</td></tr>
+      <tr style="font-weight:700;background:var(--day1-bg)"><td>8人總計</td><td>¥407,940</td><td>NT$89,747</td></tr>
+      <tr style="font-weight:700;background:var(--day2-bg)"><td>每人平均</td><td>¥50,993</td><td>NT$11,218</td></tr>
+      </table>
+    </div>
+
+    <div class="summary-card">
+      <h3>🏨 住宿資訊</h3>
+      <table class="info-table"><tr><th>天數</th><th>住宿</th><th>地址</th></tr>
+      <tr><td>Day1-2</td><td>嵐ホテル</td><td><a href="https://maps.google.com/?q=東京都台東区根岸2-16-5" class="map-link">📍 東京都台東区根岸2-16-5</a></td></tr>
+      <tr><td>Day3-4</td><td>箱根二之平民宿</td><td><a href="https://maps.google.com/?q=Ninotaira+1118-2+Hakone+Kanagawa" class="map-link">📍 Ninotaira 1118-2, Hakone</a></td></tr>
+      <tr><td>Day5</td><td>晴空塔附近</td><td><a href="https://maps.google.com/?q=東京都墨田区押上1-18-7" class="map-link">📍 東京都墨田区押上1-18-7</a></td></tr></table>
+    </div>
+
+    <div class="summary-card">
+      <h3>🏥 住宿附近醫院</h3>
+      <table class="info-table"><tr><th>住宿</th><th>醫院</th><th>電話</th></tr>
+      <tr><td>台東区根岸（Day1-2）</td><td>永寿総合病院</td><td><a href="tel:03-3872-2111" class="tel-link">📞 03-3872-2111</a></td></tr>
+      <tr><td>箱根二之平（Day3-4）</td><td>小田原市立病院</td><td><a href="tel:0465-34-3175" class="tel-link">📞 0465-34-3175</a></td></tr>
+      <tr><td>墨田区押上（Day5）</td><td>東京都立墨東病院</td><td><a href="tel:03-3633-6151" class="tel-link">📞 03-3633-6151</a></td></tr></table>
+    </div>
+
+    <div class="summary-card">
+      <h3>📱 實用APP</h3>
+      <table class="info-table"><tr><th>APP</th><th>用途</th></tr>
+      <tr><td>Google Maps</td><td>路線導航（先下載離線地圖）</td></tr>
+      <tr><td>乗換案内</td><td>日本電車換乘查詢</td></tr>
+      <tr><td>Google翻譯</td><td>相機即時翻譯菜單</td></tr>
+      <tr><td>Suica</td><td>電子錢包交通支付</td></tr>
+      <tr><td>食べログ</td><td>日本餐廳評分</td></tr></table>
+    </div>
+
+    <div class="summary-card">
+      <h3>📝 行前必辦清單</h3>
+      <ul class="checklist">
+        <li>Skyliner來回票預購</li>
+        <li>箱根周遊券預購</li>
+        <li>浪漫特快座位預訂（至少2週前）</li>
+        <li>Day1晚餐 韻松亭/T's TanTan 確認</li>
+        <li>Day3午餐 直吉預約（告知素食）</li>
+        <li>Day3晚餐 EMBLEM FLOW 預約</li>
+        <li>Day4晚餐 WOODY 預約</li>
+        <li>Day5 敘敘苑預約 <a href="tel:03-5809-7229" class="tel-link">📞 03-5809-7229</a></li>
+        <li>每人準備Suica卡</li>
+        <li>換匯每人約¥30,000-50,000現金</li>
+      </ul>
+    </div>
+
+    <div class="vegan-card">
+      <h3>🥬 素食說明日文卡（建議列印給長輩）</h3>
+      <p>私は完全菜食主義者（ビーガン）です。<br>
+      肉・魚・貝・卵・乳製品・だし（鰹・煮干し）は食べられません。<br>
+      野菜・豆腐・昆布・野菜のみの料理をお願いします。</p>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- === 底部浮動緊急按鈕 === -->
+  <button class="emergency-fab" onclick="toggleEmergency()" aria-label="緊急聯絡">🆘</button>
+  <div class="emergency-panel hidden" id="emergencyPanel">
+    <h3>緊急聯絡</h3>
+    <a href="tel:+81-3-3280-7811">📞 台北駐日代表處<br><small>+81-3-3280-7811</small></a>
+    <a href="tel:119">🚑 急救/消防 119</a>
+    <a href="tel:110">🚔 警察 110</a>
+    <a href="tel:050-3816-2787">🌐 外國人旅遊熱線（含中文）<br><small>050-3816-2787</small></a>
+  </div>
+
+  <script>
+    // === Tab 切換 ===
+    document.querySelectorAll('.tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var day = this.getAttribute('data-day');
+        var target = this.getAttribute('data-tab');
+        var section = this.closest('.day-section');
+        section.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+        section.querySelectorAll('.tab-content').forEach(function(c) { c.classList.add('hidden'); });
+        this.classList.add('active');
+        var el = document.getElementById(target);
+        if (el) el.classList.remove('hidden');
+      });
+    });
+
+    // === 平滑滾動 ===
+    document.querySelectorAll('.nav-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var id = this.getAttribute('href').substring(1);
+        var el = document.getElementById(id);
+        if (el) {
+          var y = el.getBoundingClientRect().top + window.pageYOffset - 64;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // === 當天自動高亮 ===
+    function highlightToday() {
+      var today = new Date();
+      var dates = [
+        new Date(2026, 3, 10), new Date(2026, 3, 11), new Date(2026, 3, 12),
+        new Date(2026, 3, 13), new Date(2026, 3, 14), new Date(2026, 3, 15)
+      ];
+      var btns = document.querySelectorAll('.nav-btn');
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      for (var i = 0; i < dates.length; i++) {
+        if (today.toDateString() === dates[i].toDateString()) {
+          btns[i].classList.add('active');
+          btns[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          break;
+        }
+      }
+    }
+    highlightToday();
+
+    // === Scroll Spy ===
+    var navBtns = document.querySelectorAll('.nav-btn');
+    var sections = document.querySelectorAll('.day-section, .summary-section');
+    var scrollTimer;
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function() {
+        var scrollPos = window.scrollY + 100;
+        sections.forEach(function(sec, i) {
+          if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
+            navBtns.forEach(function(b) { b.classList.remove('active'); });
+            if (navBtns[i]) navBtns[i].classList.add('active');
+          }
+        });
+      }, 50);
+    });
+
+    // === 緊急面板 ===
+    function toggleEmergency() {
+      document.getElementById('emergencyPanel').classList.toggle('hidden');
+    }
+    document.addEventListener('click', function(e) {
+      var panel = document.getElementById('emergencyPanel');
+      var fab = document.querySelector('.emergency-fab');
+      if (!panel.contains(e.target) && e.target !== fab) {
+        panel.classList.add('hidden');
+      }
+    });
+
+    // === 列印時展開所有 details ===
+    window.addEventListener('beforeprint', function() {
+      document.querySelectorAll('details').forEach(function(d) { d.setAttribute('open', ''); });
+      document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('hidden'); });
+    });
+  </script>
+</body>
+</html>
