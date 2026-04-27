@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#e91e63">
+<title>2026 福岡家族旅遊手冊</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --border: #d2d2d7;
+  --accent: #e91e63;
+  --day1: #1976d2;
+  --day2: #388e3c;
+  --day3: #f57c00;
+  --day4: #7b1fa2;
+  --day5: #c62828;
+  --day6: #455a64;
+  --warning-bg: #ffebee;
+  --warning-text: #c62828;
+  --success-bg: #e8f5e9;
+  --success-text: #2e7d32;
+  --info-bg: #e3f2fd;
+  --info-text: #1565c0;
+  --money-bg: #fff8e1;
+  --money-text: #f57f17;
+  --stroller-bg: #e1f5fe;
+  --stroller-text: #01579b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1c1e;
+    --card: #2c2c2e;
+    --text: #f5f5f7;
+    --muted: #a1a1a6;
+    --border: #38383a;
+    --warning-bg: #3a1a1a;
+    --warning-text: #ff8a80;
+    --success-bg: #1a3a1f;
+    --success-text: #81c784;
+    --info-bg: #0d2640;
+    --info-text: #81d4fa;
+    --money-bg: #3a2c0d;
+    --money-text: #ffd54f;
+    --stroller-bg: #0d2a3a;
+    --stroller-text: #81d4fa;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-bottom: 100px;
+}
+header {
+  background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+header h1 { margin: 0 0 8px; font-size: 22px; }
+header p { margin: 0; opacity: 0.95; font-size: 14px; }
+nav.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+.nav-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 12px;
+  scrollbar-width: none;
+}
+.nav-scroll::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 22px;
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+.nav-btn.day1 { border-color: var(--day1); color: var(--day1); }
+.nav-btn.day2 { border-color: var(--day2); color: var(--day2); }
+.nav-btn.day3 { border-color: var(--day3); color: var(--day3); }
+.nav-btn.day4 { border-color: var(--day4); color: var(--day4); }
+.nav-btn.day5 { border-color: var(--day5); color: var(--day5); }
+.nav-btn.day6 { border-color: var(--day6); color: var(--day6); }
+.nav-btn.info { border-color: var(--accent); color: var(--accent); }
+main { padding: 16px; max-width: 800px; margin: 0 auto; }
+section {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+section.day {
+  border-left: 6px solid var(--accent);
+}
+section#day1 { border-left-color: var(--day1); }
+section#day2 { border-left-color: var(--day2); }
+section#day3 { border-left-color: var(--day3); }
+section#day4 { border-left-color: var(--day4); }
+section#day5 { border-left-color: var(--day5); }
+section#day6 { border-left-color: var(--day6); }
+h2 { margin: 0 0 12px; font-size: 20px; display: flex; align-items: center; gap: 8px; }
+h3 { margin: 16px 0 8px; font-size: 17px; }
+h4 { margin: 12px 0 6px; font-size: 15px; }
+.tabs { display: flex; gap: 4px; margin: 12px 0; border-bottom: 2px solid var(--border); }
+.tab {
+  flex: 1;
+  min-height: 44px;
+  padding: 8px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tab.active { color: var(--text); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.timeline { padding-left: 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.timeline-item:last-child { border-bottom: none; }
+.timeline-item .time {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 14px;
+}
+.timeline-item .content { font-size: 14px; }
+details {
+  background: var(--bg);
+  border-radius: 8px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+details > summary {
+  padding: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "▶"; margin-right: 8px; transition: transform 0.2s; font-size: 12px; }
+details[open] > summary::before { transform: rotate(90deg); }
+details > .details-body { padding: 0 12px 12px; }
+.alert {
+  padding: 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+.alert.warning { background: var(--warning-bg); color: var(--warning-text); border-left: 4px solid var(--warning-text); }
+.alert.success { background: var(--success-bg); color: var(--success-text); border-left: 4px solid var(--success-text); }
+.alert.info { background: var(--info-bg); color: var(--info-text); border-left: 4px solid var(--info-text); }
+.alert.money { background: var(--money-bg); color: var(--money-text); border-left: 4px solid var(--money-text); }
+.alert.stroller { background: var(--stroller-bg); color: var(--stroller-text); border-left: 4px solid var(--stroller-text); }
+.restaurant-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 8px 0;
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  scrollbar-width: none;
+}
+.restaurant-carousel::-webkit-scrollbar { display: none; }
+.restaurant-card {
+  flex-shrink: 0;
+  width: 280px;
+  scroll-snap-align: start;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 12px;
+  border: 2px solid var(--border);
+}
+.restaurant-card.primary { border-color: var(--accent); position: relative; }
+.restaurant-card.primary::before {
+  content: "🏆 主選";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.restaurant-card h4 { margin: 0 0 6px; padding-right: 50px; }
+.restaurant-card .meta { font-size: 13px; color: var(--muted); margin: 4px 0; }
+.restaurant-card .meta strong { color: var(--text); }
+.restaurant-card a { color: var(--accent); text-decoration: none; word-break: break-all; }
+.restaurant-card a:hover { text-decoration: underline; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 8px 0;
+}
+table th, table td {
+  padding: 8px 6px;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+table th { background: var(--bg); font-weight: 700; }
+table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin: 2px;
+}
+.tag.green { background: var(--success-bg); color: var(--success-text); }
+.tag.red { background: var(--warning-bg); color: var(--warning-text); }
+.tag.blue { background: var(--info-bg); color: var(--info-text); }
+.tag.yellow { background: var(--money-bg); color: var(--money-text); }
+a[href^="https://maps"], a[href^="https://www.google.com/maps"] {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #4285f4;
+  color: white !important;
+  border-radius: 14px;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 2px;
+}
+a[href^="tel:"] {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--success-text);
+  color: white !important;
+  border-radius: 14px;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 2px;
+}
+.emergency-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: var(--warning-text);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 99;
+}
+.emergency-panel {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 99;
+  max-width: 280px;
+  display: none;
+}
+.emergency-panel.show { display: block; }
+.emergency-panel h3 { margin: 0 0 12px; font-size: 16px; color: var(--warning-text); }
+.emergency-panel a {
+  display: block;
+  padding: 10px;
+  margin: 4px 0;
+  background: var(--bg);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 8px 0 8px 28px;
+  position: relative;
+  font-size: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+.checklist li::before {
+  content: "☐";
+  position: absolute;
+  left: 4px;
+  font-size: 18px;
+  color: var(--muted);
+}
+.checklist li.done::before { content: "✅"; }
+@media (min-width: 768px) {
+  body { font-size: 17px; }
+  main { padding: 24px; }
+  section { padding: 24px; }
+  header h1 { font-size: 28px; }
+  .restaurant-card { width: 320px; }
+}
+@media (min-width: 1024px) {
+  main { max-width: 960px; }
+}
+@media print {
+  body { background: white; padding-bottom: 0; font-size: 11pt; }
+  nav.sticky-nav, .emergency-fab, .emergency-panel, .tabs { display: none !important; }
+  .tab-content { display: block !important; }
+  section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; margin-bottom: 12px; padding: 12px; }
+  section.day { page-break-before: always; }
+  section.day:first-of-type { page-break-before: auto; }
+  details { background: white; }
+  details[open] .details-body { display: block !important; }
+  details .details-body { display: block !important; }
+  .restaurant-carousel { display: block; overflow: visible; }
+  .restaurant-card { width: 100%; margin-bottom: 8px; page-break-inside: avoid; }
+  a[href^="tel:"], a[href^="https://maps"] { background: none !important; color: inherit !important; padding: 0; text-decoration: underline; }
+  header { background: #e91e63; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🗾 2026 福岡家族旅遊手冊</h1>
+<p>2026/7/18 - 7/23 ｜ 6 天 5 夜 ｜ 9 人（6 大 3 小）</p>
+</header>
+
+<nav class="sticky-nav">
+<div class="nav-scroll">
+<a href="#overview" class="nav-btn info">📋 總覽</a>
+<a href="#hotel" class="nav-btn info">🏨 住宿</a>
+<a href="#day1" class="nav-btn day1">Day1 抵達</a>
+<a href="#day2" class="nav-btn day2">Day2 海洋館</a>
+<a href="#day3" class="nav-btn day3">Day3 太宰府</a>
+<a href="#day4" class="nav-btn day4">Day4 柳川</a>
+<a href="#day5" class="nav-btn day5">Day5 門司港</a>
+<a href="#day6" class="nav-btn day6">Day6 返程</a>
+<a href="#info" class="nav-btn info">ℹ️ 實用</a>
+</div>
+</nav>
+
+<main>
+
+<section id="overview">
+<h2>📋 行程總覽</h2>
+<div class="alert info">
+<strong>核心原則：</strong>博多站附近單一飯店住 5 晚不換房，所有日程當日來回，最大化減少行李移動。
+</div>
+<table>
+<thead><tr><th>日期</th><th>主題</th><th>主要區域</th></tr></thead>
+<tbody>
+<tr><td>7/18 (六)</td><td>抵達日</td><td>福岡機場→博多飯店→晚餐</td></tr>
+<tr><td>7/19 (日)</td><td>親子日</td><td>海の中道（マリンワールド）</td></tr>
+<tr><td>7/20 (一)</td><td>文化日</td><td>太宰府天滿宮（博物館休館！）</td></tr>
+<tr><td>7/21 (二)</td><td>遊船日</td><td>柳川川下り＋鰻魚せいろ蒸し</td></tr>
+<tr><td>7/22 (三)</td><td>復古日</td><td>小倉城＋門司港レトロ</td></tr>
+<tr><td>7/23 (四)</td><td>返程日</td><td>採購→機場→14:30 班機回台</td></tr>
+</tbody>
+</table>
+<div class="alert warning">
+<strong>⚠️ 7 月福岡：</strong>體感 35-38°C、UV 極高、午後雷陣雨。推車必裝遮陽罩、定時補水。
+</div>
+<div class="alert money">
+<strong>💰 預估總費用：</strong>9 人約 ¥976,860（人均 ¥108,540 / NT$24,120）。建議每人準備 NT$28,000。
+</div>
+</section>
+
+<section id="hotel">
+<h2>🏨 住宿建議（9 人需訂 3 間客房）</h2>
+<div class="alert warning">7 月暑假旺季，<strong>建議 5 月前完成預訂</strong>。</div>
+
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>JR九州ホテルブラッサム博多中央</h4>
+<p class="meta"><strong>⭐ 4.4</strong>（2,361 則）</p>
+<p class="meta">🚶 步行 JR 博多站 5 分（331m）</p>
+<p class="meta">💰 5 晚 3 房 ¥30-42 萬</p>
+<p class="meta">📍 博多区博多駅前 2-2-11</p>
+<p class="meta"><a href="tel:+81924778739">📞 092-477-8739</a> <a href="https://www.google.com/maps/search/?api=1&query=JR+Kyushu+Hotel+Blossom+Hakata+Chuo">🗺️ 地圖</a></p>
+<p class="meta">特色：評論一致稱讚房間寬敞乾淨、近 Canal City、JR 九州旗下</p>
+</div>
+
+<div class="restaurant-card">
+<h4>都ホテル博多（雨天首選）</h4>
+<p class="meta"><strong>⭐ 4.4</strong>（2,049 則）</p>
+<p class="meta">🚶 步行 JR 博多站 6 分＋<strong>地下通道直通</strong></p>
+<p class="meta">💰 5 晚 3 房 ¥40-55 萬</p>
+<p class="meta"><a href="tel:+81924413111">📞 092-441-3111</a></p>
+<p class="meta">特色：頂樓 Spa＋泳池、雨天免淋雨</p>
+</div>
+
+<div class="restaurant-card">
+<h4>ホテル日航福岡（夏季泳池）</h4>
+<p class="meta"><strong>⭐ 4.2</strong>（5,502 則 — 評論最多）</p>
+<p class="meta">🚶 步行 JR 博多站 5 分</p>
+<p class="meta">💰 5 晚 3 房 ¥30-45 萬</p>
+<p class="meta"><a href="tel:+81924821111">📞 092-482-1111</a></p>
+<p class="meta">特色：室內游泳池＋三溫暖（夏天加分）</p>
+</div>
+
+<div class="restaurant-card">
+<h4>ホテル法華クラブ福岡（最平價）</h4>
+<p class="meta"><strong>⭐ 4.2</strong>（2,173 則）</p>
+<p class="meta">🚶 步行 JR 博多站 10 分</p>
+<p class="meta">💰 5 晚 3 房 <strong>¥18-27 萬</strong></p>
+<p class="meta"><a href="tel:+81922713171">📞 092-271-3171</a></p>
+<p class="meta">特色：早餐評價最佳、地下溫泉大浴場</p>
+</div>
+</div>
+
+<div class="alert stroller">
+<strong>🚼 訂房備註模板：</strong>「幼兒 3 名同住，最小為需推車嬰兒，請協助安排相鄰房間（Connecting Room 或同樓層）。請提供嬰兒床（ベビーベッド）×1。入住日 7/18 下午抵達，請協助行李暫存。」
+</div>
+</section>
+
+<!-- Day 1 -->
+<section id="day1" class="day">
+<h2>📅 Day 1 — 7/18(六) 抵達日</h2>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab(this, 'd1-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this, 'd1-transport')">🚃 交通</button>
+<button class="tab" onclick="showTab(this, 'd1-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d1-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">13:00</span><div class="content">桃園機場起飛</div></div>
+<div class="timeline-item"><span class="time">16:30</span><div class="content">抵達福岡空港（FUK）</div></div>
+<div class="timeline-item"><span class="time">17:00</span><div class="content">地鐵機場線 → 博多站（5 分 ¥260）</div></div>
+<div class="timeline-item"><span class="time">17:30</span><div class="content">飯店 Check-in</div></div>
+<div class="timeline-item"><span class="time">18:30</span><div class="content">晚餐：おおやま 本店</div></div>
+<div class="timeline-item"><span class="time">21:00</span><div class="content">回飯店休息</div></div>
+</div>
+</div>
+
+<div class="tab-content" id="d1-transport">
+<details open>
+<summary>🚃 福岡空港 → JR 博多站</summary>
+<div class="details-body">
+<p><strong>移動：</strong>地鐵空港線 1 站直達</p>
+<p><strong>時間：</strong>5 分鐘</p>
+<p><strong>費用：</strong>成人 ¥260 / 兒童 ¥130 / 幼幼免費</p>
+<p><strong>推車：</strong><span class="tag green">⭕ 全程電梯</span></p>
+<div class="alert info">9 人建議搭乘第 4-5 節車廂、集中相鄰節，避開早晚尖峰</div>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d1-meals">
+<h3>晚餐 18:30</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>博多もつ鍋 おおやま 本店</h4>
+<p class="meta"><strong>⭐ 4.5</strong>（2,774 則）</p>
+<p class="meta">💰 ¥2,500-3,000 / 人</p>
+<p class="meta">📍 博多区店屋町 7-28</p>
+<p class="meta">🚶 從博多站步行 20 分（或地鐵到吉塚站＋5 分）</p>
+<p class="meta">🚼 包廂可進推車（需脫鞋）</p>
+<p class="meta"><a href="tel:+81922628136">📞 092-262-8136</a> <a href="https://www.google.com/maps/search/?api=1&query=博多もつ鍋おおやま本店">🗺️</a></p>
+<p class="meta"><strong>出發前致電預約 9 人 18:30</strong></p>
+<p class="meta">推薦：もつ鍋（味噌湯底）、馬刺、收尾叉燒麵</p>
+</div>
+<div class="restaurant-card">
+<h4>河太郎 博多駅本店（最近）</h4>
+<p class="meta"><strong>⭐ 4.1</strong>（1,332 則）</p>
+<p class="meta">💰 ¥3,000-5,000 / 人</p>
+<p class="meta">🚶 博多站步行 4 分</p>
+<p class="meta">⚠️ 活烏賊刺身，幼兒需有心理準備</p>
+<p class="meta"><a href="tel:+81922609442">📞 092-260-9442</a></p>
+</div>
+<div class="restaurant-card">
+<h4>一蘭ラーメン 総本店 ❌</h4>
+<p class="meta">⭐ 4.2（12,515 則）</p>
+<p class="meta"><strong>不建議 Day1</strong>：個人隔間設計不適合家庭同桌、推車無法進入</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Day 2 -->
+<section id="day2" class="day">
+<h2>📅 Day 2 — 7/19(日) 親子日</h2>
+
+<div class="alert warning">
+<strong>⚠️ 7 月夏季關鍵決策：</strong>放棄福岡市動植物園（評論明確警告「7月只看四分之一動物就撐不住」），<strong>主選海の中道 + マリンワールド</strong>（全室內冷氣、海豚秀）。
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab(this, 'd2-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this, 'd2-transport')">🚃 交通</button>
+<button class="tab" onclick="showTab(this, 'd2-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d2-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">08:00</span><div class="content">早餐：博多一番街 B1F（07:00 開）</div></div>
+<div class="timeline-item"><span class="time">09:00</span><div class="content">JR 香椎線 博多→海ノ中道（35 分）</div></div>
+<div class="timeline-item"><span class="time">09:40</span><div class="content"><strong>マリンワールド海の中道</strong> 入場（09:30 開館）</div></div>
+<div class="timeline-item"><span class="time">10:30</span><div class="content">沙丁魚群秀</div></div>
+<div class="timeline-item"><span class="time">11:30</span><div class="content">海豚秀 + 海獅秀</div></div>
+<div class="timeline-item"><span class="time">12:30</span><div class="content">午餐：Reilly Restaurant（館內，建議 11:30 用 LINE QR 先排位）</div></div>
+<div class="timeline-item"><span class="time">14:30</span><div class="content">海濱公園入口草坪短休</div></div>
+<div class="timeline-item"><span class="time">15:30</span><div class="content">返程</div></div>
+<div class="timeline-item"><span class="time">17:30</span><div class="content">飯店休息</div></div>
+<div class="timeline-item"><span class="time">18:30</span><div class="content">晚餐：博多華味鳥 KITTE 9F</div></div>
+</div>
+<details>
+<summary>🐬 マリンワールド海の中道</summary>
+<div class="details-body">
+<p>⭐ 4.4（13,031 則）｜大人 ¥2,350、兒童 ¥1,200</p>
+<p>09:30-17:30（夏季延長）</p>
+<p>🚼 全室內、電梯齊全、有授乳室與熱水</p>
+<p><a href="tel:+81926030400">📞 092-603-0400</a></p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d2-transport">
+<details open>
+<summary>🚃 博多 → 海ノ中道（JR 香椎線）</summary>
+<div class="details-body">
+<p><strong>時間：</strong>約 35 分鐘</p>
+<p><strong>費用：</strong>約 ¥310/人</p>
+<p><strong>推車：</strong>JR 站有電梯</p>
+<p>替代方案：自駕 25 分（停車場 374 位含 8 個無障礙位）</p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d2-meals">
+<h3>早餐 08:00</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>博多一番街 B1F</h4>
+<p class="meta">⭐ 4.0（1,704 則）</p>
+<p class="meta">07:00 即開、推車全平面、離 JR 月台最近</p>
+<p class="meta">💰 ¥800-1,500 / 人</p>
+</div>
+</div>
+
+<h3>午餐 12:30</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>Reilly Restaurant（館內）</h4>
+<p class="meta">⭐ 4.1（230 則）</p>
+<p class="meta">兒童菜單、輪椅座位</p>
+<p class="meta">建議 11:30 用 LINE QR 先排位</p>
+<p class="meta">推薦：漢堡排套餐 ¥1,500 + 兒童餐 ¥800-1,000</p>
+</div>
+</div>
+
+<h3>晚餐 18:30</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>博多華味鳥 KITTE 9F「みたずき」</h4>
+<p class="meta">⭐ 4.3（97 則）</p>
+<p class="meta">水炊き名店、博多站直結電梯上樓</p>
+<p class="meta">英文服務、可預約</p>
+<p class="meta">💰 ¥3,500-6,000 / 人</p>
+<p class="meta"><a href="tel:+81922923346">📞 092-292-3346</a></p>
+</div>
+<div class="restaurant-card">
+<h4>もつ鍋 田しゅう 博多</h4>
+<p class="meta">⭐ <strong>4.6</strong>（1,507 則 — 評分最高）</p>
+<p class="meta">距博多站 2 分（巴士總站 1F）</p>
+<p class="meta"><a href="tel:+81924412071">📞 092-441-2071</a></p>
+</div>
+<div class="restaurant-card">
+<h4>中洲屋台街 ❌</h4>
+<p class="meta">⭐ 3.4</p>
+<p class="meta">推車不適、人潮擁擠、不建議 9 人主餐</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Day 3 -->
+<section id="day3" class="day">
+<h2>📅 Day 3 — 7/20(一) 太宰府文化日</h2>
+
+<div class="alert warning">
+<strong>🚨 重要警示：</strong>九州國立博物館週一休館！7/20 當天無法入場！當天以太宰府天滿宮、表參道、文化ふれあい館為主。
+</div>
+<div class="alert info">
+<strong>📌 重要說明：</strong>太宰府天滿宮主殿修繕中（2023~2027），目前為建築師藤本壯介設計的<strong>臨時假殿</strong>（屋頂植栽「空中庭園」造型，2027 年前限定景觀）。
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab(this, 'd3-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this, 'd3-transport')">🚃 交通</button>
+<button class="tab" onclick="showTab(this, 'd3-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d3-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">08:00</span><div class="content">博多→天神（地鐵 3 分）</div></div>
+<div class="timeline-item"><span class="time">08:10</span><div class="content">天神站購買「太宰府電車きっぷ」¥1,000/大人</div></div>
+<div class="timeline-item"><span class="time">08:20</span><div class="content">西鐵特急→二日市轉太宰府線（25 分）</div></div>
+<div class="timeline-item"><span class="time">08:50</span><div class="content">隈研吾設計星巴克外觀拍照（人少）</div></div>
+<div class="timeline-item"><span class="time">09:00</span><div class="content">表參道散步、購買梅枝餅</div></div>
+<div class="timeline-item"><span class="time">09:30</span><div class="content">⛩️ 太宰府天滿宮（御神牛、心字池、臨時假殿）</div></div>
+<div class="timeline-item"><span class="time">11:30</span><div class="content">午餐：松屋維新の庵 / かさの家</div></div>
+<div class="timeline-item"><span class="time">13:00</span><div class="content">太宰府市文化ふれあい館（室內冷氣）</div></div>
+<div class="timeline-item"><span class="time">14:45</span><div class="content">西鐵返天神</div></div>
+<div class="timeline-item"><span class="time">16:30</span><div class="content">飯店休息</div></div>
+<div class="timeline-item"><span class="time">18:30</span><div class="content">晚餐：とり田 川端店（水炊き）</div></div>
+</div>
+<div class="alert stroller">
+<strong>🚼 推車警示：</strong>太鼓橋有石階推車<strong>無法通行</strong>，請走橋旁左側平坦繞行步道。
+</div>
+</div>
+
+<div class="tab-content" id="d3-transport">
+<details open>
+<summary>🚃 博多 → 太宰府</summary>
+<div class="details-body">
+<p>博多→天神：地鐵 3 分 ¥210</p>
+<p>天神→太宰府：西鐵特急 25 分 ¥420（<strong>需在二日市轉太宰府線</strong>）</p>
+<p><strong>推薦套票：太宰府電車きっぷ ¥1,000/大人</strong>（含天神-太宰府來回 + 設施優惠）</p>
+<p>9 人購票：分兩組排隊較快</p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d3-meals">
+<h3>午餐 12:30</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>梅枝餅巡禮＋松屋維新の庵</h4>
+<p class="meta">⭐ 4.6（201 則）</p>
+<p class="meta">外帶梅枝餅 ¥180/個 + 內用抹茶套餐 ¥700</p>
+<p class="meta">傳統日式花園、有充足桌椅適合 9 人休息</p>
+</div>
+<div class="restaurant-card">
+<h4>かさの家（梅枝餅）</h4>
+<p class="meta">⭐ 4.4（1,362 則）</p>
+<p class="meta">老舖、現烤梅枝餅 ¥180</p>
+<p class="meta">有榻榻米內用區（需脫鞋）</p>
+</div>
+<div class="restaurant-card">
+<h4>鰻のエイト</h4>
+<p class="meta">⭐ <strong>4.9</strong>（213 則）</p>
+<p class="meta">9 人需提前預約、費用較高</p>
+<p class="meta">¥22,500-36,000 (9 人)</p>
+</div>
+</div>
+
+<div class="alert info">
+<strong>☕ 必體驗：</strong>星巴克太宰府表參道店（隈研吾設計，2,000 根木條格柵）— 建議 09:30 前先去外觀拍照
+</div>
+
+<h3>晚餐 18:30</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>博多水炊き とり田 川端店</h4>
+<p class="meta">⭐ 4.3（1,777 則）</p>
+<p class="meta">博多最有名水炊き、有攜幼兒好評</p>
+<p class="meta">💰 ¥3,000-5,000 / 人</p>
+<p class="meta"><a href="tel:+81922720920">📞 092-272-0920</a></p>
+<p class="meta"><strong>至少提前 1 天預約</strong></p>
+</div>
+<div class="restaurant-card">
+<h4>くうてん JR 博多 City 9F</h4>
+<p class="meta">⭐ 4.1（14 則）</p>
+<p class="meta">博多站直結電梯、多店選擇</p>
+<p class="meta">不需預約</p>
+</div>
+<div class="restaurant-card">
+<h4>一幸舎 ❌</h4>
+<p class="meta">⭐ 3.9（659 則）</p>
+<p class="meta">大團體服務有負評，不建議</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Day 4 -->
+<section id="day4" class="day">
+<h2>📅 Day 4 — 7/21(二) 柳川遊船日</h2>
+
+<div class="alert warning">
+<strong>☀️ 夏季注意：</strong>柳川 7 月體感 35°C+，預約遊船時務必確認<strong>有遮陽棚的船艙</strong>，自備飲水、防曬。
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab(this, 'd4-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this, 'd4-transport')">🚃 交通</button>
+<button class="tab" onclick="showTab(this, 'd4-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d4-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">07:30</span><div class="content">飯店出發</div></div>
+<div class="timeline-item"><span class="time">08:00</span><div class="content">西鐵特急 天神→柳川（50 分）</div></div>
+<div class="timeline-item"><span class="time">09:00</span><div class="content">抵達柳川站，免費接駁巴士到乘船場</div></div>
+<div class="timeline-item"><span class="time">09:30</span><div class="content">🚣 川下り遊船 70 分鐘</div></div>
+<div class="timeline-item"><span class="time">10:40</span><div class="content">下船，沖端老街</div></div>
+<div class="timeline-item"><span class="time">12:30</span><div class="content">午餐：若松屋（柳川せいろ蒸し）</div></div>
+<div class="timeline-item"><span class="time">14:30</span><div class="content">北原白秋紀念館 / 御花庭園</div></div>
+<div class="timeline-item"><span class="time">16:00</span><div class="content">接駁巴士返柳川站</div></div>
+<div class="timeline-item"><span class="time">16:30</span><div class="content">西鐵返天神</div></div>
+<div class="timeline-item"><span class="time">17:30</span><div class="content">返博多</div></div>
+<div class="timeline-item"><span class="time">18:30</span><div class="content">晚餐：もつ鍋 田しゅう 博多</div></div>
+</div>
+
+<details>
+<summary>🚣 川下り遊船公司比較</summary>
+<div class="details-body">
+<table>
+<thead><tr><th>公司</th><th>評分</th><th>特色</th></tr></thead>
+<tbody>
+<tr><td><strong>松月乗船場</strong>（主選）</td><td>⭐ 4.4（3,570）</td><td>元祖、可刷卡、免費接駁、船頭歌唱表演</td></tr>
+<tr><td>水郷柳川観光</td><td>⭐ 4.3</td><td>9:10 最早開、夏天有冷礦泉水（僅現金）</td></tr>
+<tr><td>大東エンタープライズ</td><td>⭐ 4.1</td><td>含鰻魚飯套票</td></tr>
+</tbody>
+</table>
+<p><strong>預約：</strong><a href="tel:+81944726177">📞 0944-72-6177</a>（出發前 2 週）</p>
+<p>說：「9名様（大人 6 名、小学生 1 名、幼稚園 1 名、乳幼児 1 名）、有遮陽棚船艙」</p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d4-transport">
+<details open>
+<summary>🚃 博多 → 柳川</summary>
+<div class="details-body">
+<p>博多→天神：地鐵 3 分 ¥210</p>
+<p>天神→西鐵柳川：特急 50 分 ¥860/大人</p>
+<p><strong>強烈推薦：柳川特盛きっぷ ¥6,160/大人</strong>（含西鐵特急來回 + 川下り + 鰻魚飯優惠券）</p>
+<p>購票：西鐵福岡（天神）站 Nishitetsu Information Center</p>
+<p>9 人計算：6 大 ¥6,160 = ¥36,960</p>
+<p>西鐵柳川站→乘船場：<strong>免費接駁巴士</strong>約 10 分</p>
+</div>
+</details>
+<div class="alert stroller">
+<strong>🚼 推車：</strong>上船需折疊，乘船場可<strong>免費代寄存</strong>，下船後接駁回原乘船場取回。
+</div>
+</div>
+
+<div class="tab-content" id="d4-meals">
+<h3>午餐 12:30 — 柳川名物：鰻魚せいろ蒸し</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>若松屋（1860 年）</h4>
+<p class="meta">⭐ <strong>4.4</strong>（3,588 則）</p>
+<p class="meta">寬敞榻榻米大桌、無障礙廁所、可刷卡</p>
+<p class="meta">💰 ¥3,000-5,000 / 人</p>
+<p class="meta"><a href="tel:+81944723163">📞 0944-72-3163</a></p>
+<p class="meta"><strong>提前 1 週預約：「9名様、12時半ごろ、子供2名・乳幼児1名」</strong></p>
+</div>
+<div class="restaurant-card">
+<h4>元祖 本吉屋（1681 年）</h4>
+<p class="meta">⭐ 4.2（2,861 則）</p>
+<p class="meta">最古老、英文菜單、炭火烤香</p>
+<p class="meta"><a href="tel:+81944726155">📞 0944-72-6155</a></p>
+</div>
+<div class="restaurant-card">
+<h4>富貴</h4>
+<p class="meta">⭐ 4.1</p>
+<p class="meta">兒童友善標示明確、人少較輕鬆</p>
+<p class="meta"><a href="tel:+81944743147">📞 0944-74-3147</a></p>
+</div>
+</div>
+
+<h3>晚餐 18:30</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>もつ鍋 田しゅう 博多</h4>
+<p class="meta">⭐ <strong>4.6</strong>（1,507 則）</p>
+<p class="meta">巴士總站 1F，柳川返程後出站即達</p>
+<p class="meta">💰 ¥3,000 / 人</p>
+<p class="meta"><a href="tel:+81924412071">📞 092-441-2071</a></p>
+</div>
+<div class="restaurant-card">
+<h4>おおやま 本店</h4>
+<p class="meta">⭐ 4.5（2,774 則）</p>
+<p class="meta">與 Day1 同店，已體驗可換田しゅう</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Day 5 -->
+<section id="day5" class="day">
+<h2>📅 Day 5 — 7/22(三) 門司港・小倉復古日</h2>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab(this, 'd5-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this, 'd5-transport')">🚃 交通</button>
+<button class="tab" onclick="showTab(this, 'd5-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d5-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">08:00</span><div class="content">飯店出發</div></div>
+<div class="timeline-item"><span class="time">08:30</span><div class="content">新幹線 博多→小倉（15 分）</div></div>
+<div class="timeline-item"><span class="time">09:00</span><div class="content">JR 鹿兒島本線 小倉→門司港（13 分）</div></div>
+<div class="timeline-item"><span class="time">09:15</span><div class="content">🚉 門司港駅、舊大連航路上屋</div></div>
+<div class="timeline-item"><span class="time">11:00</span><div class="content">🌉 <strong>Blue Wing Moji 開橋觀禮</strong>（升至 60 度）</div></div>
+<div class="timeline-item"><span class="time">12:00</span><div class="content">折返小倉，午餐：資さんうどん</div></div>
+<div class="timeline-item"><span class="time">13:30</span><div class="content">🏯 小倉城（互動展、頂樓咖啡）</div></div>
+<div class="timeline-item"><span class="time">14:30</span><div class="content">勝山公園（夏天可玩水）</div></div>
+<div class="timeline-item"><span class="time">15:30</span><div class="content">🛍️ Riverwalk 北九州（室內冷氣避暑）</div></div>
+<div class="timeline-item"><span class="time">17:30</span><div class="content">新幹線返博多</div></div>
+<div class="timeline-item"><span class="time">18:30</span><div class="content">晚餐：椒房庵（JR 博多 City 9F）</div></div>
+</div>
+
+<details>
+<summary>🌉 Blue Wing Moji 開橋時刻</summary>
+<div class="details-body">
+<p>每日 6 次：10:00 / 11:00 / 13:00 / 14:00 / 15:00 / 16:00（每次約 20 分鐘）</p>
+<p>建議配合 11:00 場次觀看</p>
+</div>
+</details>
+<details>
+<summary>🏯 小倉城 / Riverwalk</summary>
+<div class="details-body">
+<p>小倉城：⭐ 4.3｜大人 ¥700｜<strong>天守閣有電梯</strong>到各層</p>
+<p>Riverwalk：全室內冷氣、Daiso、Starbucks（夏天避暑首選）</p>
+<p>關門海底隧道：⚠️ 夏天悶熱，不建議帶推車</p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d5-transport">
+<details open>
+<summary>🚄 博多 → 小倉</summary>
+<div class="details-body">
+<p><strong>主選：新幹線さくら/みずほ</strong> 自由席 15 分 ¥3,150/大人（指定席 ¥4,030）</p>
+<p>備案：在來線特急ソニック 50 分 ¥1,310/大人（9 人省約 ¥11,000）</p>
+<p>建議：依當天時刻表彈性決定。9 人有推車建議指定席</p>
+</div>
+</details>
+<details>
+<summary>🚃 小倉 → 門司港</summary>
+<div class="details-body">
+<p>JR 鹿兒島本線 13 分 ¥280</p>
+<p>月台有電梯，推車友善</p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d5-meals">
+<h3>午餐 12:00（小倉）</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>資さんうどん 魚町店</h4>
+<p class="meta">⭐ 4.1（4,446 則）</p>
+<p class="meta">24h、北九州靈魂食物、平板多語點餐</p>
+<p class="meta">💰 ¥400-800 / 人</p>
+<p class="meta"><a href="tel:+81935131110">📞 093-513-1110</a></p>
+</div>
+<div class="restaurant-card">
+<h4>鉄なべ 総本店</h4>
+<p class="meta">⭐ 3.8（1,233 則）</p>
+<p class="meta">小倉名物鐵鍋餃子（每人最少 8 顆）</p>
+<p class="meta">💰 ¥1,000-1,500</p>
+</div>
+<div class="restaurant-card">
+<h4>旦過市場食堂</h4>
+<p class="meta">⭐ 3.6</p>
+<p class="meta">各吃各的彈性、市場氛圍</p>
+<p class="meta">⚠️ 通道窄，推車注意</p>
+</div>
+</div>
+
+<h3>下午茶 15:00 — 門司港燒咖哩</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>伽哩本舗 門司港</h4>
+<p class="meta">⭐ <strong>4.4</strong>（1,870 則 — 三家最高）</p>
+<p class="meta">香蕉咖哩、河豚咖哩、和牛咖哩</p>
+<p class="meta">💰 ¥1,200-1,800</p>
+<p class="meta"><a href="tel:+81933318839">📞 093-331-8839</a></p>
+</div>
+<div class="restaurant-card">
+<h4>BEAR FRUITS</h4>
+<p class="meta">⭐ 4.1（1,334 則）</p>
+<p class="meta">牛肉起司招牌、推車友善</p>
+</div>
+<div class="restaurant-card">
+<h4>王様のたまご</h4>
+<p class="meta">⭐ 4.1（1,251 則）</p>
+<p class="meta">蔬菜選項多、舒芙蕾鬆餅</p>
+</div>
+</div>
+
+<h3>晚餐 18:30（博多）</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>めんたい料理 博多 椒房庵</h4>
+<p class="meta">⭐ 4.3（953 則）</p>
+<p class="meta">JR 博多 City 9F，めんたい鯛まぶし三吃</p>
+<p class="meta">💰 ¥2,500-3,500 / 人</p>
+<p class="meta"><a href="tel:+81924096611">📞 092-409-6611</a></p>
+<p class="meta"><strong>強烈建議提前網路訂位</strong></p>
+</div>
+<div class="restaurant-card">
+<h4>くうてん 美食街</h4>
+<p class="meta">⭐ 4.1</p>
+<p class="meta">9F・10F 多店選擇彈性</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Day 6 -->
+<section id="day6" class="day">
+<h2>📅 Day 6 — 7/23(四) 返程日</h2>
+
+<div class="alert warning">
+<strong>⏰ 關鍵時間線：</strong>14:30 班機 → 12:30 必須抵達國際線 → 12:00 從博多站出發
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab(this, 'd6-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this, 'd6-shopping')">🛍️ 採購</button>
+<button class="tab" onclick="showTab(this, 'd6-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d6-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">07:00</span><div class="content">起床整理行李</div></div>
+<div class="timeline-item"><span class="time">08:00</span><div class="content">早餐：博多一番街 B1F 或飯店</div></div>
+<div class="timeline-item"><span class="time">09:00</span><div class="content">退房、寄放行李（博多站 1F コインロッカー）</div></div>
+<div class="timeline-item"><span class="time">09:30</span><div class="content">JR 博多 City マイング B1F 採購銘菓</div></div>
+<div class="timeline-item"><span class="time">10:00</span><div class="content">Pokémon Center FUKUOKA（博多マルイ 2F）</div></div>
+<div class="timeline-item"><span class="time">10:30</span><div class="content">採購收尾、取行李</div></div>
+<div class="timeline-item"><span class="time">11:00</span><div class="content">前往地鐵博多站</div></div>
+<div class="timeline-item"><span class="time">11:15</span><div class="content">地鐵機場線 → 國內線（5 分）</div></div>
+<div class="timeline-item"><span class="time">11:25</span><div class="content"><strong>免費接駁巴士</strong> → 國際線（15 分）</div></div>
+<div class="timeline-item"><span class="time">11:45</span><div class="content">抵達國際線、辦 Check-in</div></div>
+<div class="timeline-item"><span class="time">12:30</span><div class="content">通關後最後午餐：もつ鍋楽天地</div></div>
+<div class="timeline-item"><span class="time">14:30</span><div class="content">✈️ 起飛回台</div></div>
+</div>
+</div>
+
+<div class="tab-content" id="d6-shopping">
+<h3>必買博多銘菓</h3>
+<div class="alert money">
+<strong>💰 重要：</strong>博多站比機場便宜 15-30%，<strong>主要採購務必在博多站完成</strong>。
+</div>
+<table>
+<thead><tr><th>商品</th><th>地點</th><th>價格</th><th>保存</th></tr></thead>
+<tbody>
+<tr><td>博多通りもん（白豆沙饅頭）</td><td>マイング B1F 明月堂</td><td>6 個 ¥1,000</td><td>15 天</td></tr>
+<tr><td>博多の女（夾心年輪）</td><td>マイング / 博多銘品蔵</td><td>8 個 ¥1,200</td><td>30 天</td></tr>
+<tr><td>明太子（ふくや）</td><td>博多地下街</td><td>100g ¥800-1,500</td><td>冷藏</td></tr>
+<tr><td>鶴乃子（棉花糖白豆沙）</td><td>マイング 石村萬盛堂</td><td>6 個 ¥1,000</td><td>14 天</td></tr>
+</tbody>
+</table>
+
+<h3>Pokémon Center FUKUOKA</h3>
+<p>📍 博多マルイ 2F、10:00 開｜⭐ 4.2（1,915 則）</p>
+<p>福岡限定：<strong>拉麵皮卡丘</strong>布偶、Latios/Latias 限定品</p>
+</div>
+
+<div class="tab-content" id="d6-meals">
+<h3>機場最後午餐</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>もつ鍋楽天地（國際線 3F）</h4>
+<p class="meta">⭐ <strong>4.9</strong>（3,015 則 — 機場內最高分）</p>
+<p class="meta">通關後閘口區、多語言服務</p>
+<p class="meta">💰 ¥1,200-1,800 / 人</p>
+<p class="meta"><a href="tel:+81924820770">📞 092-482-0770</a></p>
+<p class="meta"><strong>強烈推薦作為告別博多之味</strong></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 實用資訊 -->
+<section id="info">
+<h2>ℹ️ 實用資訊</h2>
+
+<details>
+<summary>🌤️ 天氣預測</summary>
+<div class="details-body">
+<table>
+<thead><tr><th>日期</th><th>天氣</th><th>高/低 °C</th><th>降雨</th></tr></thead>
+<tbody>
+<tr><td>7/18 (六)</td><td>晴轉多雲</td><td>34/26</td><td>30%</td></tr>
+<tr><td>7/19 (日)</td><td>多雲有雨</td><td>33/26</td><td>50%</td></tr>
+<tr><td>7/20 (一)</td><td>午後雷陣雨</td><td>34/27</td><td>60%</td></tr>
+<tr><td>7/21 (二)</td><td>晴</td><td>35/27</td><td>20%</td></tr>
+<tr><td>7/22 (三)</td><td>多雲</td><td>33/26</td><td>40%</td></tr>
+<tr><td>7/23 (四)</td><td>晴</td><td>34/26</td><td>25%</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<details>
+<summary>🏥 醫療資源</summary>
+<div class="details-body">
+<p><strong>福岡市立こども病院</strong>（兒科首選）<br><a href="tel:+81926827000">📞 092-682-7000</a></p>
+<p><strong>福岡赤十字病院</strong>（24h 急診含夜間兒科、英語通譯）<br><a href="tel:+81925211211">📞 092-521-1211</a></p>
+<p>九州大学病院<br><a href="tel:+81926411151">📞 092-641-1151</a></p>
+<p>済生会福岡総合病院（天神區地標）<br><a href="tel:+81927718151">📞 092-771-8151</a></p>
+<p><strong>夜間兒科發燒</strong>：優先福岡赤十字 24h 急診</p>
+<p><strong>電話諮詢</strong>：<a href="tel:#8000">📞 #8000</a>（こども救急電話相談，24h 日語）</p>
+</div>
+</details>
+
+<details>
+<summary>💰 預估總費用 (9 人)</summary>
+<div class="details-body">
+<table>
+<thead><tr><th>類別</th><th>日圓</th><th>台幣 (4.5 匯率)</th></tr></thead>
+<tbody>
+<tr><td>住宿（5晚3房）</td><td class="num">¥335,000</td><td class="num">NT$74,444</td></tr>
+<tr><td>交通</td><td class="num">¥123,660</td><td class="num">NT$27,480</td></tr>
+<tr><td>景點門票</td><td class="num">¥15,200</td><td class="num">NT$3,378</td></tr>
+<tr><td>餐費（6天3餐）</td><td class="num">¥367,200</td><td class="num">NT$81,600</td></tr>
+<tr><td>伴手禮＋雜支</td><td class="num">¥135,800</td><td class="num">NT$30,178</td></tr>
+<tr><td><strong>總計</strong></td><td class="num"><strong>¥976,860</strong></td><td class="num"><strong>NT$217,080</strong></td></tr>
+</tbody>
+</table>
+<p>人均：¥108,540（NT$24,120）｜建議每人準備 NT$28,000</p>
+</div>
+</details>
+
+<details>
+<summary>📋 行前準備清單</summary>
+<div class="details-body">
+<h4>票券與訂位</h4>
+<ul class="checklist">
+<li>機票（FUK 福岡空港）</li>
+<li>飯店訂房（博多站步行 10 分內，5 月前訂）</li>
+<li>Day1 おおやま 預約：092-262-8136</li>
+<li>Day2 博多華味鳥 KITTE 9F 預約</li>
+<li>Day3 とり田 川端店 預約（提前 1 天）</li>
+<li>Day4 若松屋（柳川）預約：0944-72-3163</li>
+<li>Day4 もつ鍋田しゅう 預約：092-441-2071</li>
+<li>Day5 椒房庵（JR 博多 City 9F）預約</li>
+<li>柳川川下り：松月乗船場 0944-72-6177（出發前 2 週）</li>
+</ul>
+<h4>嬰幼兒必備</h4>
+<ul class="checklist">
+<li>輕量折疊推車 + 遮陽罩</li>
+<li>奶粉、副食品</li>
+<li>退燒藥、止瀉藥、體溫計</li>
+<li>防蚊液（幼兒專用）</li>
+<li>大量濕紙巾、尿布</li>
+</ul>
+<h4>衣物</h4>
+<ul class="checklist">
+<li>夏季吸汗速乾衣（每人 5-6 套）</li>
+<li>遮陽帽（全員）</li>
+<li>折疊傘 / 雨衣（每人一把）</li>
+<li>涼鞋 / 透氣球鞋</li>
+</ul>
+<h4>電子設備</h4>
+<ul class="checklist">
+<li>行動電源（10,000mAh 以下）</li>
+<li>Wi-Fi 分享器或日本 SIM（9 人 2-3 台）</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>💡 9 人大團體 Tips</summary>
+<div class="details-body">
+<h4>訂位</h4>
+<p>提前 1-2 週說「<strong>台湾から9人</strong>」、9 人超過大桌上限 8 人，建議分 2 桌（4+5）</p>
+<p>告知餐廳「<strong>赤ちゃんがいます</strong>」可要求嬰兒椅</p>
+<h4>交通</h4>
+<p>幼幼免費（未滿 6 歲）、國小半票</p>
+<p>計程車 9 人需 3 台：<a href="tel:+81927910011">📞 福岡計程車 092-791-0011</a></p>
+<p>JR / 西鐵不能統一購票，分 2-3 組分散買</p>
+<h4>節奏</h4>
+<p>早出（08:30 前）避開人潮和最熱時段</p>
+<p>午餐後（12:30-15:00）安排幼兒午睡</p>
+<p>晚餐 18:00-19:00 訂位（避開 19:30 尖峰）</p>
+</div>
+</details>
+
+<details>
+<summary>📱 實用 APP</summary>
+<div class="details-body">
+<ul>
+<li><strong>Google Maps</strong>：離線下載「福岡」地圖</li>
+<li><strong>Yahoo!乗換案内 / Navitime</strong>：電車轉乘（ベビーカーモード）</li>
+<li><strong>食べログ / ぐるなび</strong>：餐廳評分訂位</li>
+<li><strong>PayPay / LINE Pay</strong>：日本掃碼支付</li>
+<li><strong>Google 翻譯</strong>：下載日文離線包</li>
+<li><strong>Visit Japan Web</strong>：入境申報</li>
+</ul>
+</div>
+</details>
+</section>
+
+</main>
+
+<button class="emergency-fab" onclick="toggleEmergency()" aria-label="緊急聯絡">🆘</button>
+<div class="emergency-panel" id="emergencyPanel">
+<h3>🆘 緊急聯絡</h3>
+<a href="tel:+81927342810">📞 駐福岡分処 092-734-2810</a>
+<a href="tel:110">🚔 警察 110</a>
+<a href="tel:119">🚑 救護車 119</a>
+<a href="tel:#8000">👶 兒科諮詢 #8000</a>
+<a href="tel:+81925211211">🏥 福岡赤十字 24h 急診</a>
+<a href="tel:050-3816-2787">🌐 旅遊諮詢（中文）050-3816-2787</a>
+</div>
+
+<script>
+function showTab(btn, id) {
+  const section = btn.closest('section');
+  section.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  section.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  section.querySelector('#' + id).classList.add('active');
+}
+function toggleEmergency() {
+  document.getElementById('emergencyPanel').classList.toggle('show');
+}
+document.addEventListener('click', function(e) {
+  const panel = document.getElementById('emergencyPanel');
+  const fab = document.querySelector('.emergency-fab');
+  if (!panel.contains(e.target) && !fab.contains(e.target)) {
+    panel.classList.remove('show');
+  }
+});
+</script>
+
+</body>
+</html>
