@@ -1,0 +1,686 @@
+<div class="tab-content" id="d3-transport">
+
+  <!-- ===== Day 3 交通完整指南 ===== -->
+  <style>
+    #d3-transport {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.7;
+      color: #1a1a1a;
+    }
+    #d3-transport h2 {
+      background: linear-gradient(135deg, #2c5f8a 0%, #3a7fc1 100%);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin: 24px 0 16px;
+      font-size: 1.2rem;
+    }
+    #d3-transport h3 {
+      color: #2c5f8a;
+      border-left: 4px solid #3a7fc1;
+      padding-left: 12px;
+      margin: 20px 0 10px;
+      font-size: 1.05rem;
+    }
+    #d3-transport .segment-card {
+      background: #f8fbff;
+      border: 1px solid #c8dff5;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 14px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    #d3-transport .segment-card.walking {
+      border-left: 5px solid #27ae60;
+    }
+    #d3-transport .segment-card.subway {
+      border-left: 5px solid #e74c3c;
+    }
+    #d3-transport .segment-card.nishitetsu {
+      border-left: 5px solid #e67e22;
+    }
+    #d3-transport .segment-card.sightseeing {
+      border-left: 5px solid #8e44ad;
+    }
+    #d3-transport .steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+      counter-reset: step-counter;
+    }
+    #d3-transport .steps-list li {
+      counter-increment: step-counter;
+      padding: 8px 12px 8px 40px;
+      position: relative;
+      border-bottom: 1px dashed #dce8f5;
+    }
+    #d3-transport .steps-list li:last-child {
+      border-bottom: none;
+    }
+    #d3-transport .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      background: #3a7fc1;
+      color: #fff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #d3-transport .info-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px 12px;
+      margin: 10px 0;
+      font-size: 0.93rem;
+    }
+    #d3-transport .info-grid dt {
+      font-weight: bold;
+      color: #555;
+      white-space: nowrap;
+    }
+    #d3-transport .info-grid dd {
+      margin: 0;
+      color: #222;
+    }
+    #d3-transport .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    #d3-transport .badge-ok    { background: #d4edda; color: #155724; }
+    #d3-transport .badge-warn  { background: #fff3cd; color: #856404; }
+    #d3-transport .badge-alert { background: #f8d7da; color: #721c24; }
+    #d3-transport .badge-info  { background: #d1ecf1; color: #0c5460; }
+    #d3-transport .alert-box {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-size: 0.92rem;
+    }
+    #d3-transport .alert-box.danger {
+      background: #f8d7da;
+      border-color: #f5c6cb;
+    }
+    #d3-transport .alert-box.success {
+      background: #d4edda;
+      border-color: #c3e6cb;
+    }
+    #d3-transport .alert-box strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+    }
+    #d3-transport .gmaps-btn {
+      display: inline-block;
+      background: #4285f4;
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 13px;
+      border-radius: 5px;
+      font-size: 0.82rem;
+      margin-top: 8px;
+    }
+    #d3-transport .gmaps-btn:hover { background: #2b5fb1; }
+    #d3-transport .map-img {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 10px;
+      border: 1px solid #c8dff5;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      display: block;
+      margin: 12px auto;
+    }
+    #d3-transport .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0;
+      font-size: 0.82rem;
+    }
+    #d3-transport .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    #d3-transport .legend-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #d3-transport .ticket-box {
+      background: #fffbf0;
+      border: 2px solid #e67e22;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    #d3-transport .ticket-box h4 {
+      color: #e67e22;
+      margin: 0 0 10px;
+      font-size: 1rem;
+    }
+    #d3-transport .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 10px 0;
+    }
+    #d3-transport .cost-table th {
+      background: #e67e22;
+      color: #fff;
+      padding: 7px 10px;
+      text-align: left;
+    }
+    #d3-transport .cost-table td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #f0d9bb;
+    }
+    #d3-transport .cost-table tr:nth-child(even) td {
+      background: #fdf3e7;
+    }
+    #d3-transport .cost-table tfoot td {
+      font-weight: bold;
+      background: #fdf3e7;
+      border-top: 2px solid #e67e22;
+    }
+    #d3-transport .stroller-section {
+      background: #f0f8f0;
+      border: 1px solid #8bc34a;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    #d3-transport .stroller-section h4 {
+      color: #33691e;
+      margin: 0 0 10px;
+    }
+    #d3-transport .overview-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+      padding: 14px 18px;
+      background: #eaf2ff;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-size: 0.9rem;
+    }
+    #d3-transport .flow-node {
+      background: #3a7fc1;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    #d3-transport .flow-arrow {
+      color: #3a7fc1;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    #d3-transport .flow-meta {
+      font-size: 0.78rem;
+      color: #555;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) {
+      #d3-transport .overview-flow { flex-direction: column; align-items: flex-start; }
+      #d3-transport .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- ========== 頁首 ========== -->
+  <h2>Day 3 交通完整指南 — 太宰府文化日（2026/7/20 週一）</h2>
+
+  <div class="alert-box danger">
+    <strong>重要警示：兩項確認事項</strong>
+    1. 九州國立博物館週一例行休館（7/20 不可入場），當日以天滿宮、表參道、文化ふれあい館為主。<br>
+    2. 太宰府天滿宮主殿修繕中（2023～2027），目前為藤本壯介設計之臨時假殿，7/20 時仍為限定樣貌可參觀。
+  </div>
+
+  <!-- ========== 全程路線概覽 ========== -->
+  <h3>全程路線概覽</h3>
+  <div class="overview-flow">
+    <span class="flow-node">博多飯店</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-meta">步行 3 分</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-node">博多站（地鐵）</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-meta">空港線 3 分 ¥210</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-node">天神站</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-meta">地下街步行 3～5 分</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-node">西鐵福岡（天神）站</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-meta">特急 15 分</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-node">二日市站（轉車）</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-meta">太宰府線 5 分</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-node">太宰府站</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-meta">步行 8 分</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-node">天滿宮</span>
+  </div>
+  <p style="font-size:0.85rem;color:#555;margin:4px 0 0 4px;">回程：太宰府站 → 二日市轉西鐵特急 → 天神 → 地鐵 → 博多（全程約 30 分）</p>
+
+  <!-- ========== SEGMENT 1：飯店 → 博多站 ========== -->
+  <h3>第 1 段：博多飯店 → 博多站（地鐵入口）</h3>
+  <div class="segment-card walking">
+    <dl class="info-grid">
+      <dt>移動方式</dt><dd>步行（沿博多站前商業街）</dd>
+      <dt>距離／時間</dt><dd>約 200～400 公尺 / 3～5 分鐘（依飯店位置而異）</dd>
+      <dt>費用</dt><dd>免費</dd>
+      <dt>電梯位置</dt><dd>博多站地鐵入口：正面玄關左側有電梯直通地下 1F 閘口</dd>
+      <dt>推車友善度</dt><dd><span class="badge badge-ok">推車 OK</span> 地面平坦，無明顯坡度</dd>
+      <dt>長輩注意</dt><dd>早晨人潮少，行人道寬敞；7 月日出早，需在 08:00 前出發避開中午熱浪</dd>
+    </dl>
+    <ol class="steps-list">
+      <li>從飯店大廳出發，沿博多站前方向步行（正面可見 JR 博多站大樓及廣場）。</li>
+      <li>進入博多站廣場後，沿左側標示「地下鐵 Metro」下樓，搭乘電梯進入地下 1F 售票大廳。</li>
+      <li>購票後通過閘口，搭電梯下至空港線月台（往姪浜／福岡空港方向）。</li>
+    </ol>
+    <a class="gmaps-btn" href="https://www.google.com/maps/dir/33.5897,130.4207/33.5897,130.4207/@33.5897,130.4207,17z/data=!3m1!4b1" target="_blank" rel="noopener">Google Maps 博多站周邊地圖</a>
+  </div>
+
+  <!-- ========== SEGMENT 2：博多 → 天神（地鐵）========== -->
+  <h3>第 2 段：博多站 → 天神站（福岡市地鐵 空港線）</h3>
+  <div class="segment-card subway">
+    <dl class="info-grid">
+      <dt>移動方式</dt><dd>福岡市地鐵 空港線（KK02 博多 → KK01 天神）</dd>
+      <dt>所需時間</dt><dd>約 3 分鐘</dd>
+      <dt>費用</dt>
+      <dd>
+        成人 ¥210 / 小學生 ¥110 / 幼兒（未滿 6 歲）免費<br>
+        <strong>9 人合計：大人 ×6 = ¥1,260 ＋ 小學生 ×1 = ¥110 → 共 ¥1,370</strong>
+      </dd>
+      <dt>購票</dt><dd>博多站地鐵閘口前自動售票機（有中文介面）；可使用 Suica / ICOCA / iC 感應直接進站</dd>
+      <dt>班距</dt><dd>平日早間每 3～5 分鐘一班，無需等待</dd>
+      <dt>電梯位置</dt><dd>博多站：閘口內有電梯至月台；天神站：K 出口側設有電梯</dd>
+      <dt>推車友善度</dt><dd><span class="badge badge-ok">推車 OK</span> 博多、天神兩站均設無障礙電梯，全程無階梯</dd>
+      <dt>長輩注意</dt><dd>車廂有博多→天神 1 站即到，無需換車廂；月台間距正常，推車可輕鬆上下</dd>
+    </dl>
+    <ol class="steps-list">
+      <li>在博多站地鐵閘口前自動售票機選「天神 ¥210」，購買紙票；或直接感應 IC 卡進站。</li>
+      <li>搭乘空港線（往姪浜方向）上車，1 站即抵天神（車程 3 分）。</li>
+      <li>天神站下車後，跟隨「西鐵天神・天神地下街」指標，由 K 出口電梯上至地下 2F 天神地下街。</li>
+    </ol>
+    <a class="gmaps-btn" href="https://www.google.com/maps/dir/%E5%8D%9A%E5%A4%9A%E9%A7%85+Hakata+Station,+%E4%B8%AD%E5%A4%AE%E8%A1%97,+Hakata+Ward,+Fukuoka/%E5%A4%A9%E7%A5%9E%E9%A7%85+Tenjin+Station,+%E5%A4%A9%E7%A5%9E,+Chuo+Ward,+Fukuoka/@33.5908,130.4086,15z/" target="_blank" rel="noopener">Google Maps 路線（博多→天神）</a>
+  </div>
+
+  <!-- ========== SEGMENT 3：天神站 → 西鐵福岡（天神）站 ========== -->
+  <h3>第 3 段：天神站（地鐵）→ 西鐵福岡（天神）站</h3>
+  <div class="segment-card walking">
+    <dl class="info-grid">
+      <dt>移動方式</dt><dd>步行（天神地下街室內走廊）</dd>
+      <dt>距離／時間</dt><dd>約 290 公尺 / 步行 3～5 分鐘</dd>
+      <dt>費用</dt><dd>免費（地下街）</dd>
+      <dt>路線說明</dt><dd>地下鐵天神站 K 出口 → 天神地下街往南通行 → 西鐵天神站地下入口；全程室內有空調，7 月避暑最佳</dd>
+      <dt>電梯位置</dt><dd>西鐵福岡（天神）站：地下 1F 至 2F 月台有電梯，對應閘口右側</dd>
+      <dt>推車友善度</dt><dd><span class="badge badge-ok">推車 OK</span> 天神地下街全程平坦，無台階，寬度充裕</dd>
+      <dt>長輩注意</dt><dd>地下街冷氣充足，可讓長輩在此處調整狀態後再搭車；途中有便利商店（7-Eleven）可補充飲水</dd>
+      <dt>備註</dt><dd>西鐵天神站地下 2F 為剪票口（購票機區域），需在此購買「太宰府電車きっぷ」</dd>
+    </dl>
+    <ol class="steps-list">
+      <li>地鐵天神站下車，跟隨「天神地下街 / 西鐵天神」指標（南口方向，K 出口電梯）。</li>
+      <li>進入天神地下街，沿中央走廊往南步行（沿途有商店，可確認「西鐵天神駅」指標）。</li>
+      <li>抵達西鐵天神站地下入口，搭乘電梯至地下 2F 剪票口，在此購買「太宰府電車きっぷ」後進站。</li>
+    </ol>
+    <a class="gmaps-btn" href="https://www.google.com/maps/dir/33.5915188,130.3991187/33.5895319,130.399353/@33.5905,130.3993,17z/" target="_blank" rel="noopener">Google Maps 路線（天神地鐵→西鐵天神）</a>
+  </div>
+
+  <!-- ========== 太宰府電車きっぷ 套票 ========== -->
+  <div class="ticket-box">
+    <h4>太宰府電車きっぷ ¥1,000 套票（強烈建議購買）</h4>
+
+    <p><strong>套票內容：</strong></p>
+    <ul style="font-size:0.91rem;margin:0 0 10px 16px;">
+      <li>西鐵福岡（天神）→ 二日市 → 太宰府 來回乘車券（2 日有效）</li>
+      <li>太宰府市內指定設施折扣：九州國立博物館入場 ¥50 折扣（今日休館，改日可用）、寶物殿折扣等</li>
+      <li>表參道部分店鋪特典（如梅枝餅免費 1 個等，持票出示享優惠）</li>
+    </ul>
+
+    <p><strong>費用比較：</strong></p>
+    <table class="cost-table">
+      <thead>
+        <tr><th>票種</th><th>大人（×6）</th><th>兒童（×1 小學）</th><th>幼兒（×2）</th><th>小計</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>太宰府電車きっぷ ¥1,000（套票）</td>
+          <td>¥1,000 × 6 = ¥6,000</td>
+          <td>¥500 × 1 = ¥500</td>
+          <td>¥250 × 2 = ¥500</td>
+          <td><strong>¥7,000</strong></td>
+        </tr>
+        <tr>
+          <td>一般來回票（¥420×2）</td>
+          <td>¥840 × 6 = ¥5,040</td>
+          <td>¥420 × 1 = ¥420</td>
+          <td>免費</td>
+          <td>¥5,460</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">結論：套票含景點折扣、沿途特典，差額 ¥1,540 可從梅枝餅免費兌換等折抵回本</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p><strong>購票步驟（9 人如何最快買完）：</strong></p>
+    <ol style="font-size:0.91rem;margin:0 0 0 16px;">
+      <li>抵達西鐵天神站地下 2F 剪票口區域，確認「太宰府電車きっぷ」售票窗口（人工窗口，在閘口右側）。</li>
+      <li><strong>分兩組同時排隊：</strong> 建議組 A 排人工窗口（大人 3 張 ＋ 兒童 1 張 ＋ 幼兒 2 張），組 B 排自動售票機（大人 3 張）。套票目前須在人工窗口購買，自動售票機不販售 1 日券。</li>
+      <li>告知窗口人員：<strong>「太宰府電車きっぷ、おとな 3 枚、こども 1 枚、幼児 2 枚」</strong>；另一窗口大人 3 張可分別買。</li>
+      <li>購票後帶紙票進閘口，注意妥善保管（回程需再次使用）。</li>
+    </ol>
+
+    <div class="alert-box success" style="margin-top:12px;">
+      <strong>小提醒</strong>
+      套票在西鐵福岡（天神）站及二日市站均可購買。建議在天神站購買，省去二日市再排隊的時間。幼兒票（¥250）須一人一票，不可多人共用。
+    </div>
+  </div>
+
+  <!-- ========== SEGMENT 4：西鐵特急 → 二日市 → 太宰府 ========== -->
+  <h3>第 4 段：西鐵福岡（天神）站 → 二日市站 → 太宰府站</h3>
+  <div class="segment-card nishitetsu">
+    <dl class="info-grid">
+      <dt>移動方式</dt><dd>西鐵天神大牟田線 特急（天神→二日市）→ 西鐵太宰府線（二日市→太宰府）</dd>
+      <dt>所需時間</dt>
+      <dd>
+        天神 → 二日市：特急約 <strong>15 分鐘</strong><br>
+        二日市換乘等候：約 3～5 分鐘<br>
+        二日市 → 太宰府：太宰府線約 <strong>5 分鐘</strong><br>
+        全程共約 <strong>25～30 分鐘</strong>
+      </dd>
+      <dt>費用</dt><dd>太宰府電車きっぷ套票含（已含在 ¥1,000 票價內），不另計</dd>
+      <dt>轉乘說明</dt><dd>二日市站：下天神大牟田線後，跟隨「太宰府線のりかえ」指標，步行至隔壁月台，同層無需爬樓梯；太宰府線為 2 節小型列車，月台短</dd>
+      <dt>班距</dt><dd>特急：平日早間約 10 分一班；太宰府線：平日白天每 15 分一班，二日市等候時間短</dd>
+      <dt>電梯位置</dt>
+      <dd>
+        西鐵福岡（天神）站：地下 2F 月台各端有電梯<br>
+        二日市站：月台間連絡通道設有電梯<br>
+        太宰府站：剪票口外設電梯至地面
+      </dd>
+      <dt>推車友善度</dt><dd><span class="badge badge-ok">推車 OK</span> 三站均有電梯，太宰府線車廂空間稍小，推車需摺疊或側放（建議摺疊以利進出）</dd>
+      <dt>特別提示</dt><dd>旅人號（旅人 TABITO）觀光彩繪列車不定期開行，同一票可搭乘無需特別券；可在天神月台確認當日時刻表</dd>
+      <dt>長輩注意</dt><dd>月台與車廂間有縫隙，老人家需注意踩穩；列車為固定座位，可先入座保持穩定</dd>
+    </dl>
+    <ol class="steps-list">
+      <li>持太宰府電車きっぷ套票，搭乘 <strong>西鐵特急（往大牟田方向）</strong>，在 <strong>二日市站（Futsukaichi）</strong>下車。</li>
+      <li>二日市站下車後，跟隨藍色「太宰府線のりかえ」指標，步行至隔壁月台（同層，約 1 分鐘），等候 2 節小型列車。</li>
+      <li>搭乘 <strong>西鐵太宰府線（終點站=太宰府）</strong>，5 分鐘後抵達太宰府站，出閘口後即為表參道入口。</li>
+    </ol>
+    <a class="gmaps-btn" href="https://www.google.com/maps/dir/Nishitetsu+Fukuoka+Tenjin+Station,+%E5%A4%A9%E7%A5%9E%EF%BC%92%E4%B8%81%E7%9B%AE,+Chuo+Ward,+Fukuoka/Dazaifu+Station,+Saifu,+Dazaifu,+Fukuoka/@33.55,130.47,13z/" target="_blank" rel="noopener">Google Maps 西鐵天神→太宰府地圖（僅示意，電車路線）</a>
+  </div>
+
+  <!-- ========== SEGMENT 5：太宰府站 → 表參道 → 天滿宮 ========== -->
+  <h3>第 5 段：太宰府站 → 表參道 → 天滿宮主殿（步行路線）</h3>
+
+  <!-- 靜態地圖 -->
+  <p style="font-size:0.85rem;color:#555;margin-bottom:4px;"><strong>太宰府表參道步行路徑地圖</strong>（S=太宰府站 / M=かさの家 / C=星巴克隈研吾店 / B=太鼓橋 / T=太宰府天滿宮）</p>
+  <img
+    class="map-img"
+    src="data:image/png;base64,[地圖已由 Google Maps MCP 即時生成，請在 HTML 中以 <img src='...'/> 方式嵌入靜態地圖 URL]"
+    alt="太宰府表參道步行路徑地圖（S太宰府站→M梅枝餅かさの家→C星巴克→B太鼓橋→T太宰府天滿宮）"
+    style="display:none"
+  />
+  <!-- 下方改用實際可用的 Google Static Maps 連結圖 -->
+  <a href="https://www.google.com/maps/dir/Dazaifu+Station/Starbucks+Dazaifu+Tenmangu+Omotesando/Dazaifu+Tenmangu+Shrine/@33.5197,130.532,17z/" target="_blank" rel="noopener">
+    <img
+      class="map-img"
+      src="https://maps.googleapis.com/maps/api/staticmap?center=33.5197,130.5328&zoom=17&size=640x480&maptype=roadmap&markers=color:blue%7Clabel:S%7C33.5191483,130.5315999&markers=color:orange%7Clabel:M%7C33.5194547,130.5334317&markers=color:green%7Clabel:C%7C33.5197185,130.5333683&markers=color:purple%7Clabel:B%7C33.5201744,130.5347154&markers=color:red%7Clabel:T%7C33.5213697,130.5348239&path=color:0x0000ffaa%7Cweight:4%7C33.5191483,130.5315999%7C33.5195432,130.5316648%7C33.5195499,130.5323046%7C33.5194547,130.5334317%7C33.5197185,130.5333683%7C33.5195376,130.5342776%7C33.5201744,130.5347154%7C33.5213697,130.5348239&language=zh-TW"
+      alt="太宰府表參道步行路徑地圖"
+    />
+  </a>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1976d2">S</div><span>太宰府站出口（起點）</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f57c00">M</div><span>かさの家（梅枝餅老舖）</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#388e3c">C</div><span>星巴克（隈研吾設計）</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7b1fa2">B</div><span>太鼓橋（推車繞行點）</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#d32f2f">T</div><span>太宰府天滿宮主殿</span></div>
+  </div>
+
+  <div class="segment-card sightseeing">
+    <dl class="info-grid">
+      <dt>全程距離</dt><dd>太宰府站 → 天滿宮主殿 約 600 公尺</dd>
+      <dt>所需時間</dt><dd>直走約 8 分鐘；含停留拍照（梅枝餅、星巴克）約 30～40 分鐘</dd>
+      <dt>費用</dt><dd>步行免費；天滿宮入場免費</dd>
+      <dt>路面</dt><dd>全程石板路，平整；坡度幾乎零；9 人推車可輕鬆通行</dd>
+      <dt>推車友善度</dt><dd><span class="badge badge-ok">表參道 OK</span> <span class="badge badge-warn">太鼓橋需繞行</span></dd>
+      <dt>長輩注意</dt><dd>7 月高溫，建議 09:00 前已抵達，趁人少涼爽時完成參道；午前 11 點後熱浪強烈</dd>
+    </dl>
+
+    <p><strong>各標記點行程順序：</strong></p>
+    <ol class="steps-list">
+      <li>
+        <strong>S — 太宰府站出口（起點）</strong><br>
+        出閘口即為表參道入口；右側有 7-Eleven 可補充飲水冰品（7 月必備）。
+        <br><a class="gmaps-btn" href="https://www.google.com/maps/place/Dazaifu+Station/@33.519042,130.5313916,18z/" target="_blank" rel="noopener">Google Maps</a>
+      </li>
+      <li>
+        <strong>C — 星巴克太宰府天滿宮表參道店（隈研吾設計）</strong><br>
+        地址：3-2-43 Saifu, Dazaifu（站出口步行約 3 分鐘）<br>
+        評分：4.3★（3,679 則評論）　營業：08:00～20:00<br>
+        由木條格柵交織外牆，全球知名打卡點；建議在人潮少的早晨先拍照留念，買飲料可用 APP 預點。<br>
+        推車可停放室外露天座位區；有無障礙入口與廁所。
+        <br><a class="gmaps-btn" href="https://www.google.com/maps/place/Starbucks+Coffee+-+Dazaifu+Tenmangu+Shrine+Omotesando/@33.5197185,130.5333683,18z/" target="_blank" rel="noopener">Google Maps</a>
+      </li>
+      <li>
+        <strong>M — かさの家（梅枝餅老舖）</strong><br>
+        地址：2-7-24 Saifu, Dazaifu（緊鄰星巴克旁，步行 1 分鐘）<br>
+        評分：4.4★（1,364 則評論）　營業：09:00～18:00<br>
+        現烤梅枝餅 ¥180/個，可見師傅現烤製作過程（拍照熱點）；內用提供免費茶水，榻榻米座位讓長輩與幼兒休息。<br>
+        <span class="badge badge-warn">推車注意</span> 內用脫鞋區不便帶推車進入，外帶區可推車排隊。
+        <br><a class="gmaps-btn" href="https://www.google.com/maps/place/Kasanoya/@33.5194547,130.5334317,18z/" target="_blank" rel="noopener">Google Maps</a>
+      </li>
+      <li>
+        <strong>B — 太鼓橋（推車繞行必讀）</strong><br>
+        三座紅色弧形橋，象徵「過去‧現在‧未來」，為天滿宮標誌性景物。<br>
+        <span class="badge badge-alert">推車禁止通行</span> 橋面有明顯石階弧度，推車和行動不便者無法通行。<br>
+        <strong>繞行方法：</strong>在太鼓橋前方，向橋的左側（西側）轉，沿心字池旁的<strong>平坦石板繞行步道</strong>前行，約 1 分鐘可繞至橋的另一端，從原地匯入通往主殿的主路。長輩可自行判斷是否走橋，體力允許者可嘗試最前橋（坡度最緩），另外兩橋坡度較陡建議繞行。
+        <br><a class="gmaps-btn" href="https://www.google.com/maps/place/Taiko-bashi/@33.5201744,130.5347154,18z/" target="_blank" rel="noopener">Google Maps 太鼓橋</a>
+      </li>
+      <li>
+        <strong>T — 太宰府天滿宮主殿（現為臨時假殿）</strong><br>
+        地址：4-7-1 Saifu, Dazaifu　評分：4.5★（42,440 則評論）<br>
+        入場費用：免費　開放時間：06:30～18:30<br>
+        主殿修繕中（2023～2027），現為建築師藤本壯介設計的「空中庭園式」臨時假殿，為限定期間限定外觀，值得參觀。廣場平坦開闊，推車可進入；御神牛銅像（摸頭祈智慧）在廣場側面，推車可抵近。<br>
+        無障礙廁所設於主殿左側，有充足空間換尿布。
+        <br><a class="gmaps-btn" href="https://www.google.com/maps/place/Dazaifu+Tenmangu+Shrine/@33.5213697,130.5348239,17z/" target="_blank" rel="noopener">Google Maps 天滿宮</a>
+      </li>
+    </ol>
+  </div>
+
+  <!-- ========== SEGMENT 6：天滿宮 → 文化ふれあい館 ========== -->
+  <h3>第 6 段：太宰府天滿宮 → 太宰府市文化ふれあい館</h3>
+  <div class="segment-card walking">
+    <dl class="info-grid">
+      <dt>移動方式</dt><dd>步行（沿天神様通り）</dd>
+      <dt>距離／時間</dt>
+      <dd>
+        天滿宮主殿 → 文化ふれあい館：約 3.3 km / 步行約 <strong>45 分鐘</strong><br>
+        <span class="badge badge-warn">距離偏遠</span> 7 月高溫下不建議全程步行，建議搭乘計程車（約 10 分，¥900～¥1,200 估計）或改走參道周邊即可
+      </dd>
+      <dt>費用</dt><dd>步行免費；計程車太宰府站前乘車，約 ¥900～¥1,200</dd>
+      <dt>館別資訊</dt>
+      <dd>
+        太宰府市文化ふれあい館<br>
+        地址：4-9-1 Kokubu, Dazaifu（國分地區）<br>
+        評分：3.8★（66 則評論）　入館費用：低費或免費<br>
+        特色：室內展示太宰府歷史文化，全館空調，適合帶幼兒休息；比博物館行程輕鬆
+      </dd>
+      <dt>推車友善度</dt><dd><span class="badge badge-ok">室內 OK</span> 館內平坦，推車可進入</dd>
+      <dt>長輩注意</dt><dd>館內冷氣充足，午後最熱時段（12:00～15:00）在此休息為佳；可讓幼兒在館內玩耍補覺</dd>
+    </dl>
+    <ol class="steps-list">
+      <li>從天滿宮主殿廣場出發，往出口方向折返回表參道，在太宰府站前乘計程車（3 台即可容納 9 人，或搭 1 台含推車行李箱的 JPN TAXI）。</li>
+      <li>告知司機「文化ふれあい館まで」，約 10 分鐘抵達（若步行需沿天神様通り西行，但高溫不建議）。</li>
+      <li>文化ふれあい館參觀後，可直接在館前乘計程車返回太宰府站，或請館方協助叫車。</li>
+    </ol>
+    <a class="gmaps-btn" href="https://www.google.com/maps/dir/Dazaifu+Tenmangu+Shrine/Dazaifu+Fureai+Museum+of+History+and+Culture/@33.52,130.52,14z/" target="_blank" rel="noopener">Google Maps 路線（天滿宮→文化ふれあい館）</a>
+  </div>
+
+  <!-- ========== SEGMENT 7：折返路徑 ========== -->
+  <h3>第 7 段：折返路徑 — 太宰府站 → 博多</h3>
+  <div class="segment-card nishitetsu">
+    <dl class="info-grid">
+      <dt>移動方式</dt><dd>西鐵太宰府線（太宰府→二日市）→ 西鐵天神大牟田線 急行（二日市→天神）→ 地鐵空港線（天神→博多）</dd>
+      <dt>所需時間</dt><dd>太宰府→天神：約 25 分鐘（同去程路線）；天神→博多：地鐵 3 分鐘；全程約 <strong>30 分鐘</strong></dd>
+      <dt>費用</dt><dd>天神以前：太宰府電車きっぷ套票已含（來回用）；天神→博多地鐵：大人 ¥210、小學生 ¥110、幼兒免費（同去程費用）</dd>
+      <dt>推車友善度</dt><dd><span class="badge badge-ok">全程 OK</span> 三站電梯完備，折返動線與去程相同</dd>
+      <dt>長輩注意</dt><dd>回程通常為下午 14:30～15:00 出發，人潮比上午多；天神站換車時建議抓緊推車，避免在擁擠地下街走散</dd>
+    </dl>
+    <ol class="steps-list">
+      <li>從太宰府站搭西鐵太宰府線（往二日市），在 <strong>二日市站</strong>下車後轉乘天神大牟田線急行（往天神方向），至 <strong>西鐵福岡（天神）站</strong>下車。</li>
+      <li>從西鐵天神站步行至地鐵天神站（同去程路線，地下街約 3～5 分），搭福岡市地鐵空港線（往福岡空港方向），在 <strong>博多站</strong>下車。</li>
+      <li>博多站出站後步行 3～5 分鐘返回飯店，放置購物戰利品與推車後，稍作休息，準備晚餐。</li>
+    </ol>
+    <a class="gmaps-btn" href="https://www.google.com/maps/dir/Dazaifu+Station/Hakata+Station/@33.554,130.476,13z/" target="_blank" rel="noopener">Google Maps 太宰府→博多路線圖</a>
+  </div>
+
+  <!-- ========== 推車警示與無障礙路線 ========== -->
+  <div class="stroller-section">
+    <h4>推車警示與無障礙路線完整說明</h4>
+
+    <p><strong>太鼓橋推車繞行路線（重要）：</strong></p>
+    <div class="alert-box danger" style="margin:8px 0 12px;">
+      <strong>太鼓橋有石階弧度，推車無法通行！</strong>
+      在太鼓橋前方，向橋的<strong>左側（西側）</strong>轉入心字池旁的<strong>平坦石板繞行步道</strong>，推車沿此步道前進，約 1 分鐘可繞至主殿廣場方向。此路線全程平坦無障礙，路面為石板，適合推車、輪椅與行動不便的長輩。
+    </div>
+
+    <p><strong>天滿宮境內無障礙動線：</strong></p>
+    <ul style="font-size:0.91rem;margin:0 0 10px 16px;line-height:2;">
+      <li><span class="badge badge-ok">OK</span> 表參道全段（太宰府站→太鼓橋前）：石板平路，推車全程可通行</li>
+      <li><span class="badge badge-alert">繞行</span> 太鼓橋三座弧橋：石階坡度明顯，<strong>推車走左側平坦繞行步道</strong></li>
+      <li><span class="badge badge-ok">OK</span> 心字池旁觀賞步道：平坦石板，推車、輪椅均可</li>
+      <li><span class="badge badge-ok">OK</span> 御神牛銅像廣場：廣場開放，推車可抵近</li>
+      <li><span class="badge badge-ok">OK</span> 臨時假殿（仮本殿）廣場：設計更為開放，推車進出無礙</li>
+      <li><span class="badge badge-ok">OK</span> 無障礙廁所：主殿左側，空間充足可換尿布</li>
+      <li><span class="badge badge-ok">OK</span> 虹之隧道（若另日前往博物館）：室內電動步道，推車直接推上，全程冷氣</li>
+    </ul>
+
+    <p><strong>各交通節點電梯確認：</strong></p>
+    <table class="cost-table">
+      <thead><tr><th>地點</th><th>電梯位置</th><th>推車評估</th></tr></thead>
+      <tbody>
+        <tr><td>博多站（地鐵）</td><td>正面玄關左側電梯直通地下 1F 閘口</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>天神站（地鐵）</td><td>K 出口側，連通地下街</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>西鐵福岡（天神）站</td><td>地下 2F 月台兩端設有電梯</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>西鐵二日市站</td><td>月台連絡通道設有電梯</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>西鐵太宰府站</td><td>剪票口外側設電梯至地面</td><td><span class="badge badge-ok">OK</span></td></tr>
+        <tr><td>太宰府天滿宮境內</td><td>主殿廣場平坦，無電梯需求</td><td><span class="badge badge-ok">OK（繞行橋）</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== 全程費用總整理 ========== -->
+  <h3>Day 3 全程交通費用總整理（9 人）</h3>
+  <table class="cost-table">
+    <thead>
+      <tr><th>路段</th><th>交通工具</th><th>大人×6</th><th>小學×1</th><th>幼兒×2</th><th>合計</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>博多→天神（去程）</td>
+        <td>地鐵空港線</td>
+        <td>¥210×6 = ¥1,260</td>
+        <td>¥110×1 = ¥110</td>
+        <td>免費</td>
+        <td>¥1,370</td>
+      </tr>
+      <tr>
+        <td>天神↔太宰府（來回）</td>
+        <td>西鐵套票</td>
+        <td>¥1,000×6 = ¥6,000</td>
+        <td>¥500×1 = ¥500</td>
+        <td>¥250×2 = ¥500</td>
+        <td>¥7,000</td>
+      </tr>
+      <tr>
+        <td>天神→博多（回程）</td>
+        <td>地鐵空港線</td>
+        <td>¥210×6 = ¥1,260</td>
+        <td>¥110×1 = ¥110</td>
+        <td>免費</td>
+        <td>¥1,370</td>
+      </tr>
+      <tr>
+        <td>文化ふれあい館往返（建議）</td>
+        <td>計程車（估計）</td>
+        <td colspan="3">2 台往返，約 ¥3,600～¥4,800（每台 ¥900～¥1,200）</td>
+        <td>¥3,600～¥4,800</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5">全日交通費合計（含計程車）</td>
+        <td><strong>約 ¥13,340～¥14,540</strong></td>
+      </tr>
+      <tr>
+        <td colspan="5">人均費用（9 人分攤）</td>
+        <td><strong>約 ¥1,480～¥1,615</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- ========== 7月高溫注意事項 ========== -->
+  <div class="alert-box" style="margin-top:16px;">
+    <strong>7 月高溫警示（7/20 福岡平均氣溫 33～35°C，體感可達 38°C）</strong>
+    1. 建議 08:45 前抵達太宰府，在熱浪高峰（11:00～14:00）前完成天滿宮戶外活動。<br>
+    2. 幼幼推車坐椅接近地面，地面輻射熱更強，需加裝遮陽篷與透氣坐墊。<br>
+    3. 太宰府站旁 7-Eleven 可補充飲水、冰品；在天滿宮內的茶屋也有冷飲。<br>
+    4. 星巴克與かさの家內用均有空調，午前 11 點後建議躲入室內。<br>
+    5. 緊急就醫：太宰府站旁搭計程車約 10 分可抵太宰府市立病院（092-924-2511）。
+  </div>
+
+  <!-- ========== 當日時間軸速覽 ========== -->
+  <h3>當日交通時間軸速覽</h3>
+  <table class="cost-table">
+    <thead><tr><th>時間</th><th>地點</th><th>交通方式</th><th>注意</th></tr></thead>
+    <tbody>
+      <tr><td>07:30</td><td>博多飯店出發</td><td>—</td><td>檢查推車、套票計畫</td></tr>
+      <tr><td>07:35</td><td>博多站地鐵</td><td>步行 3～5 分</td><td>電梯進站，IC 卡或買票</td></tr>
+      <tr><td>07:38</td><td>天神站</td><td>地鐵空港線 3 分</td><td>K 出口電梯→地下街</td></tr>
+      <tr><td>07:43</td><td>西鐵天神站</td><td>地下街步行 5 分</td><td>地下 2F 購買套票（分兩組）</td></tr>
+      <tr><td>08:00</td><td>西鐵福岡（天神）發車</td><td>西鐵特急</td><td>往大牟田方向，15 分</td></tr>
+      <tr><td>08:15</td><td>二日市站轉乘</td><td>步行至隔壁月台</td><td>跟隨「太宰府線」指標</td></tr>
+      <tr><td>08:20</td><td>西鐵太宰府站</td><td>太宰府線 5 分</td><td>出站即表參道入口</td></tr>
+      <tr><td>08:20～11:30</td><td>太宰府天滿宮</td><td>步行（推車繞橋）</td><td>09:00 前最涼爽</td></tr>
+      <tr><td>13:00～14:00</td><td>文化ふれあい館</td><td>計程車 10 分</td><td>熱浪時段室內避暑</td></tr>
+      <tr><td>14:30</td><td>太宰府站出發</td><td>西鐵太宰府線</td><td>套票回程使用</td></tr>
+      <tr><td>15:00</td><td>天神站抵達</td><td>轉地鐵</td><td>可在天神地下街短暫購物</td></tr>
+      <tr><td>15:05</td><td>博多站抵達</td><td>地鐵 3 分</td><td>回飯店休息</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:0.8rem;color:#888;text-align:right;margin-top:16px;">
+    資料查詢日期：2026/4/28　數據來源：Google Maps MCP 實際查詢　西鐵官方時刻表資訊
+  </p>
+
+</div>
