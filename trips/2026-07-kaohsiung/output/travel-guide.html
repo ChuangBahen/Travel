@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fb8c00">
+<title>🌴 2026 高雄兩天一夜・親子手冊</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --border: #d2d2d7;
+  --accent: #fb8c00;
+  --day1: #1976d2;
+  --day2: #388e3c;
+  --day3: #f57c00;
+  --day4: #7b1fa2;
+  --day5: #c62828;
+  --day6: #455a64;
+  --warning-bg: #ffebee;
+  --warning-text: #c62828;
+  --success-bg: #e8f5e9;
+  --success-text: #2e7d32;
+  --info-bg: #e3f2fd;
+  --info-text: #1565c0;
+  --money-bg: #fff8e1;
+  --money-text: #f57f17;
+  --stroller-bg: #e1f5fe;
+  --stroller-text: #01579b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1c1e;
+    --card: #2c2c2e;
+    --text: #f5f5f7;
+    --muted: #a1a1a6;
+    --border: #38383a;
+    --warning-bg: #3a1a1a;
+    --warning-text: #ff8a80;
+    --success-bg: #1a3a1f;
+    --success-text: #81c784;
+    --info-bg: #0d2640;
+    --info-text: #81d4fa;
+    --money-bg: #3a2c0d;
+    --money-text: #ffd54f;
+    --stroller-bg: #0d2a3a;
+    --stroller-text: #81d4fa;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-bottom: 100px;
+}
+header {
+  background: linear-gradient(135deg, var(--accent) 0%, #f06292 100%);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+header h1 { margin: 0 0 8px; font-size: 22px; }
+header p { margin: 0; opacity: 0.95; font-size: 14px; }
+nav.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+.nav-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 12px;
+  scrollbar-width: none;
+}
+.nav-scroll::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 22px;
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+.nav-btn.day1 { border-color: var(--day1); color: var(--day1); }
+.nav-btn.day2 { border-color: var(--day2); color: var(--day2); }
+.nav-btn.day3 { border-color: var(--day3); color: var(--day3); }
+.nav-btn.day4 { border-color: var(--day4); color: var(--day4); }
+.nav-btn.day5 { border-color: var(--day5); color: var(--day5); }
+.nav-btn.day6 { border-color: var(--day6); color: var(--day6); }
+.nav-btn.info { border-color: var(--accent); color: var(--accent); }
+main { padding: 16px; max-width: 800px; margin: 0 auto; }
+section {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+section.day {
+  border-left: 6px solid var(--accent);
+}
+section#day1 { border-left-color: var(--day1); }
+section#day2 { border-left-color: var(--day2); }
+section#day3 { border-left-color: var(--day3); }
+section#day4 { border-left-color: var(--day4); }
+section#day5 { border-left-color: var(--day5); }
+section#day6 { border-left-color: var(--day6); }
+h2 { margin: 0 0 12px; font-size: 20px; display: flex; align-items: center; gap: 8px; }
+h3 { margin: 16px 0 8px; font-size: 17px; }
+h4 { margin: 12px 0 6px; font-size: 15px; }
+.tabs { display: flex; gap: 4px; margin: 12px 0; border-bottom: 2px solid var(--border); }
+.tab {
+  flex: 1;
+  min-height: 44px;
+  padding: 8px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tab.active { color: var(--text); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.timeline { padding-left: 0; }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.timeline-item:last-child { border-bottom: none; }
+.timeline-item .time {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 14px;
+}
+.timeline-item .content { font-size: 14px; }
+details {
+  background: var(--bg);
+  border-radius: 8px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+details > summary {
+  padding: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "▶"; margin-right: 8px; transition: transform 0.2s; font-size: 12px; }
+details[open] > summary::before { transform: rotate(90deg); }
+details > .details-body { padding: 0 12px 12px; }
+.alert {
+  padding: 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+.alert.warning { background: var(--warning-bg); color: var(--warning-text); border-left: 4px solid var(--warning-text); }
+.alert.success { background: var(--success-bg); color: var(--success-text); border-left: 4px solid var(--success-text); }
+.alert.info { background: var(--info-bg); color: var(--info-text); border-left: 4px solid var(--info-text); }
+.alert.money { background: var(--money-bg); color: var(--money-text); border-left: 4px solid var(--money-text); }
+.alert.stroller { background: var(--stroller-bg); color: var(--stroller-text); border-left: 4px solid var(--stroller-text); }
+.restaurant-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 8px 0;
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  scrollbar-width: none;
+}
+.restaurant-carousel::-webkit-scrollbar { display: none; }
+.restaurant-card {
+  flex-shrink: 0;
+  width: 280px;
+  scroll-snap-align: start;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 12px;
+  border: 2px solid var(--border);
+}
+.restaurant-card.primary { border-color: var(--accent); position: relative; }
+.restaurant-card.primary::before {
+  content: "🏆 主選";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.restaurant-card h4 { margin: 0 0 6px; padding-right: 50px; }
+.restaurant-card .meta { font-size: 13px; color: var(--muted); margin: 4px 0; }
+.restaurant-card .meta strong { color: var(--text); }
+.restaurant-card a { color: var(--accent); text-decoration: none; word-break: break-all; }
+.restaurant-card a:hover { text-decoration: underline; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 8px 0;
+}
+table th, table td {
+  padding: 8px 6px;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+table th { background: var(--bg); font-weight: 700; }
+table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin: 2px;
+}
+.tag.green { background: var(--success-bg); color: var(--success-text); }
+.tag.red { background: var(--warning-bg); color: var(--warning-text); }
+.tag.blue { background: var(--info-bg); color: var(--info-text); }
+.tag.yellow { background: var(--money-bg); color: var(--money-text); }
+a[href^="https://maps"], a[href^="https://www.google.com/maps"] {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #4285f4;
+  color: white !important;
+  border-radius: 14px;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 2px;
+}
+a[href^="tel:"] {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--success-text);
+  color: white !important;
+  border-radius: 14px;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 2px;
+}
+.yt {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #ff0000;
+  color: white !important;
+  border-radius: 12px;
+  font-size: 11px;
+  text-decoration: none;
+  margin: 2px 2px 2px 0;
+  font-weight: 600;
+}
+.grade { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 8px; }
+.grade.a { background: var(--success-bg); color: var(--success-text); }
+.grade.b { background: var(--money-bg); color: var(--money-text); }
+.emergency-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: var(--warning-text);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 99;
+}
+.emergency-panel {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 99;
+  max-width: 280px;
+  display: none;
+}
+.emergency-panel.show { display: block; }
+.emergency-panel h3 { margin: 0 0 12px; font-size: 16px; color: var(--warning-text); }
+.emergency-panel a {
+  display: block;
+  padding: 10px;
+  margin: 4px 0;
+  background: var(--bg);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+}
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 8px 0 8px 28px;
+  position: relative;
+  font-size: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+.checklist li::before {
+  content: "☐";
+  position: absolute;
+  left: 4px;
+  font-size: 18px;
+  color: var(--muted);
+}
+.checklist li.done::before { content: "✅"; }
+@media (min-width: 768px) {
+  body { font-size: 17px; }
+  main { padding: 24px; }
+  section { padding: 24px; }
+  header h1 { font-size: 28px; }
+  .restaurant-card { width: 320px; }
+}
+@media (min-width: 1024px) {
+  main { max-width: 960px; }
+}
+@media print {
+  body { background: white; padding-bottom: 0; font-size: 11pt; }
+  nav.sticky-nav, .emergency-fab, .emergency-panel, .tabs { display: none !important; }
+  .tab-content { display: block !important; }
+  section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; margin-bottom: 12px; padding: 12px; }
+  section.day { page-break-before: always; }
+  section.day:first-of-type { page-break-before: auto; }
+  details { background: white; }
+  details[open] .details-body { display: block !important; }
+  details .details-body { display: block !important; }
+  .restaurant-carousel { display: block; overflow: visible; }
+  .restaurant-card { width: 100%; margin-bottom: 8px; page-break-inside: avoid; }
+  a[href^="tel:"], a[href^="https://maps"] { background: none !important; color: inherit !important; padding: 0; text-decoration: underline; }
+  header { background: var(--accent); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🌴 2026 高雄兩天一夜・親子手冊</h1>
+<p>7/4(六)~7/5(日) ｜ 兩天一夜 ｜ 1 大 + 1 小（2 歲・需推車）｜ 全程大眾運輸・YouTube 取材</p>
+</header>
+
+<nav class="sticky-nav">
+<div class="nav-scroll">
+<a href="#overview" class="nav-btn info">📋 總覽</a>
+<a href="#checklist" class="nav-btn info">✅ 行前清單</a>
+<a href="#day1" class="nav-btn day1">Day1</a>
+<a href="#day2" class="nav-btn day2">Day2</a>
+<a href="#rain" class="nav-btn info">🌧️ 雨備</a>
+<a href="#retreat" class="nav-btn info">🏃 撤退</a>
+<a href="#typhoon" class="nav-btn info">🌀 颱風</a>
+<a href="#info" class="nav-btn info">ℹ️ 實用</a>
+</div>
+</nav>
+
+<main>
+
+<!-- ===== 總覽 ===== -->
+<section id="overview">
+<h2>📋 行程總覽</h2>
+<div class="alert info"><strong>核心原則：</strong>以捷運 <strong>O2 鹽埕埔</strong> 為原點做放射狀短程，午睡 13:00–15:30 回飯店，每段步行 ≤10 分，戶外點都配室內冷氣雨備，娃累隨時最短收工回飯店。</div>
+<div class="alert warning"><strong>⚠️ 重要更正：</strong>飯店最近站是<strong>捷運橘線 O2 鹽埕埔（2 號出口電梯，步行 4 分）</strong>，網路說的「輕軌 C9 鹽埕埔距 92m」是錯的（C9 是旅運中心站、很遠）。去駁二建議<strong>直接平路步行 12 分（819m）</strong>，不必繞輕軌站。</div>
+<table>
+<thead><tr><th>日期</th><th>主題</th><th>主要區域</th></tr></thead>
+<tbody>
+<tr><td>7/4(六)</td><td>抵達・鹽埕＋駁二＋六合夜市</td><td>鹽埕/駁二/哈瑪星/六合</td></tr>
+<tr><td>7/5(日)</td><td>趁涼一景點＋返程（幼兒高鐵上補午睡）</td><td>西子灣（或室內）/左營</td></tr>
+</tbody>
+</table>
+<div class="alert warning"><strong>☀️ 盛夏警示：</strong>7 月初炎熱（白天 30–34°C）、午後雷陣雨機率高、颱風季初期。多用室內冷氣避暑，戶外集中上午/傍晚，隨身帶<strong>推車雨罩＋幼兒雨衣</strong>、勤補水防曬。</div>
+<div class="alert money"><strong>💰 預估總費用（2 人）約 NT$5,200–7,800：</strong>幼兒高鐵免票、捷運輕軌免費、多數景點免費。詳見「實用」費用表。</div>
+<div class="alert stroller"><strong>🚼 帶推車重點：</strong>捷運每站有電梯（O2 走 2 號出口、美麗島走出口 1/3/4）；輕軌<strong>無閘門</strong>須在月台刷進刷出；2 歲免票免費、走無障礙寬閘門。</div>
+</section>
+
+<!-- ===== 行前清單 ===== -->
+<section id="checklist">
+<h2>✅ 旅遊前 Check List</h2>
+<details open>
+<summary>🔴 最優先（需事前預訂/確認）</summary>
+<div class="details-body">
+<ul class="checklist">
+<li><strong>高鐵來回訂位</strong>：7/4 上午台中→左營、7/5 下午左營→台中，暑假週末務必提前訂位（早鳥 8–28 天 65/8/9 折）；建議訂<strong>第 7 車無障礙車廂</strong>（推車較好放）。</li>
+<li><strong>致電飯店</strong>確認：check-in/out 時間、<strong>可否提早寄行李＋付費早入住</strong>、嬰兒床/床欄/澡盆、電梯與推車進房。</li>
+<li><strong>準備一卡通 iPASS</strong>（捷運/輕軌/公車通刷；2 歲幼兒免費不需卡）。</li>
+</ul>
+</div>
+</details>
+<details>
+<summary>🟡 行前裝備</summary>
+<div class="details-body">
+<ul class="checklist">
+<li>輕便可單手收折推車 ＋ 揹巾（爬坡/上下車備用）</li>
+<li>推車雨罩 ＋ 幼兒輕便雨衣（盛夏雷陣雨）</li>
+<li>寬邊帽、嬰幼兒防曬乳、薄長袖、水壺（大人＋幼兒）</li>
+<li>尿布/濕紙巾/換洗 2 套、常用藥（退燒/止癢/電解質）、退熱貼、安撫物、薄外套（冷氣強）</li>
+<li>健保卡（含幼兒）、現金（夜市老攤多只收現金）、行動電源</li>
+</ul>
+</div>
+</details>
+</section>
+
+<!-- ===== Day 1 ===== -->
+<section id="day1" class="day">
+<h2>Day 1 — 7/4(六) 抵達・鹽埕＋駁二＋六合夜市</h2>
+<div class="tabs">
+<button class="tab active" onclick="showTab(this,'d1-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this,'d1-transport')">🚃 交通</button>
+<button class="tab" onclick="showTab(this,'d1-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d1-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">08:25</span><div class="content">台中高鐵 → 左營（約 50 分，車上可補眠）</div></div>
+<div class="timeline-item"><span class="time">10:30</span><div class="content"><strong>抵鹽埕</strong>（O2 鹽埕埔 2 號出口電梯，步行 4 分）→ 飯店寄行李、問早入住</div></div>
+<div class="timeline-item"><span class="time">11:30</span><div class="content"><strong>鹽埕步行圈午餐</strong>（虱目魚米粉/切仔麵）<a class="yt" href="https://www.youtube.com/watch?v=7ehYsDV1RsE">▶ 內內</a><span class="grade a">A</span>｜O2 步行 3–6 分｜室內・撤回飯店≤5分</div></div>
+<div class="timeline-item"><span class="time">13:00</span><div class="content"><strong>午睡</strong>（落地方案 a/b/c，見下方提示）｜室內冷氣</div></div>
+<div class="timeline-item"><span class="time">15:45</span><div class="content"><strong>駁二藝術特區</strong>（挑 1 倉庫＋裝置藝術）＋<strong>大港橋</strong><a class="yt" href="https://www.youtube.com/watch?v=xoa6ntRttOo">▶ 駁二</a><a class="yt" href="https://www.youtube.com/watch?v=gD2IVISoWTk">▶ 大港橋</a><span class="grade a">A</span>｜飯店步行 12 分平路｜半室內+戶外橋・雨躲倉庫店家｜<span class="tag green">大港橋必看</span></div></div>
+<div class="timeline-item"><span class="time">17:00</span><div class="content"><strong>棧貳庫 KW2／哈瑪星</strong>（看港、吹冷氣退暑）<a class="yt" href="https://www.youtube.com/@kw2tw">▶ 棧貳庫</a><a class="yt" href="https://www.youtube.com/watch?v=ym_bhMHPP1A">▶ 哈瑪星</a><span class="grade a">A</span>｜駁二沿園區步行/輕軌一站｜室內冷氣+戶外水岸</div></div>
+<div class="timeline-item"><span class="time">18:30</span><div class="content"><strong>晚餐：六合夜市</strong>莊記海產粥（吃早場淺嚐，有桌椅）<a class="yt" href="https://www.youtube.com/watch?v=9jct6n7vVZ8">▶ Kevin</a><span class="grade a">A</span>｜美麗島步行 4 分｜戶外・雨備改鹽埕就近</div></div>
+<div class="timeline-item"><span class="time">20:00</span><div class="content">回飯店（美麗島 O5 → O2 鹽埕埔，地下免轉乘）</div></div>
+</div>
+<div class="alert stroller"><strong>🛏 抵達日午睡落地方案</strong>（15:00 才能 check-in vs 13:00–15:30 午睡）：<strong>(a) 主推</strong>先寄行李、問付費早入住，能進房就回房睡；<strong>(b)</strong> 在棧貳庫/鐵道館/美麗島穹頂座椅區讓娃在推車內補眠；<strong>(c)</strong> 午睡併入捷運車程、下午改靜態室內。</div>
+<div class="alert warning"><strong>⚠️ 整段替代：</strong>午後雷雨或娃狀況差 → 放棄駁二/棧貳庫戶外段，整段改 <strong>哈瑪星台灣鐵道館</strong> 或 <strong>木育森林</strong>（室內冷氣、推車友善）。六合太擠/太晚 → 改鹽埕步行圈就近晚餐/外帶回房（20:00 前就寢）。</div>
+</div>
+
+<div class="tab-content" id="d1-transport">
+<details open>
+<summary>🚄 台中 → 左營（高鐵）</summary>
+<div class="details-body">
+<p>08:25 台中發車（建議區間），約 50–65 分。<strong>2 歲免票抱著坐</strong>；推車訂<strong>第 7 車無障礙車廂</strong>較好放，哺乳室在 5–6 車間。暑假週末務必先訂位。</p>
+</div>
+</details>
+<details>
+<summary>🚇 左營 → 鹽埕（捷運，僅 1 次轉乘・全程電梯）</summary>
+<div class="details-body">
+<p>高鐵左營 →(室外連通道步行 3–5 分)→ 捷運 <strong>R16 左營</strong>（走 1 號出口電梯）→ 紅線約 6 站 → <strong>R10/O5 美麗島</strong>（站內不出閘轉橘線，出口 1/3/4 有電梯、<strong>出口 4 有無障礙廁所</strong>）→ 橘線往西 2 站 → <strong>O2 鹽埕埔</strong>（<strong>只有 2 號出口有電梯</strong>）→ 步行 4 分到飯店。</p>
+<p>全程約 40–50 分｜大人約 NT$35｜<strong>幼兒免費</strong>。<span class="tag yellow">降載建議</span> 抵達日先把行李箱寄飯店/左營置物櫃，轉乘手最輕。</p>
+</div>
+</details>
+<details>
+<summary>🚶 市區短程（去駁二/六合/西子灣）</summary>
+<div class="details-body">
+<p><strong>去駁二</strong>：直接平路步行 12 分（819m）最省力，別繞輕軌站。<br>
+<strong>去六合</strong>：O2 鹽埕埔 → 橘線往東 → 美麗島，地下免轉乘約 5–8 分。<br>
+<strong>輕軌提醒</strong>：無閘門，須自己在月台刷進刷出，漏刷出站鎖卡 55 元。</p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d1-meals">
+<h3>🍜 午餐（鹽埕步行圈・午睡前）</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>大溝頂虱目魚米粉湯</h4>
+<div class="meta"><strong>來源：</strong><a class="yt" href="https://www.youtube.com/watch?v=7ehYsDV1RsE">▶ 內內</a><span class="grade a">A</span></div>
+<div class="meta"><strong>步行：</strong>O2 步行 4–6 分（新樂街）</div>
+<div class="meta">✅ 有座位 ✅ 有冷氣 ｜ 05:30–13:30</div>
+<div class="meta">⚠️ 魚刺多先挑刺；巷窄推車折疊</div>
+</div>
+<div class="restaurant-card">
+<h4>阿進切仔麵（備案）</h4>
+<div class="meta"><strong>來源：</strong><a class="yt" href="https://www.youtube.com/watch?v=7ehYsDV1RsE">▶ 內內</a><span class="grade b">B</span></div>
+<div class="meta"><strong>步行：</strong>賴南街 4–5 分</div>
+<div class="meta">✅ 有冷氣 ✅ 有廁所 ｜ 週一休（OK）</div>
+<div class="meta">適合帶娃久坐吹冷氣</div>
+</div>
+<div class="restaurant-card">
+<h4>阿英排骨飯（備案）</h4>
+<div class="meta"><strong>來源：</strong><a class="yt" href="https://www.youtube.com/watch?v=ChAI4kzkB5c">▶ 鹽埕菜市</a><span class="grade b">B</span></div>
+<div class="meta"><strong>步行：</strong>富野路 5–6 分</div>
+<div class="meta">❌ 無冷氣只電扇 → <strong>建議外帶回房吃</strong>｜週三四休（OK）｜現金</div>
+</div>
+</div>
+<h3>🌃 晚餐（六合夜市早場 ＋ 早收備案）</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>六合・莊記海產粥</h4>
+<div class="meta"><strong>來源：</strong><a class="yt" href="https://www.youtube.com/watch?v=9jct6n7vVZ8">▶ Kevin</a><span class="grade a">A</span></div>
+<div class="meta"><strong>到達：</strong>美麗島步行 4 分</div>
+<div class="meta">✅ 有桌椅 ❌ 露天無冷氣 ｜ 17:30 開（吃早場 17:00–18:30）</div>
+<div class="meta">海產粥可分食；約 150 元、現金；⚠️尖峰擠、淺嚐即撤</div>
+</div>
+<div class="restaurant-card">
+<h4>晚餐早收備案（預設）</h4>
+<div class="meta">不出鹽埕步行圈：阿進切仔麵內用（有冷氣）／阿英排骨飯外帶回房／新樂街蛋餅蔥油餅外帶</div>
+<div class="meta">往返 5–10 分，<strong>20:00 前就寢</strong></div>
+</div>
+<div class="restaurant-card">
+<h4>光華夜市（雨天久坐）</h4>
+<div class="meta"><strong>來源：</strong><a class="yt" href="https://www.youtube.com/watch?v=ZfZXJizQR7s">▶ 大蛇丸</a><span class="grade a">A</span></div>
+<div class="meta">老店有冷氣有座位，但需轉公車（僅雨備）</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== Day 2 ===== -->
+<section id="day2" class="day">
+<h2>Day 2 — 7/5(日) 趁涼一景點・返程</h2>
+<div class="tabs">
+<button class="tab active" onclick="showTab(this,'d2-overview')">📋 總覽</button>
+<button class="tab" onclick="showTab(this,'d2-transport')">🚃 交通</button>
+<button class="tab" onclick="showTab(this,'d2-meals')">🍽️ 餐廳</button>
+</div>
+
+<div class="tab-content active" id="d2-overview">
+<div class="timeline">
+<div class="timeline-item"><span class="time">08:00</span><div class="content">飯店/鹽埕步行圈早餐<a class="yt" href="https://www.youtube.com/watch?v=7ehYsDV1RsE">▶ 內內</a><span class="grade a">A</span>｜O2 步行 3–5 分</div></div>
+<div class="timeline-item"><span class="time">09:00</span><div class="content"><strong>西子灣觀海平台</strong>（趁涼短停、拍照即走）<a class="yt" href="https://www.youtube.com/watch?v=MpI-5Nv70Vc">▶ 西子灣</a><span class="grade a">A</span>｜O2→O1 橘線一站｜戶外無遮蔭｜<span class="tag red">領事館登山略過</span></div></div>
+<div class="timeline-item"><span class="time">11:00</span><div class="content">回鹽埕（O1 → O2 一站）</div></div>
+<div class="timeline-item"><span class="time">11:30</span><div class="content"><strong>午餐：鹽埕步行圈</strong>（吃完即取行李）<a class="yt" href="https://www.youtube.com/watch?v=V7rBMTYimF4">▶ 肥波</a><span class="grade a">A</span>｜O2 步行 3–5 分｜室內</div></div>
+<div class="timeline-item"><span class="time">13:00</span><div class="content"><strong>回飯店取行李 → 前往左營</strong></div></div>
+<div class="timeline-item"><span class="time">14:00<br>–15:00</span><div class="content"><strong>左營高鐵 → 台中</strong>（約 50 分，<strong>幼兒高鐵上午睡</strong>）｜颱風/雷雨預留緩衝</div></div>
+</div>
+<div class="alert warning"><strong>⚠️ 整段替代：</strong>西子灣無遮蔭、海風大 → 若上午下雨或太曬，整段改 <strong>哈瑪星台灣鐵道館</strong> 或 <strong>棧貳庫 KW2</strong>（室內），同樣 09–12 點完成、不拖行李。颱風日改「純室內鹽埕一日方案」（見颱風頁）。</div>
+<div class="alert info"><strong>退房後不安排久留室內點：</strong>13:00 取行李直奔左營，午睡併入高鐵；左營提早到於站內候車區休息即可。</div>
+</div>
+
+<div class="tab-content" id="d2-transport">
+<details open>
+<summary>🚇 鹽埕 → 左營（返程）</summary>
+<div class="details-body">
+<p>O2 鹽埕埔（2 號出口電梯）→ 美麗島轉紅線 → R16 左營（同 Day 1 反向，約 40–50 分）。<strong>預留 60–90 分緩衝</strong>（盛夏午後雷雨＋週日返鄉人多），搭 15:00/15:25/16:00 班次，幼兒車上補眠。</p>
+</div>
+</details>
+<details>
+<summary>🧳 行李寄放</summary>
+<div class="details-body">
+<p>首選飯店退房後寄放；備案左營站投幣置物櫃（約小 30/中 40/大 50 元/3hr，<strong>只收硬幣百元鈔不找零</strong>，暑假尖峰可能滿）。</p>
+</div>
+</details>
+</div>
+
+<div class="tab-content" id="d2-meals">
+<h3>🍱 早餐／午餐（皆鹽埕步行圈）</h3>
+<div class="restaurant-carousel">
+<div class="restaurant-card primary">
+<h4>鹽埕步行圈三餐</h4>
+<div class="meta"><strong>來源：</strong><a class="yt" href="https://www.youtube.com/watch?v=7ehYsDV1RsE">▶ 內內</a><a class="yt" href="https://www.youtube.com/watch?v=V7rBMTYimF4">▶ 肥波</a><span class="grade a">A</span></div>
+<div class="meta">午餐選鄰近返程動線、吃完即取行李｜O2 步行 3–5 分｜室內</div>
+</div>
+<div class="restaurant-card">
+<h4>鹽埕王家手工豆花（消暑）</h4>
+<div class="meta"><strong>來源：</strong><a class="yt" href="https://www.youtube.com/watch?v=7ehYsDV1RsE">▶ 內內</a><span class="grade b">B</span></div>
+<div class="meta">金桔檸檬豆花外帶回房；新樂街步行 4 分</div>
+<div class="meta">⚠️ 線上營業時間不準，去前電 07-561-9412</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== 雨備庫 ===== -->
+<section id="rain">
+<h2>🌧️ 雨備庫（兩層）</h2>
+<div class="alert info">盛夏最熱時段（12–16 點）與午後雷雨用。第一層可隨時撤入；第二層需事先決定才去。</div>
+<h3>第一層：即時雨備（步行或一站可達）</h3>
+<table>
+<thead><tr><th>點</th><th>來源</th><th>帶娃重點</th></tr></thead>
+<tbody>
+<tr><td>哈瑪星台灣鐵道館</td><td><a class="yt" href="https://www.youtube.com/watch?v=ym_bhMHPP1A">▶</a><span class="grade a">A</span></td><td>室內冷氣看火車模型；小火車 2 歲須優待票 99、抱坐，<strong>須查是否正常開館</strong></td></tr>
+<tr><td>棧貳庫 KW2</td><td><a class="yt" href="https://www.youtube.com/@kw2tw">▶</a><span class="grade a">A</span></td><td>室內冷氣、電梯、無障礙廁所換尿布</td></tr>
+<tr><td>駁二倉庫店家</td><td><a class="yt" href="https://www.youtube.com/watch?v=xoa6ntRttOo">▶</a><span class="grade a">A</span></td><td>半室內，撤雨要進「有冷氣的倉庫店家內」</td></tr>
+<tr><td>木育森林 駁二旗艦店</td><td><a class="yt" href="https://www.youtube.com/watch?v=2ZX1ll5_y8s">▶</a><span class="grade a">A</span></td><td>室內原木樂園、脫鞋、約 400 元、推車寄一樓、需全程陪同</td></tr>
+<tr><td>美麗島站光之穹頂</td><td><a class="yt" href="https://www.youtube.com/watch?v=Y0uOsteylpY">▶</a><span class="grade a">A</span></td><td>站內冷氣全平面、推車最友善、免費；去六合必經</td></tr>
+<tr><td>鹽埕第一公有市場</td><td><a class="yt" href="https://www.youtube.com/watch?v=ChAI4kzkB5c">▶</a><span class="grade b">B</span></td><td>半遮蔭、最短撤退覓食（步行 5 分）；推車停外圍</td></tr>
+</tbody>
+</table>
+<h3>第二層：半日主目的地（事先決定才去）</h3>
+<div class="alert warning"><strong>科工館</strong> <a class="yt" href="https://www.youtube.com/watch?v=p1bnxzhnELk">▶</a><span class="grade a">A</span>：大型室內冷氣、B1 兒童科學園區適 2 歲、6 歲以下免費；<strong>離捷運遠、需轉公車約 32 分、班距疏</strong> → 天氣很糟想待整個半天才去；<strong>颱風/豪雨不要搭遠程公車</strong>，改用上面第一層鹽埕—駁二冷氣群。</div>
+</section>
+
+<!-- ===== 撤退速查 ===== -->
+<section id="retreat">
+<h2>🏃 撤退／最短收工速查</h2>
+<div class="alert success">娃累/變天時，回 <strong>O2 鹽埕埔＝到家</strong>（步行 4 分）。</div>
+<table>
+<thead><tr><th>當前所在</th><th>最短收工</th><th>估時</th></tr></thead>
+<tbody>
+<tr><td>駁二/大港橋/木育森林</td><td>步行 12 分回飯店，或輕軌/步行回 O2</td><td>10–15 分</td></tr>
+<tr><td>棧貳庫/哈瑪星</td><td>橘線 O1 西子灣 → O2 一站，或輕軌回駁二再步行</td><td>10–15 分</td></tr>
+<tr><td>西子灣（O1）</td><td>橘線 O1 → O2 一站 → 2 號出口電梯 → 步行 4 分</td><td>8–12 分</td></tr>
+<tr><td>六合夜市/美麗島</td><td>橘線 美麗島 → O2（地下免轉乘）</td><td>12–15 分</td></tr>
+<tr><td>鹽埕步行圈</td><td>直接步行回飯店</td><td>3–5 分</td></tr>
+</tbody>
+</table>
+<div class="alert stroller"><strong>撤退途中防護：</strong>推車雨罩全程備著，午後雷雨可能 5 分內落下。捷運段全程地下最安全；輕軌平面站正下雨先在簷下等雨稍歇再上月台（無閘門、月台候車會淋）。</div>
+</section>
+
+<!-- ===== 颱風應變 ===== -->
+<section id="typhoon">
+<h2>🌀 颱風／豪雨應變</h2>
+<div class="alert warning"><strong>① 查證：</strong>中央氣象署即時雷達、台灣高鐵「天災停駛公告」、台鐵停駛、高雄市府停班課。</div>
+<div class="alert info"><strong>② 退改票：</strong>高鐵天災停駛可全額退票免手續費（以官網當期公告為準）；當日上官網/App 查營運，訂票保留可改彈性。</div>
+<h3>③ 純室內鹽埕一日方案（完全不離步行圈/一站內）</h3>
+<div class="timeline">
+<div class="timeline-item"><span class="time">上午</span><div class="content">飯店休息／鹽埕第一公有市場（步行 5 分）</div></div>
+<div class="timeline-item"><span class="time">午餐</span><div class="content">鹽埕老街有冷氣/電扇單店小吃（騎樓可推車）</div></div>
+<div class="timeline-item"><span class="time">午睡</span><div class="content">飯店冷氣房</div></div>
+<div class="timeline-item"><span class="time">下午</span><div class="content">步行或一站到 木育森林／棧貳庫 KW2（室內）</div></div>
+<div class="timeline-item"><span class="time">晚餐</span><div class="content">鹽埕步行圈外帶回房</div></div>
+</div>
+<div class="alert warning"><strong>④ 決策時間點：</strong>出發前一晚看隔日雷達/警報；當日 07:00–08:00 再看一次決定是否照常南下/北上或退票；每日 13:00 前與午睡後（15:30）決定傍晚戶外是否成行。</div>
+</section>
+
+<!-- ===== 實用資訊 ===== -->
+<section id="info">
+<h2>ℹ️ 實用資訊</h2>
+
+<h3>💰 費用估算（2 人）</h3>
+<table>
+<thead><tr><th>項目</th><th>大人</th><th>2 歲幼兒</th><th>小計</th></tr></thead>
+<tbody>
+<tr><td>高鐵 台中⇄左營來回</td><td class="num">1,580</td><td>免票不佔位</td><td class="num">~1,580</td></tr>
+<tr><td>捷運＋輕軌（2 天）</td><td class="num">200–300</td><td>免費</td><td class="num">~200–300</td></tr>
+<tr><td>餐食（銅板小吃）</td><td class="num">800–1,200</td><td>分食</td><td class="num">~800–1,200</td></tr>
+<tr><td>景點門票</td><td>小火車 99–149／木育森林 400／駁二多免費</td><td>多免費/優待</td><td class="num">~300–700</td></tr>
+<tr><td>住宿（鹽埕館 1 晚）</td><td class="num">2,000–3,500</td><td>同房</td><td class="num">~2,000–3,500</td></tr>
+<tr><td>雜支</td><td>—</td><td>—</td><td class="num">~300–500</td></tr>
+<tr><td><strong>合計</strong></td><td></td><td></td><td class="num"><strong>~5,200–7,800</strong></td></tr>
+</tbody>
+</table>
+
+<h3>🌡️ 天氣／穿著</h3>
+<p>7 月初白天約 30–34°C、濕熱、午後雷陣雨。透氣排汗衣、寬邊帽、防曬乳、薄外套（室內冷氣強）、推車雨罩＋幼兒雨衣、勤補水。</p>
+
+<h3>🏥 醫療／安全（緊急撥 119）</h3>
+<ul>
+<li>高雄市立大同醫院（前金區中華三路，近 O4 市議會站）— 距鹽埕近、有小兒科 <a href="https://www.google.com/maps/search/高雄市立大同醫院">🗺️ 導航</a></li>
+<li>高雄醫學大學附設中和紀念醫院（三民區）— 醫學中心、兒科急診 <a href="https://www.google.com/maps/search/高雄醫學大學附設中和紀念醫院">🗺️ 導航</a></li>
+<li><strong>走失預防</strong>：出門拍幼兒當日穿著照、口袋放寫大人手機號識別卡、人多用揹巾/牽繩、走失找捷運站務/夜市服務台</li>
+</ul>
+
+<h3>🍼 哺乳／換尿布（可整台推車進入）</h3>
+<p>飯店房內（最近）、<strong>美麗島站出口 4</strong>、棧貳庫 KW2、駁二大義倉庫商場、鐵道館、科工館。鹽埕老街小吃多無設施 → 回飯店（≤5 分）。可查衛福部「孕產婦關懷網站」哺集乳室地圖。</p>
+
+<h3>🚇 帶推車・大眾運輸要點</h3>
+<ul>
+<li>一卡通大人 1 張，捷運進出各刷一次走無障礙寬閘門，幼兒不用刷</li>
+<li><strong>輕軌無閘門</strong>：須在月台驗票機進、出各刷一次，漏刷出站鎖卡（55 元解卡）；推車先停妥再刷</li>
+<li>捷運每站有電梯；O2 鹽埕埔走 2 號出口、美麗島走出口 1/3/4</li>
+<li>移動式避暑：捷運地下＋車廂冷氣最強；輕軌平面站候車會曬，掐準班距再下月台</li>
+</ul>
+
+<h3>🔎 出發前必再查證清單</h3>
+<ul class="checklist">
+<li>高鐵去/回程班次票價並提前訂位；第 7 車無障礙車廂、2 歲免票規定</li>
+<li>飯店：check-in/out、可否早寄行李＋早入住、嬰兒備品、電梯推車進房</li>
+<li>哈瑪星台灣鐵道館是否正常開館＋小火車 2 歲可否/票價＋週二休</li>
+<li>木育森林營業時間＋票價約 400＋2 歲可玩範圍（電 07-521-2454）</li>
+<li>莊記海產粥/王家豆花/阿英排骨飯/阿進切仔麵當日營業（電話/臉書）</li>
+<li>愛之船、旗津渡輪班次（渡輪僅週末假日 11:00–19:30）</li>
+<li>輕軌/捷運票價與電梯運作；左營置物櫃當日可用性</li>
+<li>颱風/豪雨：中央氣象署雷達、高鐵天災停駛與退改票、停班課</li>
+</ul>
+
+<div class="alert info"><strong>📺 來源：</strong>所有景點/餐廳取自真實 YouTube 影片並標 A/B/C 等級（已 WebFetch 驗證，2026-06-29）。完整逐點佐證見 <code>output/FINAL_GUIDE.md</code> 與各 <code>*.md</code>。Google Maps 僅佐證最近站/電梯/步行/營業。</div>
+</section>
+
+</main>
+
+<!-- ===== 緊急浮動按鈕 ===== -->
+<button class="emergency-fab" onclick="toggleEmergency()">🆘</button>
+<div class="emergency-panel" id="emergencyPanel">
+<h3>🆘 緊急聯絡</h3>
+<a href="tel:119">🚑 消防/救護 119</a>
+<a href="tel:110">🚔 警察 110</a>
+<a href="tel:072911101">🏥 大同醫院總機 07-291-1101（近O4）</a>
+<a href="tel:073121101">🏥 高醫總機 07-312-1101（三民）</a>
+<a href="tel:1968">🛣️ 即時路況 1968</a>
+</div>
+
+<script>
+function showTab(btn, id) {
+  const section = btn.closest('section');
+  section.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  section.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  section.querySelector('#' + id).classList.add('active');
+}
+function toggleEmergency() {
+  document.getElementById('emergencyPanel').classList.toggle('show');
+}
+document.addEventListener('click', function(e) {
+  const panel = document.getElementById('emergencyPanel');
+  const fab = document.querySelector('.emergency-fab');
+  if (!panel.contains(e.target) && !fab.contains(e.target)) {
+    panel.classList.remove('show');
+  }
+});
+</script>
+
+</body>
+</html>
