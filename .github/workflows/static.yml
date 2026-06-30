@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Generate landing page (index.html) from trips
+        run: node scripts/build-index.mjs
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

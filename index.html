@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="theme-color" content="#0d9488">
 <title>🧳 家族旅遊手冊總覽</title>
+<!-- 此檔由 scripts/build-index.mjs 自動產生，請勿手動編輯；新增旅遊請放 trips/<趟>/trip.json -->
 <style>
 :root{
   --bg:#f5f5f7; --card:#fff; --text:#1d1d1f; --muted:#6e6e73; --border:#d2d2d7; --accent:#0d9488;
@@ -27,7 +28,7 @@ main{max-width:900px;margin:0 auto;padding:16px;}
 .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;margin:2px 4px 2px 0;background:var(--bg);border:1px solid var(--border);color:var(--muted);}
 .card .spacer{flex:1;}
 .btn{display:inline-block;text-align:center;padding:10px 14px;border-radius:22px;background:var(--accent);color:#fff !important;text-decoration:none;font-weight:700;font-size:14px;}
-.btn.ghost{background:transparent;color:var(--accent) !important;border:2px solid var(--accent);margin-left:8px;}
+.btn.ghost{background:transparent;color:var(--accent) !important;border:2px solid var(--accent);}
 .btnrow{display:flex;flex-wrap:wrap;gap:8px;}
 .note{font-size:13px;color:var(--muted);margin:24px 0 8px;text-align:center;}
 footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--muted);}
@@ -41,18 +42,6 @@ a.src{color:var(--accent);}
 </header>
 <main>
 <div class="grid">
-
-  <div class="card">
-    <h2>🇹🇼 高雄兩天一夜</h2>
-    <div class="meta">📅 2026/7/4(六)–7/5(日) ｜ 兩天一夜</div>
-    <div class="meta">👨‍👧 1 大 + 1 幼（2 歲・需推車）</div>
-    <div class="tags"><span class="tag">鹽埕基地</span><span class="tag">大眾運輸</span><span class="tag">YouTube 取材</span></div>
-    <div class="spacer"></div>
-    <div class="btnrow">
-      <a class="btn" href="trips/2026-07-kaohsiung/output/travel-guide.html">開啟手冊</a>
-      <a class="btn ghost" href="trips/2026-07-kaohsiung/output/FINAL_GUIDE.md">文字版</a>
-    </div>
-  </div>
 
   <div class="card">
     <h2>🇯🇵 東京＋箱根</h2>
@@ -75,6 +64,18 @@ a.src{color:var(--accent);}
     <div class="btnrow">
       <a class="btn" href="trips/2026-05-kansai/output/travel-guide.html">開啟手冊</a>
       <a class="btn ghost" href="trips/2026-05-kansai/output/FINAL_GUIDE.md">文字版</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🇹🇼 高雄兩天一夜</h2>
+    <div class="meta">📅 2026/7/4(六)–7/5(日) ｜ 兩天一夜</div>
+    <div class="meta">👨‍👩‍👧‍👦 1 大 + 1 幼（2 歲・需推車）</div>
+    <div class="tags"><span class="tag">鹽埕基地</span><span class="tag">大眾運輸</span><span class="tag">YouTube 取材</span></div>
+    <div class="spacer"></div>
+    <div class="btnrow">
+      <a class="btn" href="trips/2026-07-kaohsiung/output/travel-guide.html">開啟手冊</a>
+      <a class="btn ghost" href="trips/2026-07-kaohsiung/output/FINAL_GUIDE.md">文字版</a>
     </div>
   </div>
 
@@ -106,6 +107,6 @@ a.src{color:var(--accent);}
 
 <p class="note">📂 原始檔與規劃資料：<a class="src" href="https://github.com/ChuangBahen/Travel">github.com/ChuangBahen/Travel</a></p>
 </main>
-<footer>家族旅遊規劃工作區 ｜ 新增旅遊後此頁會自動部署更新</footer>
+<footer>家族旅遊規劃工作區 ｜ 本頁每次 push 自動重建（共 5 趟）</footer>
 </body>
 </html>
