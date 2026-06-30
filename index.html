@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="theme-color" content="#0d9488">
+<title>🧳 家族旅遊手冊總覽</title>
+<style>
+:root{
+  --bg:#f5f5f7; --card:#fff; --text:#1d1d1f; --muted:#6e6e73; --border:#d2d2d7; --accent:#0d9488;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1c1c1e; --card:#2c2c2e; --text:#f5f5f7; --muted:#a1a1a6; --border:#38383a; }
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+header{background:linear-gradient(135deg,var(--accent) 0%,#22c55e 100%);color:#fff;padding:32px 16px;text-align:center;}
+header h1{margin:0 0 8px;font-size:24px;}
+header p{margin:0;opacity:.95;font-size:14px;}
+main{max-width:900px;margin:0 auto;padding:16px;}
+.grid{display:grid;grid-template-columns:1fr;gap:16px;}
+@media (min-width:640px){.grid{grid-template-columns:1fr 1fr;}}
+.card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.08);border-left:6px solid var(--accent);display:flex;flex-direction:column;}
+.card h2{margin:0 0 6px;font-size:18px;}
+.card .meta{font-size:13px;color:var(--muted);margin:2px 0;}
+.card .tags{margin:8px 0 14px;}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;margin:2px 4px 2px 0;background:var(--bg);border:1px solid var(--border);color:var(--muted);}
+.card .spacer{flex:1;}
+.btn{display:inline-block;text-align:center;padding:10px 14px;border-radius:22px;background:var(--accent);color:#fff !important;text-decoration:none;font-weight:700;font-size:14px;}
+.btn.ghost{background:transparent;color:var(--accent) !important;border:2px solid var(--accent);margin-left:8px;}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;}
+.note{font-size:13px;color:var(--muted);margin:24px 0 8px;text-align:center;}
+footer{text-align:center;padding:24px 16px;font-size:12px;color:var(--muted);}
+a.src{color:var(--accent);}
+</style>
+</head>
+<body>
+<header>
+<h1>🧳 家族旅遊手冊總覽</h1>
+<p>點選任一趟旅遊即可開啟手機版手冊（可離線、Ctrl+P 列印 PDF）</p>
+</header>
+<main>
+<div class="grid">
+
+  <div class="card">
+    <h2>🇹🇼 高雄兩天一夜</h2>
+    <div class="meta">📅 2026/7/4(六)–7/5(日) ｜ 兩天一夜</div>
+    <div class="meta">👨‍👧 1 大 + 1 幼（2 歲・需推車）</div>
+    <div class="tags"><span class="tag">鹽埕基地</span><span class="tag">大眾運輸</span><span class="tag">YouTube 取材</span></div>
+    <div class="spacer"></div>
+    <div class="btnrow">
+      <a class="btn" href="trips/2026-07-kaohsiung/output/travel-guide.html">開啟手冊</a>
+      <a class="btn ghost" href="trips/2026-07-kaohsiung/output/FINAL_GUIDE.md">文字版</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🇯🇵 東京＋箱根</h2>
+    <div class="meta">📅 2026/4/10(五)–4/15(三) ｜ 6 天 5 夜</div>
+    <div class="meta">👨‍👩‍👧‍👦 6 大 2 小（含長輩・幼兒推車）</div>
+    <div class="tags"><span class="tag">東京</span><span class="tag">箱根</span><span class="tag">全素選項</span></div>
+    <div class="spacer"></div>
+    <div class="btnrow">
+      <a class="btn" href="trips/2026-04-tokyo-hakone/output/travel-guide.html">開啟手冊</a>
+      <a class="btn ghost" href="trips/2026-04-tokyo-hakone/output/FINAL_GUIDE.md">文字版</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🇯🇵 京阪神（5 月）</h2>
+    <div class="meta">📅 2026/5/13(三)–5/18(一) ｜ 6 天 5 夜</div>
+    <div class="meta">👨‍👩‍👧‍👦 6 大 3 小（含全素長輩・幼兒推車）</div>
+    <div class="tags"><span class="tag">京都</span><span class="tag">大阪</span><span class="tag">神戶</span></div>
+    <div class="spacer"></div>
+    <div class="btnrow">
+      <a class="btn" href="trips/2026-05-kansai/output/travel-guide.html">開啟手冊</a>
+      <a class="btn ghost" href="trips/2026-05-kansai/output/FINAL_GUIDE.md">文字版</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🇯🇵 福岡</h2>
+    <div class="meta">📅 2026/7/18(六)–7/23(四) ｜ 6 天 5 夜</div>
+    <div class="meta">👨‍👩‍👧‍👦 6 大 3 小（幼幼兒需推車）</div>
+    <div class="tags"><span class="tag">博多</span><span class="tag">太宰府</span><span class="tag">柳川</span><span class="tag">門司港</span></div>
+    <div class="spacer"></div>
+    <div class="btnrow">
+      <a class="btn" href="trips/2026-07-fukuoka/output/travel-guide.html">開啟手冊</a>
+      <a class="btn ghost" href="trips/2026-07-fukuoka/output/FINAL_GUIDE.md">文字版</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🇯🇵 京阪神（10 月・時代祭）</h2>
+    <div class="meta">📅 2026/10/20(二)–10/25(日) ｜ 6 天 5 夜</div>
+    <div class="meta">👨‍👩‍👧‍👦 6 大 3 小（含全素長輩・幼兒推車）</div>
+    <div class="tags"><span class="tag">時代祭</span><span class="tag">京都</span><span class="tag">大阪</span><span class="tag">星宇航空</span></div>
+    <div class="spacer"></div>
+    <div class="btnrow">
+      <a class="btn" href="trips/2026-10-kansai/output/travel-guide.html">開啟手冊</a>
+      <a class="btn ghost" href="trips/2026-10-kansai/output/FINAL_GUIDE.md">文字版</a>
+    </div>
+  </div>
+
+</div>
+
+<p class="note">📂 原始檔與規劃資料：<a class="src" href="https://github.com/ChuangBahen/Travel">github.com/ChuangBahen/Travel</a></p>
+</main>
+<footer>家族旅遊規劃工作區 ｜ 新增旅遊後此頁會自動部署更新</footer>
+</body>
+</html>
