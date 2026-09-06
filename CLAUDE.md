@@ -66,9 +66,10 @@ Travel/
 | Skill | 用途 |
 |-------|------|
 | `new-trip` | 新增一趟旅遊：收集基本資料 → 建立 `trips/YYYY-MM-<目的地>/` 標準骨架（CLAUDE.md／itinerary.tsv／orchestrator.md／output/）→ 登記。**取代舊的空 `templates/` 機制，模板集中在此 skill 內。** |
+| `verify-youtube-sources` | YouTube 取材趟的來源驗證關卡：逐條 WebFetch 確認連結真偽＋主題相符，按 A/B/C 分級，攔截幻覺來源。**只有 A/B 級能排入正式行程。** |
 | `build-travel-guide` | 把某趟 `output/*.md` 整合成 `FINAL_GUIDE.md`，再依內建骨架 `template.html` 產出 mobile-first 離線 `travel-guide.html`。**HTML 的 CSS/JS 統一收錄在此 skill，新趟不再各自複製規格。** |
 
-> 觸發方式：對話中說「新增一趟旅遊／整合手冊／做網頁版」，或直接 `/new-trip`、`/build-travel-guide`。
+> 工作流：`/new-trip` → 跑 orchestrator 派 agents（YouTube 趟先 `/verify-youtube-sources` 驗證來源）→ `/build-travel-guide` 整合產出。
 
 ## 如何新增一趟旅遊
 
